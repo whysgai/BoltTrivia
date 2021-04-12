@@ -10,7 +10,7 @@ export const GAME_MODE = {
 
 export const GAME_PHASE = {
     SELECT_MODE = "SELECT_MODE",
-    SET_CONFIGsS = "SET_CONFIGS",
+    SET_CONFIGS = "SET_CONFIGS",
     PLAY_GAME = "PLAY_GAME",
     VIEW_SCORES = "VIEW_SCORES"
 };

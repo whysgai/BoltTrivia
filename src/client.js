@@ -12,13 +12,11 @@ let socket = socketIOClient.connect(host, { secure: true });
 // Checks which host we're connected to for troubleshooting.
 console.log("Connected to " + host);
 
-export const orderPizzas = (numPizzas, callbackFunction) => {
-  socket.emit("pizzas", numPizzas);
-
-  socket.on("delivery", (msg) => {
-    console.log(msg + " delivered");
-    socket.off("delivery"); // Prevents duplicate listeners
-    callbackFunction(msg + " delivered");
+export const selectMultiplayerMode = () => {
+  socket.emit("multiplayer selected");
+  socket.on("check availability", (availability) => {
+    console.log("p1: " + availability[0] + " p2: " + availability[1]);
+    socket.off("check availability"); // Prevents duplicate listeners
   });
 };
 

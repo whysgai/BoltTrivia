@@ -1,9 +1,10 @@
-import '../styles/App.css';
+import "../styles/App.css";
+import { selectMultiplayerMode } from "../client";
 
 function App() {
   return (
     <div className="App">
-      test
+      <button onClick={selectMultiplayerMode}>test</button>
     </div>
   );
 }

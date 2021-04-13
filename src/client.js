@@ -35,4 +35,14 @@ export const selectPlayerMulti = (playerIndex) => {
   });
 };
 
+// Game type selected (timed/score)
+export const selectGameType = (type) => {
+  socket.emit("game type selected", type);
+  socket.on("confirm game type selection", (gameType) => {
+    socket.off("confirm game type selection");
+    console.log("gametype: " + gameType);
+    return gameType;
+  });
+};
+
 socket.on("notify all", (data) => console.log(data));

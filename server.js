@@ -68,6 +68,7 @@ server.listen(PORT, () => console.log(`Listening on ${PORT}`));
 // This array keeps track of availability of both players,
 // which will help UI determine which button to disable, if any
 let playerAvailability = [true, true];
+let gameType = null;
 
 io.on("connection", (client) => {
   io.sockets.emit("notify all", `Client ${client.id} has connected`);
@@ -82,6 +83,11 @@ io.on("connection", (client) => {
     playerAvailability[playerIndex] = false;
     console.log(playerAvailability);
     client.emit("confirm player multi selection", [...playerAvailability]);
+  });
+
+  client.on("game type selected", (type) => {
+    gameType = type;
+    client.emit("confirm game type selection", gameType);
   });
 });
 

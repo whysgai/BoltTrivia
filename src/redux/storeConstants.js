@@ -1,18 +1,18 @@
 export const PLAYER_MODE = {
-    SINGLE_PLAYER: "SINGLE_PLAYER",
-    MULTI_PLAYER: "MULTI_PLAYER"
+    SINGLE_PLAYER: "single player",
+    MULTI_PLAYER: "multi player"
 };
 
 export const GAME_TYPE = {
-    TIME_MODE: "TIME_MODE",
-    SCORE_MODE: "SCORE_MODE"
+    TIME_MODE: "time mode",
+    SCORE_MODE: "score mode"
 };
 
 export const GAME_PHASE = {
-    SELECT_MULTI: "SELECT_MULTI",
-    SELECT_PLAYER: "SELECT_PLAYER",
-    SELECT_GAME_TYPE: "SELECT_GAME_TYPE",
-    SET_CONFIGS: "SET_CONFIGS",
-    PLAY_GAME: "PLAY_GAME",
-    VIEW_SCORES: "VIEW_SCORES"
+    SELECT_MULTI: "select multi player",
+    SELECT_PLAYER: "select single player",
+    SELECT_GAME_TYPE: "select game type",
+    SET_CONFIGS: "set configs",
+    PLAY_GAME: "play game",
+    VIEW_SCORES: "view scores"
 };

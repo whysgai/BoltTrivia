@@ -2,6 +2,7 @@ import "../styles/App.css";
 import {GAME_PHASE, PLAYER_MODE} from "../redux/storeConstants"
 import { useSelector } from "react-redux";
 import MultiSelect from "../components/MultiSelect";
+import ChoosePlayer from "../components/ChoosePlayer";
 
 function App() {
   const gameState = useSelector(state => state.gameStateReducer)
@@ -17,6 +18,13 @@ function App() {
         gameState.multiSelect === PLAYER_MODE.SINGLE_PLAYER &&
         <>
           <p>You have chosen Single Player mode.</p>
+        </>
+      }
+      {
+        gameState.phase === GAME_PHASE.SELECT_PLAYER &&
+        <>
+          <p>You have chosen Multi Player mode.</p>
+          <ChoosePlayer/>
         </>
       }
     </div>

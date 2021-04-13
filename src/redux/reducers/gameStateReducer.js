@@ -9,8 +9,13 @@ const INITIAL_STATE = {
 
 export const gameStateReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    //case GAME_PHASE.SELECT_MULTI:
-
+    case PLAYER_MODE.SINGLE_PLAYER:
+        return {
+            ...state,
+            //player:
+            phase: GAME_PHASE.SELECT_GAME_TYPE,
+            multiSelect: PLAYER_MODE.SINGLE_PLAYER
+        }
     default:
       return state;
   }

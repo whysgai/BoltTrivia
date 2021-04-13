@@ -1,9 +1,9 @@
-import {SINGLE_PLAYER, MULTI_PLAYER} from "../actionConstants"
+import {SELECT_SINGLE_PLAYER_TYPE, SELECT_MULTI_PLAYER_TYPE} from "../actionConstants"
 import { selectMultiplayerMode } from "../../client";
 import { useDispatch } from "react-redux";
 
 export const connectSinglePlayerMode = () => ({
-    type: SINGLE_PLAYER
+    type: SELECT_SINGLE_PLAYER_TYPE
 })
 
 export const connectMultiPlayerMode = () => {
@@ -14,5 +14,5 @@ export const connectMultiPlayerMode = () => {
 }
 
 export const selectMultiPlayer = () => ({
-    type: MULTI_PLAYER
+    type: SELECT_MULTI_PLAYER_TYPE
 })

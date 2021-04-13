@@ -1,4 +1,5 @@
 import { PLAYER_MODE, GAME_TYPE, GAME_PHASE } from "../storeConstants";
+import {SINGLE_PLAYER, MULTI_PLAYER} from "../actionConstants"
 
 const INITIAL_STATE = {
   player: null,
@@ -9,13 +10,13 @@ const INITIAL_STATE = {
 
 export const gameStateReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case PLAYER_MODE.SINGLE_PLAYER:
+    case SINGLE_PLAYER:
         return {
             ...state,
             phase: GAME_PHASE.SELECT_GAME_TYPE,
             multiSelect: PLAYER_MODE.SINGLE_PLAYER
         }
-    case PLAYER_MODE.MULTI_PLAYER:
+    case MULTI_PLAYER:
         return {
             ...state,
             phase: GAME_PHASE.SELECT_PLAYER,

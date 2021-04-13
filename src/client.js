@@ -12,11 +12,26 @@ let socket = socketIOClient.connect(host, { secure: true });
 // Checks which host we're connected to for troubleshooting.
 console.log("Connected to " + host);
 
+// Multiplayer Button Clicked
+// returns new availability array
 export const selectMultiplayerMode = () => {
   socket.emit("multiplayer selected");
-  socket.on("check availability", (availability) => {
+  socket.on("check initial player availability", (availability) => {
     console.log("p1: " + availability[0] + " p2: " + availability[1]);
     socket.off("check availability"); // Prevents duplicate listeners
+    return availability;
+  });
+};
+
+// Player1 or Player2 button clicked
+// playerIndex = 0 for player 1, playerIndex = 1 for player 2
+// returns new availability array
+export const selectPlayerMulti = (playerIndex) => {
+  socket.emit("player multi selection", playerIndex);
+  socket.on("confirm player multi selection", (availability) => {
+    socket.off("confirm player multi selection");
+    console.log(availability);
+    return availability;
   });
 };
 

@@ -17,7 +17,6 @@ export const gameStateReducer = (state = INITIAL_STATE, action) => {
             multiSelect: PLAYER_MODE.SINGLE_PLAYER
         }
     case MULTI_PLAYER:
-        console.log('test')
         return {
             ...state,
             phase: GAME_PHASE.SELECT_PLAYER,

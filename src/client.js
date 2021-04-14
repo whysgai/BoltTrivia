@@ -3,6 +3,7 @@ import store from "./redux/store";
 import {
   selectMultiPlayer,
   selectPlayerNumber,
+  selectGameType,
 } from "./redux/actions/gameStateActions";
 
 /** CLIENT CONFIGURATION - connect to the server */
@@ -53,9 +54,11 @@ export const selectPlayerMulti = (playerIndex) => {
 // Game type button selected (timed/score)
 export const selectGameType = (type) => {
   socket.emit("game type selected", type);
-
-  // No redux store dispatch needed here because the server
-  // will respond to this event with another event(the next one)
+  socket.on("confirm game type selection", (gameType) => {
+    socket.off("confirm game type selection");
+    console.log("gametype: " + gameType);
+    store.dispatch(selectGameType(gameType));
+  });
 };
 
 socket.on("wait for game type approval", (gameType) => {

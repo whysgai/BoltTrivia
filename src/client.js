@@ -1,9 +1,13 @@
 import { useDispatch } from "react-redux";
 import store from "./redux/store";
+<<<<<<< HEAD
 import {
   selectMultiPlayer,
   selectPlayerNumber,
 } from "./redux/actions/gameStateActions";
+=======
+import { selectMultiPlayer, selectPlayerNumber, selectGameType } from "./redux/actions/gameStateActions";
+>>>>>>> bc2412a (BT19 refactor: Add dipatch call to selectGameType function)
 
 /** CLIENT CONFIGURATION - connect to the server */
 const socketIOClient = require("socket.io-client");
@@ -53,9 +57,17 @@ export const selectPlayerMulti = (playerIndex) => {
 // Game type button selected (timed/score)
 export const selectGameType = (type) => {
   socket.emit("game type selected", type);
+<<<<<<< HEAD
 
   // No redux store dispatch needed here because the server
   // will respond to this event with another event(the next one)
+=======
+  socket.on("confirm game type selection", (gameType) => {
+    socket.off("confirm game type selection");
+    console.log("gametype: " + gameType);
+    store.dispatch(selectGameType(gameType));
+  });
+>>>>>>> bc2412a (BT19 refactor: Add dipatch call to selectGameType function)
 };
 
 socket.on("wait for game type approval", (gameType) => {

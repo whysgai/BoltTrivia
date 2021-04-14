@@ -3,6 +3,7 @@ import { GAME_PHASE, PLAYER_MODE, PLAYER_MODE} from "../redux/storeConstants"
 import { useSelector } from "react-redux";
 import MultiSelect from "../components/MultiSelect";
 import ChoosePlayer from "../components/ChoosePlayer";
+import GameTypeSelect from "../components/GameTypeSelect";
 
 function App() {
   const gameState = useSelector(state => state.gameStateReducer)
@@ -44,6 +45,10 @@ function App() {
                   <p>SP view the scores</p>
                   :
                   <p>SP Error catching</p>
+      }
+      {
+        gameState.phase === GAME_PHASE.SELECT_GAME_TYPE &&
+          <GameTypeSelect />
       }
     </div>
   );

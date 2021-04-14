@@ -89,25 +89,13 @@ io.on("connection", (client) => {
   client.on("game type selected", (type) => {
     gameType = type;
     // send to all clients
-    io.sockets.emit("wait for game type approval", gameType);
-  });
-
-  client.on("approve game type", (type) => {
-    gameType = type;
-    // send to all clients
-    io.sockets.emit("confirm game type approval", gameType);
+    io.sockets.emit("confirm game type selection", gameType);
   });
 
   client.on("game config selected", (configObject) => {
     gameConfig = { ...configObject };
     // send to all clients
-    io.sockets.emit("wait for game config approval", { ...gameConfig });
-  });
-
-  client.on("approve game config", (configObject) => {
-    gameConfig = { ...configObject };
-    // send to all clients
-    io.sockets.emit("confirm game config approval", { ...gameConfig });
+    io.sockets.emit("confirm game config selection", { ...gameConfig });
   });
 });
 

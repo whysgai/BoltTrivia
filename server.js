@@ -87,11 +87,15 @@ io.on("connection", (client) => {
 
   client.on("game type selected", (type) => {
     gameType = type;
-    client.emit("confirm game type selection", gameType);
     // send to all except current client
-    client.broadcast.emit("wait for approval");
+    io.sockets.emit("wait for game type approval", gameType);
   });
 
+  client.on("approve game type", (type) => {
+    gameType = type;
+    // send to all except current client
+    io.sockets.emit("confirm game type approval", gameType);
+  });
 });
 
 // Will

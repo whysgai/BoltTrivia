@@ -84,3 +84,23 @@ socket.on("confirm game type approval", (gameType) => {
 });
 
 socket.on("notify all", (data) => console.log(data));
+
+// Game config selected
+export const selectGameConfig = (configObject) => {
+  socket.emit("game config selected", configObject);
+
+  // No redux store dispatch needed here because the server
+  // will respond to this event with another event(the next one)
+};
+
+socket.on("wait for game config approval", (configObject) => {
+  console.log(
+    "server now waiting for P2 to approve game config: " + configObject
+  );
+
+  // Redux dispatch needed here to update store state
+  // to waiting for game config approval,
+  // along with the gameConfig that needs approval
+
+  socket.off("wait for game config approval");
+});

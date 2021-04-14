@@ -18,7 +18,8 @@ export const selectMultiplayerMode = () => {
   socket.emit("multiplayer selected");
   socket.on("check initial player availability", (availability) => {
     console.log("p1: " + availability[0] + " p2: " + availability[1]);
-    socket.off("check availability"); // Prevents duplicate listeners
+    socket.off("check inital player availability"); // Prevents duplicate listeners
+    // Update redux store instead of below line(s)
     return availability;
   });
 };
@@ -31,6 +32,7 @@ export const selectPlayerMulti = (playerIndex) => {
   socket.on("confirm player multi selection", (availability) => {
     socket.off("confirm player multi selection");
     console.log(availability);
+    // Update redux store instead of below line(s)
     return availability;
   });
 };
@@ -41,8 +43,11 @@ export const selectGameType = (type) => {
   socket.on("confirm game type selection", (gameType) => {
     socket.off("confirm game type selection");
     console.log("gametype: " + gameType);
+    // Update redux store instead of below line(s)
     return gameType;
   });
 };
+
+socket.on("wait for approval", (data) => console.log(data));
 
 socket.on("notify all", (data) => console.log(data));

@@ -1,3 +1,4 @@
+import { selectMultiplayerMode, selectGameType } from "../client";
 import { useDispatch } from "react-redux";
 import {connectSinglePlayerMode, connectMultiPlayerMode} from "../redux/actions/gameStateActions"
 
@@ -15,8 +16,21 @@ const MultiSelect = () => {
   return (
     <>
       <p>Choose single player or multiplayer.</p>
-      <button className='btn-sm btn-primary' onClick={() => selectMultiPlayerClick()}>Multiplayer</button>
-      <button className='btn-sm btn-primary' onClick={() => selectSinglePlayerClick()}>Single Player</button>
+      <button className="btn-sm btn-primary" onClick={selectMultiplayerMode}>
+        Multiplayer
+      </button>
+      <button
+        className="btn-sm btn-primary"
+        onClick={() => selectSinglePlayerClick()}
+      >
+        Single Player
+      </button>
+      <button
+        className="btn-sm btn-primary"
+        onClick={() => selectGameType("TIME_MODE")}
+      >
+        Game mode
+      </button>
     </>
   );
 };

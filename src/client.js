@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import store from "./redux/store";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import {
   selectMultiPlayer,
   selectPlayerNumber,
@@ -8,6 +9,9 @@ import {
 =======
 import { selectMultiPlayer, selectPlayerNumber, selectGameType } from "./redux/actions/gameStateActions";
 >>>>>>> bc2412a (BT19 refactor: Add dipatch call to selectGameType function)
+=======
+import { selectMultiPlayer, selectPlayerNumber, gameTypeSelection } from "./redux/actions/gameStateActions";
+>>>>>>> aff560a (BT19 fix: Repair overlapping function names)
 
 /** CLIENT CONFIGURATION - connect to the server */
 const socketIOClient = require("socket.io-client");
@@ -65,7 +69,7 @@ export const selectGameType = (type) => {
   socket.on("confirm game type selection", (gameType) => {
     socket.off("confirm game type selection");
     console.log("gametype: " + gameType);
-    store.dispatch(selectGameType(gameType));
+    store.dispatch(gameTypeSelection(gameType));
   });
 >>>>>>> bc2412a (BT19 refactor: Add dipatch call to selectGameType function)
 };

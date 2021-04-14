@@ -34,7 +34,7 @@ export const selectPlayerNumber = (playerNumber, playerAvailability) => ({
     }
 });
 
-export const selectGameType = (gameType) => ({
+export const gameTypeSelection = (gameType) => ({
     type: SELECT_GAME_TYPE,
     payload: {
         gameType

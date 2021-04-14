@@ -1,3 +1,7 @@
+import { useDispatch } from "react-redux";
+import store from "./redux/store";
+import { selectMultiPlayer, selectPlayerNumber } from "./redux/actions/gameStateActions";
+
 /** CLIENT CONFIGURATION - connect to the server */
 const socketIOClient = require("socket.io-client");
 
@@ -18,9 +22,8 @@ export const selectMultiplayerMode = () => {
   socket.emit("multiplayer selected");
   socket.on("check initial player availability", (availability) => {
     console.log("p1: " + availability[0] + " p2: " + availability[1]);
-    socket.off("check inital player availability"); // Prevents duplicate listeners
-    // Update redux store instead of below line(s)
-    return availability;
+    store.dispatch(selectMultiPlayer(availability));
+    socket.off("check availability"); // Prevents duplicate listeners
   });
 };
 
@@ -31,9 +34,8 @@ export const selectPlayerMulti = (playerIndex) => {
   socket.emit("player multi selection", playerIndex);
   socket.on("confirm player multi selection", (availability) => {
     socket.off("confirm player multi selection");
-    console.log(availability);
-    // Update redux store instead of below line(s)
-    return availability;
+    console.log("selectPlayerMulti", availability);
+    store.dispatch(selectPlayerNumber(playerIndex, availability));
   });
 };
 

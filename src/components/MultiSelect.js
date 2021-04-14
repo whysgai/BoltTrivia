@@ -1,5 +1,6 @@
 import { selectMultiplayerMode, selectGameType } from "../client";
 import { useDispatch } from "react-redux";
+import { selectMultiplayerMode } from "../client";
 import {connectSinglePlayerMode, connectMultiPlayerMode} from "../redux/actions/gameStateActions"
 
 const MultiSelect = () => {
@@ -10,7 +11,7 @@ const MultiSelect = () => {
     }
 
     const selectMultiPlayerClick = () => {
-        dispatch(connectMultiPlayerMode())
+        selectMultiplayerMode();
     }
 
   return (

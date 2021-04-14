@@ -103,6 +103,12 @@ io.on("connection", (client) => {
     // send to all clients
     io.sockets.emit("wait for game config approval", { ...gameConfig });
   });
+
+  client.on("approve game config", (configObject) => {
+    gameConfig = { ...configObject };
+    // send to all clients
+    io.sockets.emit("confirm game config approval", { ...gameConfig });
+  });
 });
 
 // Will

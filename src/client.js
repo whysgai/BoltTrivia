@@ -3,7 +3,7 @@ import store from "./redux/store";
 import {
   selectMultiPlayer,
   selectPlayerNumber,
-  selectGameType,
+  gameTypeSelection,
 } from "./redux/actions/gameStateActions";
 
 /** CLIENT CONFIGURATION - connect to the server */
@@ -65,7 +65,7 @@ socket.on("confirm game type selection", (gameType) => {
   // Redux dispatch needed here to update store state
   // to waiting for game type approval,
   // along with the gameType that needs approval
-  store.dispatch(selectGameType(gameType));
+  store.dispatch(gameTypeSelection(gameType));
 
   socket.off("confirm game type selection");
 });

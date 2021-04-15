@@ -57,8 +57,7 @@ const SinglePlayer = () => {
         {
             !beginQuiz ?
             <>
-                <p>You have chosen Single Player mode. In this mode you will be given a set of 10 multiple choice questions. 
-                    Your goal is to answer as many of them correctly in a short amount of time.</p>
+                <p>You have chosen Single Player mode. Please select your game choices from the options below.</p>
                     
                     <div class="form-row">
                         <div class="col-md-4 mb-3">

@@ -30,15 +30,16 @@ function App() {
           <p>MP Error catching</p>
         )
       ) : //Single player
-      gameState.phase === GAME_PHASE.SET_CONFIGS ? (
-        <p>SP set configs</p>
-      ) : gameState.phase === GAME_PHASE.PLAY_GAME ? (
-        <p>SP running the game</p>
-      ) : gameState.phase === GAME_PHASE.VIEW_SCORES ? (
-        <p>SP view the scores</p>
-      ) : (
-        <p>SP Error catching</p>
-      )}
+      //gameState.phase === GAME_PHASE.SET_CONFIGS ? (
+        <SinglePlayer/>
+      // ) : gameState.phase === GAME_PHASE.PLAY_GAME ? (
+      //   <p>SP running the game</p>
+      // ) : gameState.phase === GAME_PHASE.VIEW_SCORES ? (
+      //   <p>SP view the scores</p>
+      // ) : (
+      //   <p>SP Error catching</p>
+      // )
+       }
     </div>
   );
 }

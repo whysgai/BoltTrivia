@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import MultiSelect from "../components/MultiSelect";
 import ChoosePlayer from "../components/ChoosePlayer";
 import GameTypeSelect from "../components/GameTypeSelect";
+import SinglePlayer from "../components/SinglePlayer"
 
 function App() {
   const gameState = useSelector((state) => state.gameStateReducer);

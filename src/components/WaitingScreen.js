@@ -9,8 +9,10 @@ const WaitingScreen = () => {
     <>
       {gamePhase === GAME_PHASE.SELECT_GAME_TYPE && playerNumber === 1 ? (
         <p>Waiting for Player 1 to select game mode</p>
+      ) : gamePhase === GAME_PHASE.SELECT_GAME_TYPE && playerNumber === 0 ? (
+        <p>Waiting for Player 2 to Join</p>
       ) : (
-        <p>Nothing yet</p>
+        <></>
       )}
     </>
   );

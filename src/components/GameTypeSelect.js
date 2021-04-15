@@ -6,6 +6,9 @@ import WaitingScreen from "./WaitingScreen";
 const GameTypeSelect = () => {
   const selectedType = useSelector((state) => state.gameStateReducer.type);
   const playerNumber = useSelector((state) => state.gameStateReducer.player);
+  const playerAvailability = useSelector(
+    (state) => state.gameStateReducer.playerAvailability
+  );
 
   const selectTimed = () => {
     selectGameType(GAME_TYPE.TIME_MODE);
@@ -17,7 +20,7 @@ const GameTypeSelect = () => {
 
   return (
     <>
-      {playerNumber === 0 ? (
+      {playerNumber === 0 && !playerAvailability[1] ? (
         <>
           <p>Player 1: select a game mode:</p>
           <button className="btn btn-info" onClick={() => selectTimed()}>

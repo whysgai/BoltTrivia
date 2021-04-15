@@ -41,15 +41,17 @@ export const selectMultiplayerMode = () => {
 // returns new availability array
 export const selectPlayerMulti = (playerIndex) => {
   socket.emit("player multi selection", playerIndex);
-  socket.on("confirm player multi selection", (availability) => {
-    console.log(
-      "server confirmed player multi selection and sent back availability as: ",
-      availability
-    );
-    store.dispatch(selectPlayerNumber(playerIndex, availability));
-    socket.off("confirm player multi selection");
-  });
+  // no redux action needed
 };
+
+socket.on("confirm player multi selection", (playerIndex, availability) => {
+  console.log(
+    "server confirmed player multi selection and sent back availability as: ",
+    availability
+  );
+  store.dispatch(selectPlayerNumber(playerIndex, availability));
+  socket.off("confirm player multi selection");
+});
 
 // Game type button selected (timed/score)
 export const selectGameType = (type) => {

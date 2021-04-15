@@ -1,4 +1,4 @@
-import {SELECT_SINGLE_PLAYER_TYPE, SELECT_MULTI_PLAYER_TYPE, SELECT_PLAYER_NUMBER,
+import {SELECT_SINGLE_PLAYER_TYPE, SELECT_MULTI_PLAYER_TYPE, SELECT_PLAYER_NUMBER, UPDATE_PLAYER_AVAILABILITY,
     SELECT_GAME_TYPE } from "../actionConstants";
 import { selectMultiplayerMode } from "../../client";
 import { useDispatch } from "react-redux";
@@ -26,10 +26,24 @@ export const selectMultiPlayer = (availability) => ({
     }
 });
 
-export const selectPlayerNumber = (playerNumber, playerAvailability) => ({
+// export const selectPlayerNumber = (playerNumber, playerAvailability) => ({
+//     type: SELECT_PLAYER_NUMBER,
+//     payload: {
+//         playerNumber,
+//         playerAvailability
+//     }
+// });
+
+export const selectPlayerNumber = (playerNumber) => ({
     type: SELECT_PLAYER_NUMBER,
     payload: {
-        playerNumber,
+        playerNumber
+    }
+});
+
+export const updatePlayerAvailability = (playerAvailability) => ({
+    type: UPDATE_PLAYER_AVAILABILITY,
+    payload: {
         playerAvailability
     }
 });

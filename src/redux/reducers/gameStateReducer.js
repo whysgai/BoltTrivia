@@ -26,6 +26,7 @@ export const gameStateReducer = (state = INITIAL_STATE, action) => {
         playerAvailability: action.payload.availability
       }
     case SELECT_PLAYER_NUMBER:
+      console.log("Player number updated in reducer", action.payload.playerNumber)
       return {
         ...state,
         phase: GAME_PHASE.SELECT_GAME_TYPE,
@@ -35,7 +36,7 @@ export const gameStateReducer = (state = INITIAL_STATE, action) => {
       console.log("Player availability updated in reducer", action.payload.playerAvailability)
       return {
         ...state,
-        player: action.payload.playerAvailability
+        playerAvailability: action.payload.playerAvailability
       }
     case SELECT_GAME_TYPE:
       return {

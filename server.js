@@ -80,10 +80,13 @@ io.on("connection", (client) => {
   });
 
   client.on("player multi selection", (playerIndex) => {
+
     console.log(`Player ${playerIndex} has been selected`);
     playerAvailability[playerIndex] = false;
-    client.emit("confirm player multi selection", playerIndex);
+    console.log("Server is sending playerAvailability", playerAvailability);
     io.sockets.emit("update player availability", [...playerAvailability]);
+    client.emit("confirm player multi selection", playerIndex);
+
   });
 
   client.on("game type selected", (type) => {

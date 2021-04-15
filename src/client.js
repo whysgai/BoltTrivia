@@ -3,6 +3,7 @@ import store from "./redux/store";
 import {
   selectMultiPlayer,
   selectPlayerNumber,
+  updatePlayerAvailability,
   gameTypeSelection,
 } from "./redux/actions/gameStateActions";
 
@@ -44,13 +45,22 @@ export const selectPlayerMulti = (playerIndex) => {
   // no redux action needed
 };
 
-socket.on("confirm player multi selection", (playerIndex, availability) => {
+socket.on("confirm player multi selection", (playerIndex) => {
   console.log(
-    "server confirmed player multi selection and sent back availability as: ",
+    "server confirmed player as: ",
+    playerIndex
+  );
+  store.dispatch(selectPlayerNumber(playerIndex));
+  socket.off("confirm player multi selection");
+});
+
+socket.on("update player availability", (availability) => {
+  console.log(
+    "server updated availability to: ",
     availability
   );
-  store.dispatch(selectPlayerNumber(playerIndex, availability));
-  socket.off("confirm player multi selection");
+  store.dispatch(updatePlayerAvailability(availability));
+  socket.off("update player availability");
 });
 
 // Game type button selected (timed/score)

@@ -50,7 +50,7 @@ socket.on("confirm player multi selection", (playerIndex) => {
     "server confirmed player as: ",
     playerIndex
   );
-  socket.off("confirm player multi selection");
+  store.dispatch(selectPlayerNumber(playerIndex));
 });
 
 socket.on("update player availability", (availability) => {

@@ -2,9 +2,9 @@ import {useState, useEffect} from 'react';
 import PropTypes from "prop-types";
 import { GAME_TYPE } from "../redux/storeConstants";
 
-const TimedConfigs = () => {
+const TimedConfigs = (props) => {
     const [configs, setConfigs] = useState({
-        gameType: GAME_TYPE.TIME_MODE,
+        gameType: props.selectedType,
         timeLimit: 60,
         questionCount: 50,
         difficulty: "any"
@@ -13,25 +13,43 @@ const TimedConfigs = () => {
     return(
         <>
             <p>Set time configs:</p>
+            
             <div className="config">
                 <div className="config-inputs">
-                    <label className="form-label config-setting">
-                        Time limit (seconds):
-                        <input className="form-control"
-                            type="number" min="1" max="50" 
-                            value={configs.timeLimit}
-                            onChange={e => setConfigs(
-                                {
-                                    ...configs,
-                                    timeLimit: e.target.value
-                                }
-                            )}
-                        />
-                    </label>
+                    {
+                        props.selectedType === GAME_TYPE.TIME_MODE ?
+                            <label className="form-label config-setting">
+                                Time limit (seconds, max 120):
+                                <input className="form-control"
+                                    type="number" min="1" max="120" 
+                                    value={configs.timeLimit}
+                                    onChange={e => setConfigs(
+                                        {
+                                            ...configs,
+                                            timeLimit: e.target.value
+                                        }
+                                    )}
+                                />
+                            </label>
+                            :
+                            <label className="form-label config-setting">
+                                Number of questions (50 max):
+                                <input className="form-control"
+                                    type="number" min="1" max="50" 
+                                    value={configs.questionCount}
+                                    onChange={e => setConfigs(
+                                        {
+                                            ...configs,
+                                            questionCount: e.target.value
+                                        }
+                                    )}
+                                />
+                            </label>
+                    }
                     <label className="form-label config-setting">
                         Difficulty:
                         <select className="form-control"
-                            value={props.queryParams.dif}
+                            value={configs.difficulty}
                             onChange={e => setConfigs(
                                 {
                                     ...configs,
@@ -59,3 +77,7 @@ const TimedConfigs = () => {
 };
 
 export default TimedConfigs;
+
+PropTypes.TimedConfigs = {
+    selectedType : PropTypes.string.isRequired
+}

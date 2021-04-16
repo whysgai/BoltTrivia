@@ -41,13 +41,15 @@ const GameTypeSelect = () => {
             <></>
           )}
           {
-            selectedType === GAME_TYPE.TIME_MODE &&
-              <TimedConfigs />
+            selectedType !== null && selectedType !== undefined ?
+              <TimedConfigs selectedType={selectedType}/>
+              :
+              <></>
           }
-          {
+          {/* {
             selectedType === GAME_TYPE.SCORE_MODE &&
               <ScoreConfigs />
-          }
+          } */}
         </>
       ) : (
         <WaitingScreen />

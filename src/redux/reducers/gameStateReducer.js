@@ -1,5 +1,5 @@
 import { PLAYER_MODE, GAME_TYPE, GAME_PHASE } from "../storeConstants";
-import { SELECT_SINGLE_PLAYER_TYPE, SELECT_MULTI_PLAYER_TYPE, SELECT_PLAYER_NUMBER,
+import { SELECT_SINGLE_PLAYER_TYPE, SELECT_MULTI_PLAYER_TYPE, SELECT_PLAYER_NUMBER, UPDATE_PLAYER_AVAILABILITY,
   SELECT_GAME_TYPE } from "../actionConstants"
 
 const INITIAL_STATE = {
@@ -26,10 +26,16 @@ export const gameStateReducer = (state = INITIAL_STATE, action) => {
         playerAvailability: action.payload.availability
       }
     case SELECT_PLAYER_NUMBER:
+      console.log("Player number updated in reducer", action.payload.playerNumber)
       return {
         ...state,
         phase: GAME_PHASE.SELECT_GAME_TYPE,
-        player: action.payload.playerNumber,
+        player: action.payload.playerNumber
+      }
+    case UPDATE_PLAYER_AVAILABILITY:
+      console.log("Player availability updated in reducer", action.payload.playerAvailability)
+      return {
+        ...state,
         playerAvailability: action.payload.playerAvailability
       }
     case SELECT_GAME_TYPE:

@@ -51,6 +51,7 @@ socket.on("confirm player multi selection", (playerIndex) => {
     playerIndex
   );
   store.dispatch(selectPlayerNumber(playerIndex));
+  socket.off("confirm player multi selection");
 });
 
 socket.on("update player availability", (availability) => {

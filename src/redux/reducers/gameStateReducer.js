@@ -1,13 +1,14 @@
 import { PLAYER_MODE, GAME_TYPE, GAME_PHASE } from "../storeConstants";
 import { SELECT_SINGLE_PLAYER_TYPE, SELECT_MULTI_PLAYER_TYPE, SELECT_PLAYER_NUMBER, UPDATE_PLAYER_AVAILABILITY,
-  SELECT_GAME_TYPE } from "../actionConstants"
+  SET_GAME_CONFIGS } from "../actionConstants"
 
 const INITIAL_STATE = {
   player: null,
   type: null,
   phase: GAME_PHASE.SELECT_MULTI,
   multiSelect: null,
-  playerAvailability: [true, true]
+  playerAvailability: [true, true],
+  gameConfigs: {}
 };
 
 export const gameStateReducer = (state = INITIAL_STATE, action) => {
@@ -38,10 +39,11 @@ export const gameStateReducer = (state = INITIAL_STATE, action) => {
         ...state,
         playerAvailability: action.payload.playerAvailability
       }
-    case SELECT_GAME_TYPE:
+    case SET_GAME_CONFIGS:
       return {
         ...state,
-        type: action.payload.gameType
+        configs: action.payload.configs,
+        type: action.payload.configs.gameType
       }
     default:
       return state;

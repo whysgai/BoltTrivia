@@ -5,6 +5,7 @@ import {
   selectPlayerNumber,
   updatePlayerAvailability,
   gameTypeSelection,
+  setGameConfigs
 } from "./redux/actions/gameStateActions";
 
 /** CLIENT CONFIGURATION - connect to the server */
@@ -62,41 +63,42 @@ socket.on("update player availability", (availability) => {
   store.dispatch(updatePlayerAvailability(availability));
 });
 
-// Game type button selected (timed/score)
-export const selectGameType = (type) => {
-  socket.emit("game type selected", type);
+// // Game type button selected (timed/score)
+// export const selectGameType = (type) => {
+//   socket.emit("game type selected", type);
 
-  // No redux store dispatch needed here because the server
-  // will respond to this event with another event(the next one)
-};
+//   // No redux store dispatch needed here because the server
+//   // will respond to this event with another event(the next one)
+// };
 
-socket.on("confirm game type selection", (gameType) => {
-  console.log("server confirmed game selection: " + gameType);
+// socket.on("confirm game type selection", (gameType) => {
+//   console.log("server confirmed game selection: " + gameType);
 
-  // Redux dispatch needed here to update store state
-  // to waiting for game type approval,
-  // along with the gameType that needs approval
-  store.dispatch(gameTypeSelection(gameType));
+//   // Redux dispatch needed here to update store state
+//   // to waiting for game type approval,
+//   // along with the gameType that needs approval
+//   store.dispatch(gameTypeSelection(gameType));
 
-  socket.off("confirm game type selection");
-});
+//   socket.off("confirm game type selection");
+// });
 
 // Game config selected
-export const selectGameConfig = (configObject) => {
-  socket.emit("game config selected", configObject);
+export const selectGameConfig = (configs) => {
+  console.log("Sending configs to server", configs)
+  socket.emit("game configs selected", configs);
 
   // No redux store dispatch needed here because the server
   // will respond to this event with another event(the next one)
 };
 
-socket.on("confirm game config selection", (configObject) => {
-  console.log("server approved game config: " + configObject);
+socket.on("confirm game configs", (configs) => {
+  console.log("server approved game config: ", configs);
 
   // Redux dispatch needed here to update store state
   // to waiting for game config approval,
   // along with the gameConfig that needs approval
-
-  socket.off("confirm game config selection");
+  store.dispatch(setGameConfigs(configs));
+  socket.off("confirm game configs");
 });
 
 socket.on("notify all", (data) => console.log(data));

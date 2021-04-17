@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Question from './QuestionCard'
 import { useDispatch } from 'react-redux';
 import { addAnswer } from '../redux/actions/SPQuestionActions'
 
@@ -7,6 +6,7 @@ const SPQuestionCard = props => {
     const question = props.question;
     const [answer, setAnswer] = useState('');
     const [submit, setSubmit] = useState(false);
+    const [checked, setChecked] = useState(false);
     const [correct, setCorrect] = useState('')
     const [correctBool, setCorrectBool] = useState('')
     const dispatch = useDispatch();
@@ -39,17 +39,17 @@ const SPQuestionCard = props => {
             {
                 props.multipleChoice.map((selection, index) =>
                     <div className="form-check pb-2">
-                        <input className="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="type-text" onClick={() => setAnswer(characterCheck(selection))}/>
+                        <input className="form-check-input" checked={answer===characterCheck(selection)} disabled={submit}
+                            type="radio" name="gridRadios" id="gridRadios1" value="type-text"
+                            onClick={() => setAnswer(characterCheck(selection))}/>
                         <label className="form-check-label pb-2" htmlFor="gridRadios1">{characterCheck(selection)}</label>
                     </div>
                 )
             }
             {
-                !submit &&
+                !submit ?
                 <button className="btn btn-success float-right" onClick={() => updateCount()}>Submit</button>
-            }
-            {
-                submit &&
+                :
                 <div className="text-center">
                     <h3 className="text-primary">{correct}</h3>
                     <h5 className="text-success">Correct Answer: {characterCheck(question.correct_answer)}</h5>

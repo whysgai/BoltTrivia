@@ -47,7 +47,7 @@ const GameTypeSelect = () => {
           )}
           {
             selectedType !== null && selectedType !== undefined ?
-              <gameConfigs selectedType={selectedType}/>
+              <GameConfigs selectedType={selectedType}/>
               :
               <></>
           }

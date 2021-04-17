@@ -6,3 +6,5 @@ export const SET_GAME_CONFIGS = "SET_GAME_CONFIGS";
 
 // Question action constants
 export const SET_SP_TRIVIA_QUESTIONS = "SET_SP_TRIVIA_QUESTIONS";
+export const SET_SP_ANSWERED = "SET_SP_ANSWERED";
+export const ADD_SP_ANSWER = "ADD_SP_ANSWER";

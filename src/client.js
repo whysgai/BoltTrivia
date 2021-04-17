@@ -93,10 +93,6 @@ export const selectGameConfig = (configs) => {
 
 socket.on("confirm game configs", (configs) => {
   console.log("server approved game config: ", configs);
-
-  // Redux dispatch needed here to update store state
-  // to waiting for game config approval,
-  // along with the gameConfig that needs approval
   store.dispatch(setGameConfigs(configs));
   socket.off("confirm game configs");
 });

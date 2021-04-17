@@ -1,10 +1,10 @@
-import {useState, useEffect} from 'react';
+import { useState } from 'react';
 import { GAME_TYPE } from "../redux/storeConstants";
 // import { selectGameType } from "../client";
 //import { gameTypeSelection } from "../redux/actions/gameStateActions";
 import { useSelector, useDispatch } from "react-redux";
 import WaitingScreen from "./WaitingScreen";
-import TimedConfigs from "./TimedConfigs";
+import GameConfigs from "./GameConfigs";
 import ScoreConfigs from "./ScoreConfigs";
 
 
@@ -47,14 +47,10 @@ const GameTypeSelect = () => {
           )}
           {
             selectedType !== null && selectedType !== undefined ?
-              <TimedConfigs selectedType={selectedType}/>
+              <gameConfigs selectedType={selectedType}/>
               :
               <></>
           }
-          {/* {
-            selectedType === GAME_TYPE.SCORE_MODE &&
-              <ScoreConfigs />
-          } */}
         </>
       ) : (
         <WaitingScreen />

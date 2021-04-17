@@ -1,9 +1,9 @@
-import {useState, useEffect} from 'react';
+import { useState } from 'react';
 import PropTypes from "prop-types";
 import { GAME_TYPE } from "../redux/storeConstants";
 import { selectGameConfig } from '../client';
 
-const TimedConfigs = (props) => {
+const GameConfigs = (props) => {
     const [configs, setConfigs] = useState({
         gameType: props.selectedType,
         timeLimit: 60,
@@ -77,7 +77,7 @@ const TimedConfigs = (props) => {
     );
 };
 
-export default TimedConfigs;
+export default GameConfigs;
 
 PropTypes.TimedConfigs = {
     selectedType : PropTypes.string.isRequired

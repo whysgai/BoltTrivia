@@ -69,7 +69,7 @@ server.listen(PORT, () => console.log(`Listening on ${PORT}`));
 // which will help UI determine which button to disable, if any
 let playerAvailability = [true, true];
 let gameType = null;
-let gameConfig = {};
+let gameConfigs = {};
 
 io.on("connection", (client) => {
   io.sockets.emit("notify all", `Client ${client.id} has connected`);
@@ -88,16 +88,18 @@ io.on("connection", (client) => {
     io.sockets.emit("update player availability", [...playerAvailability]);
   });
 
-  client.on("game type selected", (type) => {
-    gameType = type;
-    // send to all clients
-    io.sockets.emit("confirm game type selection", gameType);
-  });
+  // client.on("game type selected", (type) => {
+  //   gameType = type;
+  //   // send to all clients
+  //   io.sockets.emit("confirm game type selection", gameType);
+  // });
 
-  client.on("game config selected", (configObject) => {
-    gameConfig = { ...configObject };
+  client.on("game configs selected", (configSettings) => {
+    console.log("Sever recieved configs", configSettings)
+    gameType = configSettings.gameType;
+    gameConfigs = { ...configSettings };
     // send to all clients
-    io.sockets.emit("confirm game config selection", { ...gameConfig });
+    io.sockets.emit("confirm game configs", { ...gameConfigs });
   });
 });
 

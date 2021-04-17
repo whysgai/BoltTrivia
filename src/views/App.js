@@ -20,8 +20,6 @@ function App() {
           <ChoosePlayer />
         ) : gameState.phase === GAME_PHASE.SELECT_GAME_TYPE ? (
           <GameTypeSelect />
-        ) : gameState.phase === GAME_PHASE.SET_CONFIGS ? (
-          <p>MP set configs</p>
         ) : gameState.phase === GAME_PHASE.PLAY_GAME ? (
           <p>MP running the game</p>
         ) : gameState.phase === GAME_PHASE.VIEW_SCORES ? (

@@ -42,6 +42,7 @@ export const gameStateReducer = (state = INITIAL_STATE, action) => {
     case SET_GAME_CONFIGS:
       return {
         ...state,
+        phase: GAME_PHASE.PLAY_GAME,
         configs: action.payload.configs,
         type: action.payload.configs.gameType
       }

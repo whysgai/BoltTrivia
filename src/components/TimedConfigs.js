@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react';
 import PropTypes from "prop-types";
 import { GAME_TYPE } from "../redux/storeConstants";
+import { selectGameConfig } from '../client';
 
 const TimedConfigs = (props) => {
     const [configs, setConfigs] = useState({
@@ -63,11 +64,11 @@ const TimedConfigs = (props) => {
                             <option value="hard">Hard</option>
                         </select>
                     </label>
-                </div>    
+                </div>   
+                {/* selectGameConfig  */}
                 <button className="btn btn-success config-confirm" 
-                    
+                    onClick={() => selectGameConfig(configs)}
                 >
-                    <h2 className="big-button-text">START</h2>
                     <span className="little-button-text">START</span>
                 </button>
             </div>

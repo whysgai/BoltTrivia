@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
-import { setSPQuestions} from "../redux/actions/SPQuestionActions"
+import { setSPQuestions } from "../redux/actions/SPQuestionActions"
+import SPQuiz from "./SPQuiz"
 
 const requestTriviaCategories = async () => {
     let response = await fetch("https://opentdb.com/api_category.php");
@@ -88,7 +89,7 @@ const SinglePlayer = () => {
             </>
             :
             <>
-                You have started the quiz
+                <SPQuiz/>
             </>
         }
         

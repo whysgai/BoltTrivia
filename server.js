@@ -80,7 +80,7 @@ const readQuestions = async (url) => {
 
 const assembleURL = (gameConfigs) => {
   let url = OPEN_TDB_URL + "?amount=" + gameConfigs.questionCount;
-  url = url + "&category=any";
+  // url = url + "&category=any";
   if (gameConfigs.difficulty !== "any") {
     url = url + "&difficulty=" + gameConfigs.difficulty;
   }

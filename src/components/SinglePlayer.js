@@ -1,6 +1,9 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import { setSPQuestions } from "../redux/actions/SPQuestionActions";
+import {
+  setSPQuestions,
+  setSPBeginQuiz,
+} from "../redux/actions/SPQuestionActions";
 import SPQuiz from "./SPQuiz";
 
 const requestTriviaCategories = async () => {
@@ -10,7 +13,7 @@ const requestTriviaCategories = async () => {
 };
 
 const SinglePlayer = () => {
-  const [beginQuiz, setBeginQuiz] = useState(false);
+  const beginQuiz = useSelector((state) => state.SPQuestionReducer.beginQuiz);
   const dispatch = useDispatch();
   const difficulty = ["any difficulty", "easy", "medium", "hard"];
 
@@ -58,7 +61,7 @@ const SinglePlayer = () => {
       .catch((error) => {
         console.log(error);
       });
-    setBeginQuiz(true);
+    dispatch(setSPBeginQuiz());
   };
 
   return (

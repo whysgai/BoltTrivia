@@ -13,7 +13,7 @@ const SPQuestionCard = (props) => {
 
   const [answer, setAnswer] = useState("");
   const [submit, setSubmit] = useState(false);
-  const [checked, setChecked] = useState(false);
+  const [valid, setValid] = useState(false);
   const [correct, setCorrect] = useState("");
   const [correctBool, setCorrectBool] = useState("");
   const dispatch = useDispatch();
@@ -22,6 +22,7 @@ const SPQuestionCard = (props) => {
     if (submit) {
       setSubmit(false);
       dispatch(addAnswer(correctBool));
+      setValid(false);
     } else {
       if (answer === characterCheck(question.correct_answer)) {
         setCorrect("Correct!");
@@ -45,6 +46,7 @@ const SPQuestionCard = (props) => {
       {props.multipleChoice.map((selection, index) => (
         <div key={index} className="form-check pb-2">
           <input
+            required
             className="form-check-input"
             checked={answer === characterCheck(selection)}
             disabled={submit}
@@ -52,7 +54,10 @@ const SPQuestionCard = (props) => {
             name="gridRadios"
             id={"gridRadios" + index}
             value="type-text"
-            onChange={() => setAnswer(characterCheck(selection))}
+            onChange={() => {
+              setAnswer(characterCheck(selection));
+              setValid(true);
+            }}
           />
           <label
             className="form-check-label pb-2"
@@ -66,6 +71,7 @@ const SPQuestionCard = (props) => {
         <button
           className="btn btn-success float-right"
           onClick={() => updateCount()}
+          disabled={!valid}
         >
           Submit
         </button>

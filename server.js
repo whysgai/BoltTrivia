@@ -1,3 +1,4 @@
+import fetch from 'node-fetch';
 // Server config stuff goes here
 
 // Server attributes go here:

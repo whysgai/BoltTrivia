@@ -69,7 +69,9 @@ server.listen(PORT, () => console.log(`Listening on ${PORT}`));
 const OPEN_TDB_URL = "https://opentdb.com/api.php";
 
 const readQuestions = async (url) => {
-  {console.log("Requesting from: ", url)}
+  {
+    console.log("Requesting from: ", url);
+  }
   let response = await fetch(url);
   let questions = await response.json();
   return questions;
@@ -78,39 +80,55 @@ const readQuestions = async (url) => {
 const assembleURL = (quizParams) => {
   let url = OPEN_TDB_URL + "?amount=" + quizParams.num;
   if (quizParams.cat !== "any") {
-      url = url + "&category=" + quizParams.cat;
+    url = url + "&category=" + quizParams.cat;
   }
   if (quizParams.dif !== "any") {
-      url = url + "&difficulty=" + quizParams.dif; 
+    url = url + "&difficulty=" + quizParams.dif;
   }
   return url;
 };
 
-const decodeText = txt => {
-  return new DOMParser().parseFromString(txt, 'text/html').body.innerText;
+const contactAPI = () => {
+  let url = assembleURL(queryParams);
+  readQuestions(url)
+    .then((data) => {
+      console.log("data:", data);
+      // data.results.map((result, index) => {
+      //   result.all_answers = processAnswers(result);
+      //   result.question = decode(result.question);
+      // });
+      // console.log("Post set-questions:", data.results);
+      // setQuestions(data.results);
+      // setStatus(STATUS.SUCCESS);
+    })
+    .catch((error) => {
+      setStatus(STATUS.FAIL);
+      console.log(error);
+    });
 };
 
-const processQuestion = question => {
+const decodeText = (txt) => {
+  return new DOMParser().parseFromString(txt, "text/html").body.innerText;
+};
+
+const processQuestion = (question) => {
   console.log("Process question:", question);
   question.question = decode(question.question);
   let allAnswers = [];
-  question.incorrect_answers.map(answer => 
-      allAnswers.push(decode(answer))
-  )
-  allAnswers.push(question.correct_answer);    
+  question.incorrect_answers.map((answer) => allAnswers.push(decode(answer)));
+  allAnswers.push(question.correct_answer);
 
   let i, j, k;
   for (i = 0; i < allAnswers.length; i++) {
-      j = Math.floor(Math.random() * (i + 1));
-      k = allAnswers[i];
-      allAnswers[i] = allAnswers[j];
-      allAnswers[j] = k;
+    j = Math.floor(Math.random() * (i + 1));
+    k = allAnswers[i];
+    allAnswers[i] = allAnswers[j];
+    allAnswers[j] = k;
   }
   question.allAnswers = allAnswers;
 
   return question;
-}
-
+};
 
 // This array keeps track of availability of both players,
 // which will help UI determine which button to disable, if any
@@ -131,7 +149,7 @@ io.on("connection", (client) => {
     console.log(`Player ${playerIndex} has been selected`);
     playerAvailability[playerIndex] = false;
     client.emit("confirm player multi selection", playerIndex);
-    
+
     console.log("Server is sending playerAvailability", playerAvailability);
     io.sockets.emit("update player availability", [...playerAvailability]);
   });
@@ -143,11 +161,15 @@ io.on("connection", (client) => {
   // });
 
   client.on("game configs selected", (configSettings) => {
-    console.log("Sever recieved configs", configSettings)
+    console.log("Sever recieved configs", configSettings);
     gameType = configSettings.gameType;
     gameConfigs = { ...configSettings };
     // send to all clients
     io.sockets.emit("confirm game configs", { ...gameConfigs });
+    // request from API
+    contactAPI();
+    // process questions
+    // start the game
   });
 });
 

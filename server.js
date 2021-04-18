@@ -77,19 +77,17 @@ const readQuestions = async (url) => {
   return questions;
 };
 
-const assembleURL = (quizParams) => {
-  let url = OPEN_TDB_URL + "?amount=" + quizParams.num;
-  if (quizParams.cat !== "any") {
-    url = url + "&category=" + quizParams.cat;
-  }
-  if (quizParams.dif !== "any") {
-    url = url + "&difficulty=" + quizParams.dif;
+const assembleURL = (gameConfigs) => {
+  let url = OPEN_TDB_URL + "?amount=" + gameConfigs.questionCount;
+  url = url + "&category=any";
+  if (gameConfigs.difficulty !== "any") {
+    url = url + "&difficulty=" + gameConfigs.difficulty;
   }
   return url;
 };
 
-const contactAPI = () => {
-  let url = assembleURL(queryParams);
+const contactAPI = (gameConfigs) => {
+  let url = assembleURL(gameConfigs);
   readQuestions(url)
     .then((data) => {
       console.log("data:", data);
@@ -102,7 +100,7 @@ const contactAPI = () => {
       // setStatus(STATUS.SUCCESS);
     })
     .catch((error) => {
-      setStatus(STATUS.FAIL);
+      //setStatus(STATUS.FAIL);
       console.log(error);
     });
 };
@@ -167,7 +165,7 @@ io.on("connection", (client) => {
     // send to all clients
     io.sockets.emit("confirm game configs", { ...gameConfigs });
     // request from API
-    contactAPI();
+    contactAPI(gameConfigs);
     // process questions
     // start the game
   });

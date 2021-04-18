@@ -1,4 +1,4 @@
-import fetch from 'node-fetch';
+const fetch = require('node-fetch');
 // Server config stuff goes here
 
 // Server attributes go here:
@@ -92,10 +92,11 @@ const contactAPI = (gameConfigs) => {
   readQuestions(url)
     .then((data) => {
       console.log("data:", data);
-      // data.results.map((result, index) => {
-      //   result.all_answers = processAnswers(result);
-      //   result.question = decode(result.question);
-      // });
+      data.results.map((result, index) => {
+        console.log("Result", result);
+        // result.all_answers = processAnswers(result);
+        // result.question = decode(result.question);
+      });
       // console.log("Post set-questions:", data.results);
       // setQuestions(data.results);
       // setStatus(STATUS.SUCCESS);

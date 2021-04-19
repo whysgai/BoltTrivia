@@ -5,8 +5,9 @@ import {
   selectPlayerNumber,
   updatePlayerAvailability,
   gameTypeSelection,
-  setGameConfigs
+  setGameConfigs,
 } from "./redux/actions/gameStateActions";
+import { setMPQuestions } from "./redux/actions/MPQuestionActions";
 
 /** CLIENT CONFIGURATION - connect to the server */
 const socketIOClient = require("socket.io-client");
@@ -47,19 +48,13 @@ export const selectPlayerMulti = (playerIndex) => {
 };
 
 socket.on("confirm player multi selection", (playerIndex) => {
-  console.log(
-    "server confirmed player as: ",
-    playerIndex
-  );
+  console.log("server confirmed player as: ", playerIndex);
   store.dispatch(selectPlayerNumber(playerIndex));
   socket.off("confirm player multi selection");
 });
 
 socket.on("update player availability", (availability) => {
-  console.log(
-    "server updated availability to: ",
-    availability
-  );
+  console.log("server updated availability to: ", availability);
   store.dispatch(updatePlayerAvailability(availability));
 });
 
@@ -84,7 +79,7 @@ socket.on("update player availability", (availability) => {
 
 // Game config selected
 export const selectGameConfig = (configs) => {
-  console.log("Sending configs to server", configs)
+  console.log("Sending configs to server", configs);
   socket.emit("game configs selected", configs);
 
   // No redux store dispatch needed here because the server
@@ -97,4 +92,31 @@ socket.on("confirm game configs", (configs) => {
   socket.off("confirm game configs");
 });
 
+socket.on("start game", (questions) => {
+  questions.map((question, index) => processQuestion(question));
+  store.dispatch(setMPQuestions(questions));
+});
+
 socket.on("notify all", (data) => console.log(data));
+
+const decodeText = (txt) => {
+  return new DOMParser().parseFromString(txt, "text/html").body.innerText;
+};
+
+const processQuestion = (question) => {
+  question.question = decodeText(question.question);
+  let allAnswers = [];
+  question.incorrect_answers.map((answer) =>
+    allAnswers.push(decodeText(answer))
+  );
+  allAnswers.push(question.correct_answer);
+  let i, j, k;
+  for (i = 0; i < allAnswers.length; i++) {
+    j = Math.floor(Math.random() * (i + 1));
+    k = allAnswers[i];
+    allAnswers[i] = allAnswers[j];
+    allAnswers[j] = k;
+  }
+  question.allAnswers = allAnswers;
+  return question;
+};

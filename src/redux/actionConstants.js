@@ -4,7 +4,15 @@ export const SELECT_PLAYER_NUMBER = "SELECT_PLAYER_NUMBER";
 export const UPDATE_PLAYER_AVAILABILITY = "UPDATE_PLAYER_AVAILABILITY";
 export const SET_GAME_CONFIGS = "SET_GAME_CONFIGS";
 
-// Question action constants
+// SP Question action constants
 export const SET_SP_TRIVIA_QUESTIONS = "SET_SP_TRIVIA_QUESTIONS";
 export const SET_SP_ANSWERED = "SET_SP_ANSWERED";
 export const ADD_SP_ANSWER = "ADD_SP_ANSWER";
+export const SET_SP_BEGIN_QUIZ = "SET_SP_BEGIN_QUIZ";
+export const UNSET_SP_BEGIN_QUIZ = "UNSET_SP_BEGIN_QUIZ";
+
+// MP Question action constants
+export const SET_MP_QUESTIONS = "SET_MP_QUESTIONS";
+export const ADD_MP_ANSWER = "ADD_MP_ANSWER";
+export const START_MP_QUIZ = "START_MP_QUIZ";
+export const END_MP_QUIZ = "END_MP_QUIZ";

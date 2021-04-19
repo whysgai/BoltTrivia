@@ -84,6 +84,7 @@ const assembleURL = (gameConfigs) => {
   if (gameConfigs.difficulty !== "any") {
     url = url + "&difficulty=" + gameConfigs.difficulty;
   }
+  url = url + "&type=multiple"
   return url;
 };
 
@@ -101,30 +102,6 @@ const contactAPI = (gameConfigs) => {
       console.log(error);
     });
 };
-
-// Will need these in client in BT-44, leave here for now
-// const decodeText = (txt) => {
-//   return new DOMParser().parseFromString(txt, "text/html").body.innerText;
-// };
-
-// const processQuestion = (question) => {
-//   console.log("Process question:", question);
-//   question.question = decodeText(question.question);
-//   let allAnswers = [];
-//   question.incorrect_answers.map((answer) => allAnswers.push(decodeText(answer)));
-//   allAnswers.push(question.correct_answer);
-
-//   let i, j, k;
-//   for (i = 0; i < allAnswers.length; i++) {
-//     j = Math.floor(Math.random() * (i + 1));
-//     k = allAnswers[i];
-//     allAnswers[i] = allAnswers[j];
-//     allAnswers[j] = k;
-//   }
-//   question.allAnswers = allAnswers;
-
-//   return question;
-// };
 
 // This array keeps track of availability of both players,
 // which will help UI determine which button to disable, if any

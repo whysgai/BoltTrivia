@@ -102,6 +102,8 @@ const contactAPI = (gameConfigs) => {
     });
 };
 
+
+// Will need these in client in BT-44, leave here for now
 // const decodeText = (txt) => {
 //   return new DOMParser().parseFromString(txt, "text/html").body.innerText;
 // };
@@ -148,12 +150,6 @@ io.on("connection", (client) => {
     console.log("Server is sending playerAvailability", playerAvailability);
     io.sockets.emit("update player availability", [...playerAvailability]);
   });
-
-  // client.on("game type selected", (type) => {
-  //   gameType = type;
-  //   // send to all clients
-  //   io.sockets.emit("confirm game type selection", gameType);
-  // });
 
   client.on("game configs selected", (configSettings) => {
     console.log("Sever recieved configs", configSettings);

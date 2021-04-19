@@ -97,4 +97,8 @@ socket.on("confirm game configs", (configs) => {
   socket.off("confirm game configs");
 });
 
+socket.on("start game", (questions) => {
+  console.log("Questions from server", questions);
+});
+
 socket.on("notify all", (data) => console.log(data));

@@ -7,6 +7,7 @@ import {
   gameTypeSelection,
   setGameConfigs,
 } from "./redux/actions/gameStateActions";
+import { setMPQuestions } from "./redux/actions/MPQuestionActions";
 
 /** CLIENT CONFIGURATION - connect to the server */
 const socketIOClient = require("socket.io-client");
@@ -92,7 +93,30 @@ socket.on("confirm game configs", (configs) => {
 });
 
 socket.on("start game", (questions) => {
-  console.log("Questions from server", questions);
+  questions.map((question, index) => processQuestion(question));
+  store.dispatch(setMPQuestions(questions));
 });
 
 socket.on("notify all", (data) => console.log(data));
+
+const decodeText = (txt) => {
+  return new DOMParser().parseFromString(txt, "text/html").body.innerText;
+};
+
+const processQuestion = (question) => {
+  question.question = decodeText(question.question);
+  let allAnswers = [];
+  question.incorrect_answers.map((answer) =>
+    allAnswers.push(decodeText(answer))
+  );
+  allAnswers.push(question.correct_answer);
+  let i, j, k;
+  for (i = 0; i < allAnswers.length; i++) {
+    j = Math.floor(Math.random() * (i + 1));
+    k = allAnswers[i];
+    allAnswers[i] = allAnswers[j];
+    allAnswers[j] = k;
+  }
+  question.allAnswers = allAnswers;
+  return question;
+};

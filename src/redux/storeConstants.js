@@ -13,6 +13,7 @@ export const GAME_PHASE = {
     SELECT_PLAYER: "select single player",
     SELECT_GAME_TYPE: "select game type",
     SET_CONFIGS: "set configs",
+    LOADING_GAME: "loading game",
     PLAY_GAME: "play game",
     VIEW_SCORES: "view scores"
 };

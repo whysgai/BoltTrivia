@@ -12,7 +12,7 @@ export const SET_SP_BEGIN_QUIZ = "SET_SP_BEGIN_QUIZ";
 export const UNSET_SP_BEGIN_QUIZ = "UNSET_SP_BEGIN_QUIZ";
 
 // MP Question action constants
-export const SET_MP_TRIVIA_QUESTIONS = "SET_MP_TRIVIA_QUESTIONS";
+export const SET_MP_QUESTIONS = "SET_MP_QUESTIONS";
 export const ADD_MP_ANSWER = "ADD_MP_ANSWER";
-export const SET_MP_BEGIN_QUIZ = "SET_MP_BEGIN_QUIZ";
-export const UNSET_MP_BEGIN_QUIZ = "UNSET_MP_BEGIN_QUIZ";
+export const START_MP_QUIZ = "START_MP_QUIZ";
+export const END_MP_QUIZ = "END_MP_QUIZ";

@@ -92,14 +92,18 @@ const contactAPI = (gameConfigs) => {
   readQuestions(url)
     .then((data) => {
       console.log("data:", data);
-      data.results.map((result, index) => {
-        console.log("Result", result);
-        // result.all_answers = processAnswers(result);
-        // result.question = decode(result.question);
-      });
+      // data.results.map((result, index) => {
+      //   console.log("Raw result", result);
+      //   // result.all_answers = processQuestion(result);
+      //   // result.question = decode(result.question);
+      //   let newResult = processQuestion(result);
+      //   console.log("Processed result", newResult);
+      //   return newResult;
+      // });
       // console.log("Post set-questions:", data.results);
       // setQuestions(data.results);
       // setStatus(STATUS.SUCCESS);
+      questionList = data.results;
     })
     .catch((error) => {
       //setStatus(STATUS.FAIL);
@@ -107,28 +111,28 @@ const contactAPI = (gameConfigs) => {
     });
 };
 
-const decodeText = (txt) => {
-  return new DOMParser().parseFromString(txt, "text/html").body.innerText;
-};
+// const decodeText = (txt) => {
+//   return new DOMParser().parseFromString(txt, "text/html").body.innerText;
+// };
 
-const processQuestion = (question) => {
-  console.log("Process question:", question);
-  question.question = decode(question.question);
-  let allAnswers = [];
-  question.incorrect_answers.map((answer) => allAnswers.push(decode(answer)));
-  allAnswers.push(question.correct_answer);
+// const processQuestion = (question) => {
+//   console.log("Process question:", question);
+//   question.question = decodeText(question.question);
+//   let allAnswers = [];
+//   question.incorrect_answers.map((answer) => allAnswers.push(decodeText(answer)));
+//   allAnswers.push(question.correct_answer);
 
-  let i, j, k;
-  for (i = 0; i < allAnswers.length; i++) {
-    j = Math.floor(Math.random() * (i + 1));
-    k = allAnswers[i];
-    allAnswers[i] = allAnswers[j];
-    allAnswers[j] = k;
-  }
-  question.allAnswers = allAnswers;
+//   let i, j, k;
+//   for (i = 0; i < allAnswers.length; i++) {
+//     j = Math.floor(Math.random() * (i + 1));
+//     k = allAnswers[i];
+//     allAnswers[i] = allAnswers[j];
+//     allAnswers[j] = k;
+//   }
+//   question.allAnswers = allAnswers;
 
-  return question;
-};
+//   return question;
+// };
 
 // This array keeps track of availability of both players,
 // which will help UI determine which button to disable, if any

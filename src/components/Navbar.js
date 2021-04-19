@@ -1,12 +1,12 @@
 import React from 'react';
 import {useSelector, useDispatch} from "react-redux";
-import {restartGame} from "../redux/actions/gameStateActions"
+import {selectRestart} from "../client"
 
 const NavbarComponent = () => {
     const dispatch = useDispatch();
 
     const restart = () => {
-        dispatch(restartGame())
+        selectRestart()
     }
 
     return (

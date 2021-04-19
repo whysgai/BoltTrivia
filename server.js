@@ -91,19 +91,10 @@ const contactAPI = (gameConfigs) => {
   let url = assembleURL(gameConfigs);
   readQuestions(url)
     .then((data) => {
-      console.log("data:", data);
-      // data.results.map((result, index) => {
-      //   console.log("Raw result", result);
-      //   // result.all_answers = processQuestion(result);
-      //   // result.question = decode(result.question);
-      //   let newResult = processQuestion(result);
-      //   console.log("Processed result", newResult);
-      //   return newResult;
-      // });
-      // console.log("Post set-questions:", data.results);
-      // setQuestions(data.results);
+      //console.log("data:", data);
       // setStatus(STATUS.SUCCESS);
       questionList = data.results;
+      io.sockets.emit("start game", [...questionList]);
     })
     .catch((error) => {
       //setStatus(STATUS.FAIL);
@@ -172,7 +163,6 @@ io.on("connection", (client) => {
     io.sockets.emit("confirm game configs", { ...gameConfigs });
     // request from API
     contactAPI(gameConfigs);
-    // process questions
     // start the game
   });
 });

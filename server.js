@@ -84,7 +84,7 @@ const assembleURL = (gameConfigs) => {
   if (gameConfigs.difficulty !== "any") {
     url = url + "&difficulty=" + gameConfigs.difficulty;
   }
-  url = url + "&type=multiple"
+  url = url + "&type=multiple";
   return url;
 };
 
@@ -133,9 +133,8 @@ io.on("connection", (client) => {
     gameConfigs = { ...configSettings };
     // send to all clients
     io.sockets.emit("confirm game configs", { ...gameConfigs });
-    // request from API
+    // request from API and start the game
     contactAPI(gameConfigs);
-    // start the game
   });
 });
 

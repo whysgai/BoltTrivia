@@ -20,6 +20,8 @@ function App() {
           <ChoosePlayer />
         ) : gameState.phase === GAME_PHASE.SELECT_GAME_TYPE ? (
           <GameTypeSelect />
+        ) : gameState.phase === GAME_PHASE.LOADING_GAME ? (
+          <p>MP loading the game {console.log("Loading game")}</p>
         ) : gameState.phase === GAME_PHASE.PLAY_GAME ? (
           <p>MP running the game</p>
         ) : gameState.phase === GAME_PHASE.VIEW_SCORES ? (

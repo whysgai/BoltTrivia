@@ -5,7 +5,7 @@ import {
   selectPlayerNumber,
   updatePlayerAvailability,
   gameTypeSelection,
-  setGameConfigs
+  setGameConfigs,
 } from "./redux/actions/gameStateActions";
 
 /** CLIENT CONFIGURATION - connect to the server */
@@ -47,19 +47,13 @@ export const selectPlayerMulti = (playerIndex) => {
 };
 
 socket.on("confirm player multi selection", (playerIndex) => {
-  console.log(
-    "server confirmed player as: ",
-    playerIndex
-  );
+  console.log("server confirmed player as: ", playerIndex);
   store.dispatch(selectPlayerNumber(playerIndex));
   socket.off("confirm player multi selection");
 });
 
 socket.on("update player availability", (availability) => {
-  console.log(
-    "server updated availability to: ",
-    availability
-  );
+  console.log("server updated availability to: ", availability);
   store.dispatch(updatePlayerAvailability(availability));
 });
 
@@ -84,7 +78,7 @@ socket.on("update player availability", (availability) => {
 
 // Game config selected
 export const selectGameConfig = (configs) => {
-  console.log("Sending configs to server", configs)
+  console.log("Sending configs to server", configs);
   socket.emit("game configs selected", configs);
 
   // No redux store dispatch needed here because the server

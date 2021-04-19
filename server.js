@@ -1,4 +1,4 @@
-const fetch = require('node-fetch');
+const fetch = require("node-fetch");
 // Server config stuff goes here
 
 // Server attributes go here:
@@ -101,7 +101,6 @@ const contactAPI = (gameConfigs) => {
       console.log(error);
     });
 };
-
 
 // Will need these in client in BT-44, leave here for now
 // const decodeText = (txt) => {

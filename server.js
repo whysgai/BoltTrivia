@@ -27,8 +27,6 @@ const fetch = require("node-fetch");
 
 //  end game (to all) and emit scoreboard
 
-// Kaiz
-
 /** SERVER CONFIGURATION */
 const express = require("express");
 const app = express();
@@ -109,6 +107,7 @@ let playerAvailability = [true, true];
 let gameType = null;
 let gameConfigs = {};
 let questionList = [];
+let playerScores = [0, 0];
 
 io.on("connection", (client) => {
   io.sockets.emit("notify all", `Client ${client.id} has connected`);
@@ -136,8 +135,17 @@ io.on("connection", (client) => {
     // request from API and start the game
     contactAPI(gameConfigs);
   });
+
+  client.on("update player score", (playerIndex, pointsToAdd) => {
+    console.log(
+      "updating score for player " +
+        playerIndex +
+        " with " +
+        pointsToAdd +
+        " points."
+    );
+
+    playerScores[playerIndex] += pointsToAdd;
+    io.sockets.emit("player scores updated", [...playerScores]);
+  });
 });
-
-// Will
-
-// Mikayla

@@ -120,3 +120,18 @@ const processQuestion = (question) => {
   question.allAnswers = allAnswers;
   return question;
 };
+
+export const updatePlayerScore = (playerIndex, pointsToAdd) => {
+  console.log("Sending updated player to server", pointsToAdd);
+  socket.emit("update player score", playerIndex, pointsToAdd);
+
+  // No redux store dispatch needed here because the server
+  // will respond to this event with another event(the next one)
+};
+
+socket.on("player scores updated", (scores) => {
+  console.log("playerScoreUpdated: ", scores);
+
+  // redux action to update all player scores (e.g. below)
+  // store.dispatch(setUpdatedPlayerScores(scores));
+});

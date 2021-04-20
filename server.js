@@ -136,6 +136,11 @@ io.on("connection", (client) => {
     contactAPI(gameConfigs);
   });
 
+  client.on("restart selected", () => {
+    console.log("Server recieved game restart");
+    io.sockets.emit("restart")
+  })
+
   client.on("update player score", (playerIndex, pointsToAdd) => {
     console.log(
       "updating score for player " +

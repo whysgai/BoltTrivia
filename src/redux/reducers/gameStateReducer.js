@@ -1,6 +1,12 @@
 import { PLAYER_MODE, GAME_TYPE, GAME_PHASE } from "../storeConstants";
 import { SELECT_SINGLE_PLAYER_TYPE, SELECT_MULTI_PLAYER_TYPE, SELECT_PLAYER_NUMBER, UPDATE_PLAYER_AVAILABILITY,
   SET_GAME_CONFIGS } from "../actionConstants"
+import {
+    SET_MP_QUESTIONS,
+    ADD_MP_ANSWER,
+    START_MP_QUIZ,
+    END_MP_QUIZ,
+  } from "../actionConstants";
 
 const INITIAL_STATE = {
   player: null,
@@ -42,9 +48,14 @@ export const gameStateReducer = (state = INITIAL_STATE, action) => {
     case SET_GAME_CONFIGS:
       return {
         ...state,
-        phase: GAME_PHASE.PLAY_GAME,
+        phase: GAME_PHASE.LOADING_GAME,
         configs: action.payload.configs,
         type: action.payload.configs.gameType
+      }
+    case SET_MP_QUESTIONS:
+      return {
+        ...state,
+        phase: GAME_PHASE.PLAY_GAME
       }
     default:
       return state;

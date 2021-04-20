@@ -27,8 +27,6 @@ const fetch = require("node-fetch");
 
 //  end game (to all) and emit scoreboard
 
-// Kaiz
-
 /** SERVER CONFIGURATION */
 const express = require("express");
 const app = express();
@@ -84,6 +82,7 @@ const assembleURL = (gameConfigs) => {
   if (gameConfigs.difficulty !== "any") {
     url = url + "&difficulty=" + gameConfigs.difficulty;
   }
+  url = url + "&type=multiple";
   return url;
 };
 
@@ -102,36 +101,13 @@ const contactAPI = (gameConfigs) => {
     });
 };
 
-// Will need these in client in BT-44, leave here for now
-// const decodeText = (txt) => {
-//   return new DOMParser().parseFromString(txt, "text/html").body.innerText;
-// };
-
-// const processQuestion = (question) => {
-//   console.log("Process question:", question);
-//   question.question = decodeText(question.question);
-//   let allAnswers = [];
-//   question.incorrect_answers.map((answer) => allAnswers.push(decodeText(answer)));
-//   allAnswers.push(question.correct_answer);
-
-//   let i, j, k;
-//   for (i = 0; i < allAnswers.length; i++) {
-//     j = Math.floor(Math.random() * (i + 1));
-//     k = allAnswers[i];
-//     allAnswers[i] = allAnswers[j];
-//     allAnswers[j] = k;
-//   }
-//   question.allAnswers = allAnswers;
-
-//   return question;
-// };
-
 // This array keeps track of availability of both players,
 // which will help UI determine which button to disable, if any
 let playerAvailability = [true, true];
 let gameType = null;
 let gameConfigs = {};
 let questionList = [];
+let playerScores = [0, 0];
 
 io.on("connection", (client) => {
   io.sockets.emit("notify all", `Client ${client.id} has connected`);
@@ -156,12 +132,20 @@ io.on("connection", (client) => {
     gameConfigs = { ...configSettings };
     // send to all clients
     io.sockets.emit("confirm game configs", { ...gameConfigs });
-    // request from API
+    // request from API and start the game
     contactAPI(gameConfigs);
-    // start the game
+  });
+
+  client.on("update player score", (playerIndex, pointsToAdd) => {
+    console.log(
+      "updating score for player " +
+        playerIndex +
+        " with " +
+        pointsToAdd +
+        " points."
+    );
+
+    playerScores[playerIndex] += pointsToAdd;
+    io.sockets.emit("player scores updated", [...playerScores]);
   });
 });
-
-// Will
-
-// Mikayla

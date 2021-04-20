@@ -149,11 +149,14 @@ io.on("connection", (client) => {
     io.sockets.emit("player scores updated", [...playerScores]);
   });
 
-    client.on("finish MP game", () => {
-      console.log(
-        "finishing MP game"
-      );
+  client.on("finish MP game", () => {
+    console.log("finishing MP game");
 
-      io.sockets.emit("MP game finished", [...playerScores]);
-    });
+    io.sockets.emit("MP game finished", [...playerScores]);
+    playerAvailability = [true, true];
+    gameType = null;
+    gameConfigs = {};
+    questionList = [];
+    playerScores = [0, 0];
+  });
 });

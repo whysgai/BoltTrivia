@@ -14,7 +14,8 @@ const INITIAL_STATE = {
   phase: GAME_PHASE.SELECT_MULTI,
   multiSelect: null,
   playerAvailability: [true, true],
-  gameConfigs: {}
+  gameConfigs: {},
+  restart: false
 };
 
 export const gameStateReducer = (state = INITIAL_STATE, action) => {
@@ -26,17 +27,20 @@ export const gameStateReducer = (state = INITIAL_STATE, action) => {
         phase: GAME_PHASE.SELECT_MULTI,
         multiSelect: null,
         playerAvailability: [true, true],
-        gameConfigs: {}
+        gameConfigs: {},
+        restart: true
       }
     case SELECT_SINGLE_PLAYER_TYPE:
       return {
         ...state,
+        restart: false,
         phase: GAME_PHASE.SELECT_GAME_TYPE,
         multiSelect: PLAYER_MODE.SINGLE_PLAYER
       }
     case SELECT_MULTI_PLAYER_TYPE:
       return {
         ...state,
+        restart: false,
         phase: GAME_PHASE.SELECT_PLAYER,
         multiSelect: PLAYER_MODE.MULTI_PLAYER,
         playerAvailability: action.payload.availability

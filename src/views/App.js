@@ -16,6 +16,10 @@ function App() {
       <NavbarComponent/>
       <h2 className="mt-3">Bolt Trivia!</h2>
       {
+        gameState.restart && 
+        <div className="alert alert-danger">You or your opponent has quit, please choose Single Player or Multi Player to play again.</div>
+      }
+      {
         gameState.phase === GAME_PHASE.SELECT_MULTI ? (
           <MultiSelect />
         ) : gameState.multiSelect === PLAYER_MODE.MULTI_PLAYER ? (

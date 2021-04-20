@@ -10,7 +10,7 @@ export const GAME_TYPE = {
 
 export const GAME_PHASE = {
     SELECT_MULTI: "select multi player",
-    SELECT_PLAYER: "select single player",
+    SELECT_PLAYER: "select player 1 or player 2",
     SELECT_GAME_TYPE: "select game type",
     SET_CONFIGS: "set configs",
     LOADING_GAME: "loading game",

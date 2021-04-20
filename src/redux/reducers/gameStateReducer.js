@@ -28,7 +28,7 @@ export const gameStateReducer = (state = INITIAL_STATE, action) => {
         multiSelect: null,
         playerAvailability: [true, true],
         gameConfigs: {},
-        restart: true
+        restart: action.payload.restart
       }
     case SELECT_SINGLE_PLAYER_TYPE:
       return {

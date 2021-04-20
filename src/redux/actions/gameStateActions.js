@@ -3,8 +3,11 @@ import {RESTART_SELECTIONS, SELECT_SINGLE_PLAYER_TYPE, SELECT_MULTI_PLAYER_TYPE,
 import { selectMultiplayerMode } from "../../client";
 import { useDispatch } from "react-redux";
 
-export const restartGame = () => ({
-    type: RESTART_SELECTIONS
+export const restartGame = (restart) => ({
+    type: RESTART_SELECTIONS,
+    payload: {
+        restart: restart
+    }
 })
 
 export const connectSinglePlayerMode = () => ({

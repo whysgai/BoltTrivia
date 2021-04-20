@@ -148,4 +148,12 @@ io.on("connection", (client) => {
     playerScores[playerIndex] += pointsToAdd;
     io.sockets.emit("player scores updated", [...playerScores]);
   });
+
+    client.on("finish MP game", () => {
+      console.log(
+        "finishing MP game"
+      );
+
+      io.sockets.emit("MP game finished", [...playerScores]);
+    });
 });

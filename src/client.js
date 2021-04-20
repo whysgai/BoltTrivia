@@ -6,6 +6,7 @@ import {
   updatePlayerAvailability,
   gameTypeSelection,
   setGameConfigs,
+  restartGame
 } from "./redux/actions/gameStateActions";
 import { setMPQuestions } from "./redux/actions/MPQuestionActions";
 
@@ -95,6 +96,22 @@ socket.on("confirm game configs", (configs) => {
 socket.on("start game", (questions) => {
   questions.map((question, index) => processQuestion(question));
   store.dispatch(setMPQuestions(questions));
+  console.log("Questions from server", questions);
+})
+
+// Restart selected
+export const selectRestart = () => {
+  console.log("Sending restart to server")
+  socket.emit("restart selected");
+
+  // No redux store dispatch needed here because the server
+  // will respond to this event with another event(the next one)
+};
+
+
+socket.on("restart", () => {
+  console.log("Server restarted game");
+  store.dispatch(restartGame());
 });
 
 socket.on("notify all", (data) => console.log(data));

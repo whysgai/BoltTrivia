@@ -9,6 +9,7 @@ import {
   restartGame
 } from "./redux/actions/gameStateActions";
 import { setMPQuestions } from "./redux/actions/MPQuestionActions";
+import {PLAYER_MODE} from "./redux/storeConstants"
 
 /** CLIENT CONFIGURATION - connect to the server */
 const socketIOClient = require("socket.io-client");
@@ -111,7 +112,9 @@ export const selectRestart = () => {
 
 socket.on("restart", () => {
   console.log("Server restarted game");
-  store.dispatch(restartGame());
+  if (store.getState().gameStateReducer.multiSelect === PLAYER_MODE.MULTI_PLAYER) {
+    store.dispatch(restartGame());
+  }
 });
 
 socket.on("notify all", (data) => console.log(data));

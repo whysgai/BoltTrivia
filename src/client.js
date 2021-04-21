@@ -91,7 +91,7 @@ export const selectGameConfig = (configs) => {
 socket.on("confirm game configs", (configs) => {
   console.log("server approved game config: ", configs);
   store.dispatch(setGameConfigs(configs));
-  socket.off("confirm game configs");
+  // socket.off("confirm game configs");
 });
 
 socket.on("start game", (questions) => {

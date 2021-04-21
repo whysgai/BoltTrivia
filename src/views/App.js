@@ -7,19 +7,22 @@ import GameTypeSelect from "../components/GameTypeSelect";
 import SinglePlayer from "../components/SinglePlayer";
 import { updatePlayerScore, finishMPGame } from "../client.js";
 import NavbarComponent from "../components/Navbar";
+import MPTimer from "../components/MPTimer";
 
 function App() {
   const gameState = useSelector((state) => state.gameStateReducer);
 
   return (
     <div className="App">
-      {console.log('game phase', gameState.phase)}
-      <NavbarComponent/>
+      {console.log("game phase", gameState.phase)}
+      <NavbarComponent />
       <h2 className="mt-3">Bolt Trivia!</h2>
-      {
-        gameState.restart && 
-        <div className="alert alert-danger">You or your opponent has quit, please choose Single Player or Multi Player to play again.</div>
-      }
+      {gameState.restart && (
+        <div className="alert alert-danger">
+          You or your opponent has quit, please choose Single Player or Multi
+          Player to play again.
+        </div>
+      )}
       {
         gameState.phase === GAME_PHASE.SELECT_MULTI ? (
           <MultiSelect />
@@ -34,6 +37,7 @@ function App() {
           ) : gameState.phase === GAME_PHASE.PLAY_GAME ? (
             <>
               <p>MP running the game</p>
+              <MPTimer />
               <button onClick={() => updatePlayerScore(0, 10)}>
                 Update Player 1 Score by 10
               </button>

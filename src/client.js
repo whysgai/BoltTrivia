@@ -52,7 +52,7 @@ export const selectPlayerMulti = (playerIndex) => {
 socket.on("confirm player multi selection", (playerIndex) => {
   console.log("server confirmed player as: ", playerIndex);
   store.dispatch(selectPlayerNumber(playerIndex));
-  socket.off("confirm player multi selection");
+  // socket.off("confirm player multi selection");
 });
 
 socket.on("update player availability", (availability) => {

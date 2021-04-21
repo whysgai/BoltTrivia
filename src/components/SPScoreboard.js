@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { unsetSPBeginQuiz } from "../redux/actions/SPQuestionActions";
+import { restartGame } from "../redux/actions/gameStateActions";
 
 const SPScoreboard = () => {
   const answers = useSelector((state) => state.SPQuestionReducer.answers);
@@ -27,7 +28,7 @@ const SPScoreboard = () => {
       </button>
 
       {/* quit game logic */}
-      <button className="btn btn-primary">Home</button>
+      <button className="btn btn-primary" onClick={() => dispatch(restartGame(false))}>Home</button>
     </>
   );
 };

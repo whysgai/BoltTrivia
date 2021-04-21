@@ -1,5 +1,5 @@
 import { PLAYER_MODE, GAME_TYPE, GAME_PHASE } from "../storeConstants";
-import { SELECT_SINGLE_PLAYER_TYPE, SELECT_MULTI_PLAYER_TYPE, SELECT_PLAYER_NUMBER, UPDATE_PLAYER_AVAILABILITY,
+import { RESTART_SELECTIONS, SELECT_SINGLE_PLAYER_TYPE, SELECT_MULTI_PLAYER_TYPE, SELECT_PLAYER_NUMBER, UPDATE_PLAYER_AVAILABILITY,
   SET_GAME_CONFIGS } from "../actionConstants"
 import {
     SET_MP_QUESTIONS,
@@ -14,20 +14,33 @@ const INITIAL_STATE = {
   phase: GAME_PHASE.SELECT_MULTI,
   multiSelect: null,
   playerAvailability: [true, true],
-  gameConfigs: {}
+  gameConfigs: {},
+  restart: false
 };
 
 export const gameStateReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case RESTART_SELECTIONS:
+      return {
+        player: null,
+        type: null,
+        phase: GAME_PHASE.SELECT_MULTI,
+        multiSelect: null,
+        playerAvailability: [true, true],
+        gameConfigs: {},
+        restart: action.payload.restart
+      }
     case SELECT_SINGLE_PLAYER_TYPE:
       return {
         ...state,
+        restart: false,
         phase: GAME_PHASE.SELECT_GAME_TYPE,
         multiSelect: PLAYER_MODE.SINGLE_PLAYER
       }
     case SELECT_MULTI_PLAYER_TYPE:
       return {
         ...state,
+        restart: false,
         phase: GAME_PHASE.SELECT_PLAYER,
         multiSelect: PLAYER_MODE.MULTI_PLAYER,
         playerAvailability: action.payload.availability

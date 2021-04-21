@@ -136,6 +136,17 @@ io.on("connection", (client) => {
     contactAPI(gameConfigs);
   });
 
+  client.on("restart selected", () => {
+    console.log("Server recieved game restart");
+    playerAvailability = [true, true];
+    gameType = null;
+    gameConfigs = {};
+    questionList = [];
+    playerScores = [0, 0];
+    console.log("Sever restarted multiplayer availability", playerAvailability);
+    io.sockets.emit("restart")
+  })
+
   client.on("update player score", (playerIndex, pointsToAdd) => {
     console.log(
       "updating score for player " +
@@ -153,6 +164,15 @@ io.on("connection", (client) => {
     console.log("finishing MP game");
 
     io.sockets.emit("MP game finished", [...playerScores]);
+    playerAvailability = [true, true];
+    gameType = null;
+    gameConfigs = {};
+    questionList = [];
+    playerScores = [0, 0];
+  })
+
+  client.on('disconnect', () => {
+    io.sockets.emit('disconnected'); 
     playerAvailability = [true, true];
     gameType = null;
     gameConfigs = {};

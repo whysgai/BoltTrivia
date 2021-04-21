@@ -6,13 +6,20 @@ import ChoosePlayer from "../components/ChoosePlayer";
 import GameTypeSelect from "../components/GameTypeSelect";
 import SinglePlayer from "../components/SinglePlayer";
 import { updatePlayerScore, finishMPGame } from "../client.js";
+import NavbarComponent from "../components/Navbar";
 
 function App() {
   const gameState = useSelector((state) => state.gameStateReducer);
 
   return (
     <div className="App">
-      <h2>Bolt Trivia!</h2>
+      {console.log('game phase', gameState.phase)}
+      <NavbarComponent/>
+      <h2 className="mt-3">Bolt Trivia!</h2>
+      {
+        gameState.restart && 
+        <div className="alert alert-danger">You or your opponent has quit, please choose Single Player or Multi Player to play again.</div>
+      }
       {
         gameState.phase === GAME_PHASE.SELECT_MULTI ? (
           <MultiSelect />

@@ -1,16 +1,19 @@
 import React from 'react';
 import {useSelector, useDispatch} from "react-redux";
 import {selectRestart} from "../client"
-import {PLAYER_MODE} from "../redux/storeConstants"
+import {PLAYER_MODE, GAME_PHASE} from "../redux/storeConstants"
 import { restartGame } from '../redux/actions/gameStateActions';
 
 const NavbarComponent = () => {
     const dispatch = useDispatch();
     const multiSelect = useSelector(state => state.gameStateReducer.multiSelect)
+    const phase = useSelector(state => state.gameStateReducer.phase)
 
     const restart = () => {
         if (multiSelect === PLAYER_MODE.SINGLE_PLAYER) {
-            dispatch(restartGame())
+            dispatch(restartGame(true))
+        } else if (phase === GAME_PHASE.SELECT_MULTI) {
+            dispatch(restartGame(false))
         } else {
             selectRestart()
         }

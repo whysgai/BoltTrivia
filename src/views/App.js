@@ -8,6 +8,7 @@ import SinglePlayer from "../components/SinglePlayer";
 import { updatePlayerScore, finishMPGame } from "../client.js";
 import NavbarComponent from "../components/Navbar";
 import MPTimer from "../components/MPTimer";
+import MPScoreboardTimed from "../components/MPScoreboardTimed";
 
 function App() {
   const gameState = useSelector((state) => state.gameStateReducer);
@@ -36,12 +37,15 @@ function App() {
             <p>MP loading the game {console.log("Loading game")}</p>
           ) : gameState.phase === GAME_PHASE.PLAY_GAME ? (
             <>
-              <p>MP running the game</p>
-              <MPTimer />
-              <button onClick={() => updatePlayerScore(0, 10)}>
-                Update Player 1 Score by 10
-              </button>
-              <button onClick={() => finishMPGame()}>Game Over</button>
+              <div>
+                <p>MP running the game</p>
+                {/* <MPTimer /> */}
+                <button onClick={() => updatePlayerScore(0, 10)}>
+                  Update Player 1 Score by 10
+                </button>
+                <button onClick={() => finishMPGame()}>Game Over</button>
+              </div>
+              <MPScoreboardTimed />
             </>
           ) : gameState.phase === GAME_PHASE.VIEW_SCORES ? (
             <p>MP view the scores</p>

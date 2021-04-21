@@ -9,7 +9,7 @@ import {
   restartGame
 } from "./redux/actions/gameStateActions";
 import { setMPQuestions } from "./redux/actions/MPQuestionActions";
-import {PLAYER_MODE} from "./redux/storeConstants"
+import {PLAYER_MODE, GAME_PHASE} from "./redux/storeConstants"
 
 /** CLIENT CONFIGURATION - connect to the server */
 const socketIOClient = require("socket.io-client");
@@ -112,14 +112,16 @@ export const selectRestart = () => {
 
 socket.on("restart", () => {
   console.log("Server restarted game");
-  if (store.getState().gameStateReducer.multiSelect === PLAYER_MODE.MULTI_PLAYER) {
+  if (store.getState().gameStateReducer.multiSelect === PLAYER_MODE.MULTI_PLAYER && store.getState().gameStateReducer.phase !== GAME_PHASE.SELECT_PLAYER) {
     store.dispatch(restartGame(true));
   }
 });
 
 socket.on("disconnected", () => {
   console.log("User has disconnected");
-  store.dispatch(restartGame(true));
+  if (store.getState().gameStateReducer.multiSelect === PLAYER_MODE.MULTI_PLAYER && store.getState().gameStateReducer.phase !== GAME_PHASE.SELECT_PLAYER) {
+    store.dispatch(restartGame(true));
+  }
 });
 
 socket.on("notify all", (data) => console.log(data));

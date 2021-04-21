@@ -8,7 +8,8 @@ import {
 
 const INITIAL_STATE = {
   questions: [],
-  answers: [],
+  answersBool: [],
+  answerStrings: [],
   quizInProgress: false,
   time: 0,
 };

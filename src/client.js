@@ -6,8 +6,10 @@ import {
   updatePlayerAvailability,
   gameTypeSelection,
   setGameConfigs,
+  restartGame
 } from "./redux/actions/gameStateActions";
 import { setMPQuestions } from "./redux/actions/MPQuestionActions";
+import {PLAYER_MODE, GAME_PHASE} from "./redux/storeConstants"
 
 /** CLIENT CONFIGURATION - connect to the server */
 const socketIOClient = require("socket.io-client");
@@ -50,7 +52,7 @@ export const selectPlayerMulti = (playerIndex) => {
 socket.on("confirm player multi selection", (playerIndex) => {
   console.log("server confirmed player as: ", playerIndex);
   store.dispatch(selectPlayerNumber(playerIndex));
-  socket.off("confirm player multi selection");
+  // socket.off("confirm player multi selection");
 });
 
 socket.on("update player availability", (availability) => {
@@ -95,6 +97,31 @@ socket.on("confirm game configs", (configs) => {
 socket.on("start game", (questions) => {
   questions.map((question, index) => processQuestion(question));
   store.dispatch(setMPQuestions(questions));
+  console.log("Questions from server", questions);
+})
+
+// Restart selected
+export const selectRestart = () => {
+  console.log("Sending restart to server")
+  socket.emit("restart selected");
+
+  // No redux store dispatch needed here because the server
+  // will respond to this event with another event(the next one)
+};
+
+
+socket.on("restart", () => {
+  console.log("Server restarted game");
+  if (store.getState().gameStateReducer.multiSelect === PLAYER_MODE.MULTI_PLAYER) {
+    store.dispatch(restartGame(true));
+  }
+});
+
+socket.on("disconnected", () => {
+  console.log("User has disconnected");
+  if (store.getState().gameStateReducer.multiSelect === PLAYER_MODE.MULTI_PLAYER && store.getState().gameStateReducer.phase !== GAME_PHASE.SELECT_PLAYER) {
+    store.dispatch(restartGame(true));
+  }
 });
 
 socket.on("notify all", (data) => console.log(data));
@@ -134,4 +161,18 @@ socket.on("player scores updated", (scores) => {
 
   // redux action to update all player scores (e.g. below)
   // store.dispatch(setUpdatedPlayerScores(scores));
+});
+
+export const finishMPGame = () => {
+  console.log("Sending game finish update to server");
+  socket.emit("finish MP game");
+
+  // No redux store dispatch needed here because the server
+  // will respond to this event with another event(the next one)
+};
+
+socket.on("MP game finished", (scores) => {
+  console.log("Game has finished: " + scores);
+
+  // redux action to finish game and set final score
 });

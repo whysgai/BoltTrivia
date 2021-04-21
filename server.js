@@ -170,8 +170,13 @@ io.on("connection", (client) => {
     questionList = [];
     playerScores = [0, 0];
   })
-  
+
   client.on('disconnect', () => {
     io.sockets.emit('disconnected'); 
+    playerAvailability = [true, true];
+    gameType = null;
+    gameConfigs = {};
+    questionList = [];
+    playerScores = [0, 0];
   });
 });

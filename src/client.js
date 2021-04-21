@@ -113,8 +113,13 @@ export const selectRestart = () => {
 socket.on("restart", () => {
   console.log("Server restarted game");
   if (store.getState().gameStateReducer.multiSelect === PLAYER_MODE.MULTI_PLAYER) {
-    store.dispatch(restartGame());
+    store.dispatch(restartGame(true));
   }
+});
+
+socket.on("disconnected", () => {
+  console.log("User has disconnected");
+  store.dispatch(restartGame(true));
 });
 
 socket.on("notify all", (data) => console.log(data));

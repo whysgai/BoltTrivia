@@ -1,8 +1,13 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
+
 import { startMPTimer, stopMPTimer } from "../redux/actions/MPQuestionActions";
+import { GAME_TYPE } from "../redux/storeConstants";
 
 const MPTimer = () => {
+  const gameType = useSelector(
+    (state) => state.gameStateReducer.type
+  );
   const timeLimit = useSelector(
     (state) => state.gameStateReducer.configs.timeLimit
   );
@@ -23,7 +28,12 @@ const MPTimer = () => {
 
   return (
     <>
-      <p>{time}</p>
+      {
+        gameType === GAME_TYPE.TIME_MODE ?
+          <p>{timeLimit - time}</p>
+          :
+          <p>{time}</p>
+      }
     </>
   );
 };

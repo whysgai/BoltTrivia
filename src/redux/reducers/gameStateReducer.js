@@ -20,7 +20,11 @@ const INITIAL_STATE = {
   phase: GAME_PHASE.SELECT_MULTI,
   multiSelect: null,
   playerAvailability: [true, true],
-  configs: {},
+  configs: {
+    timeLimit: "none",
+    questionCount: 50,
+    difficulty: "any",
+  },
   restart: false,
 };
 
@@ -33,7 +37,11 @@ export const gameStateReducer = (state = INITIAL_STATE, action) => {
         phase: GAME_PHASE.SELECT_MULTI,
         multiSelect: null,
         playerAvailability: [true, true],
-        gameConfigs: {},
+        configs: {
+          timeLimit: "none",
+          questionCount: 50,
+          difficulty: "any",
+        },
         restart: action.payload.restart,
       };
     case SELECT_SINGLE_PLAYER_TYPE:

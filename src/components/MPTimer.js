@@ -8,6 +8,13 @@ const MPTimer = () => {
   );
   const time = useSelector((state) => state.MPQuestionReducer.time);
   const dispatch = useDispatch();
+  if (timeLimit !== "none" && time >= timeLimit) {
+    dispatch(stopMPTimer());
+  } // add score completed condition to else if
+  else if (timeLimit === "none") {
+    console.log("stopping");
+    dispatch(stopMPTimer());
+  }
 
   useEffect(() => {
     console.log(timeLimit);
@@ -16,7 +23,6 @@ const MPTimer = () => {
 
   return (
     <>
-      {time >= timeLimit && dispatch(stopMPTimer())}
       <p>{time}</p>
     </>
   );

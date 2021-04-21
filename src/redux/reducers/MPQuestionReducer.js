@@ -4,6 +4,7 @@ import {
   START_MP_QUIZ,
   END_MP_QUIZ,
   UPDATE_MP_TIME,
+  RESTART_SELECTIONS,
 } from "../actionConstants";
 
 const INITIAL_STATE = {
@@ -26,6 +27,10 @@ export const MPQuestionReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         time: state.time + 1,
+      };
+    case RESTART_SELECTIONS:
+      return {
+        time: 0,
       };
     default:
       return state;

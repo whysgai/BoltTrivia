@@ -135,3 +135,17 @@ socket.on("player scores updated", (scores) => {
   // redux action to update all player scores (e.g. below)
   // store.dispatch(setUpdatedPlayerScores(scores));
 });
+
+export const finishMPGame = () => {
+  console.log("Sending game finish update to server");
+  socket.emit("finish MP game");
+
+  // No redux store dispatch needed here because the server
+  // will respond to this event with another event(the next one)
+};
+
+socket.on("MP game finished", (scores) => {
+  console.log("Game has finished: " + scores);
+
+  // redux action to finish game and set final score
+});

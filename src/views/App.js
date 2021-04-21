@@ -5,7 +5,8 @@ import MultiSelect from "../components/MultiSelect";
 import ChoosePlayer from "../components/ChoosePlayer";
 import GameTypeSelect from "../components/GameTypeSelect";
 import SinglePlayer from "../components/SinglePlayer";
-import { updatePlayerScore } from "../client.js";
+import { updatePlayerScore, finishMPGame } from "../client.js";
+
 function App() {
   const gameState = useSelector((state) => state.gameStateReducer);
 
@@ -29,6 +30,7 @@ function App() {
               <button onClick={() => updatePlayerScore(0, 10)}>
                 Update Player 1 Score by 10
               </button>
+              <button onClick={() => finishMPGame()}>Game Over</button>
             </>
           ) : gameState.phase === GAME_PHASE.VIEW_SCORES ? (
             <p>MP view the scores</p>

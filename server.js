@@ -138,6 +138,12 @@ io.on("connection", (client) => {
 
   client.on("restart selected", () => {
     console.log("Server recieved game restart");
+    playerAvailability = [true, true];
+    gameType = null;
+    gameConfigs = {};
+    questionList = [];
+    playerScores = [0, 0];
+    console.log("Sever restarted multiplayer availability", playerAvailability);
     io.sockets.emit("restart")
   })
 
@@ -163,5 +169,9 @@ io.on("connection", (client) => {
     gameConfigs = {};
     questionList = [];
     playerScores = [0, 0];
+  })
+  
+  client.on('disconnect', () => {
+    io.sockets.emit('disconnected'); 
   });
 });

@@ -13,6 +13,7 @@ function App() {
 
   return (
     <div className="App">
+      {console.log('game phase', gameState.phase)}
       <NavbarComponent/>
       <h2 className="mt-3">Bolt Trivia!</h2>
       {

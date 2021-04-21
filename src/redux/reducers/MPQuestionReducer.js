@@ -3,12 +3,14 @@ import {
   ADD_MP_ANSWER,
   START_MP_QUIZ,
   END_MP_QUIZ,
+  UPDATE_MP_TIME,
 } from "../actionConstants";
 
 const INITIAL_STATE = {
   questions: [],
   answers: [],
   quizInProgress: false,
+  time: 0,
 };
 
 export const MPQuestionReducer = (state = INITIAL_STATE, action) => {
@@ -18,6 +20,11 @@ export const MPQuestionReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         questions: action.payload.questions,
+      };
+    case UPDATE_MP_TIME:
+      return {
+        ...state,
+        time: state.time + 1,
       };
     default:
       return state;

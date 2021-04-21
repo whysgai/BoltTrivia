@@ -6,6 +6,8 @@ import ChoosePlayer from "../components/ChoosePlayer";
 import GameTypeSelect from "../components/GameTypeSelect";
 import SinglePlayer from "../components/SinglePlayer";
 import { updatePlayerScore } from "../client.js";
+import MPTimer from "../components/MPTimer";
+
 function App() {
   const gameState = useSelector((state) => state.gameStateReducer);
 
@@ -26,6 +28,7 @@ function App() {
           ) : gameState.phase === GAME_PHASE.PLAY_GAME ? (
             <>
               <p>MP running the game</p>
+              <MPTimer />
               <button onClick={() => updatePlayerScore(0, 10)}>
                 Update Player 1 Score by 10
               </button>

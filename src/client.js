@@ -112,7 +112,7 @@ export const selectRestart = () => {
 
 socket.on("restart", () => {
   console.log("Server restarted game");
-  if (store.getState().gameStateReducer.multiSelect === PLAYER_MODE.MULTI_PLAYER && store.getState().gameStateReducer.phase !== GAME_PHASE.SELECT_PLAYER) {
+  if (store.getState().gameStateReducer.multiSelect === PLAYER_MODE.MULTI_PLAYER) {
     store.dispatch(restartGame(true));
   }
 });

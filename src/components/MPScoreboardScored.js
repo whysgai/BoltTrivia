@@ -14,7 +14,7 @@ const MPScoreboardScored = () => {
                      
             <p>{player === 0 ? "P1" : "P2"}'s score: {scores[player]}</p>
             <p>{player === 0 ? "P2" : "P1"}'s score: {scores[player === 0 ? 1 : 0]}</p>
-            <p>Out of&nbso;{goal} </p>
+            <p>Out of&nbsp;{goal} </p>
             <div>
                 {
                     wins.map((question, index) => 

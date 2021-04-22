@@ -1,5 +1,5 @@
 import "../styles/App.css";
-import { GAME_PHASE, PLAYER_MODE } from "../redux/storeConstants";
+import { GAME_PHASE, PLAYER_MODE, GAME_TYPE } from "../redux/storeConstants";
 import { useSelector } from "react-redux";
 import MultiSelect from "../components/MultiSelect";
 import ChoosePlayer from "../components/ChoosePlayer";
@@ -9,6 +9,7 @@ import { updatePlayerScore, finishMPGame } from "../client.js";
 import NavbarComponent from "../components/Navbar";
 import MPTimer from "../components/MPTimer";
 import MPScoreboardTimed from "../components/MPScoreboardTimed";
+import MPScoreboardScored from "../components/MPScoreboardScored";
 
 function App() {
   const gameState = useSelector((state) => state.gameStateReducer);
@@ -45,7 +46,15 @@ function App() {
                 </button>
                 <button onClick={() => finishMPGame()}>Game Over</button>
               </div>
-              <MPScoreboardTimed />
+              {
+                gameState.type === GAME_TYPE.TIME_MODE ?
+                  <MPScoreboardTimed />
+                  :
+                  gameState.type === GAME_TYPE.SCORE_MODE ?
+                    <MPScoreboardScored />
+                    :
+                    <></>
+              }
             </>
           ) : gameState.phase === GAME_PHASE.VIEW_SCORES ? (
             <p>MP view the scores</p>

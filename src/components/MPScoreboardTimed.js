@@ -3,15 +3,14 @@ import MPTimer from "./MPTimer";
 
 const MPScoreboardTimed = () => {
     const player = useSelector(state => state.gameStateReducer.player);
-    const scores = useSelector(state => state.MPQuestionReducer.scores)
+    const scores = useSelector(state => state.MPQuestionReducer.scores);
     //dummy score history
     const wins = [true, false, true, true, false, true];
 
     return (
         <div>
             <p>Scoreboard (timed)</p>
-            <p>Timer Component</p>
-            <MPTimer />
+            <p><MPTimer />&nbsp;seconds</p>            
             <p>{player === 0 ? "P1" : "P2"}'s score: {scores[player]}</p>
             <div>
                 {

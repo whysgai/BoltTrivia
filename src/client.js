@@ -8,7 +8,7 @@ import {
   setGameConfigs,
   restartGame
 } from "./redux/actions/gameStateActions";
-import { setMPQuestions } from "./redux/actions/MPQuestionActions";
+import { setMPQuestions, updateMPScores } from "./redux/actions/MPQuestionActions";
 import {PLAYER_MODE, GAME_PHASE} from "./redux/storeConstants"
 
 /** CLIENT CONFIGURATION - connect to the server */
@@ -161,6 +161,7 @@ socket.on("player scores updated", (scores) => {
 
   // redux action to update all player scores (e.g. below)
   // store.dispatch(setUpdatedPlayerScores(scores));
+  store.dispatch(updateMPScores(scores));
 });
 
 export const finishMPGame = () => {

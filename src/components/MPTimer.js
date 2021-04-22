@@ -30,9 +30,9 @@ const MPTimer = () => {
     <>
       {
         gameType === GAME_TYPE.TIME_MODE ?
-          <p>{timeLimit - time}</p>
+          <span>{timeLimit - time}</span>
           :
-          <p>{time}</p>
+          <span>{time}</span>
       }
     </>
   );

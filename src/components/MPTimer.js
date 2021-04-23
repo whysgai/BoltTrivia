@@ -22,7 +22,8 @@ const MPTimer = () => {
   }
 
   useEffect(() => {
-    console.log(timeLimit);
+    console.log("Starting time is ", time);
+    console.log("sSetting time limit", timeLimit);
     dispatch(startMPTimer());
   }, []);
 

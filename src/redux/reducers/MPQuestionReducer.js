@@ -19,6 +19,10 @@ const INITIAL_STATE = {
 
 export const MPQuestionReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case RESTART_SELECTIONS:
+      return {
+        ...INITIAL_STATE
+      }
     case SET_MP_QUESTIONS:
       console.log("New questions", action.payload.questions);
       return {

@@ -17,8 +17,8 @@ const GameTypeSelect = () => {
 
   const [selectedType, setType] = useState();
   const [configs, setConfigs] = useState({
-    gameType: selectedType,
-    timeLimit: selectedType === GAME_TYPE.TIME_MODE ? 60 : "none",
+    gameType: null,
+    timeLimit: null,
     questionCount: 50,
     difficulty: "any",
   });
@@ -27,7 +27,8 @@ const GameTypeSelect = () => {
     console.log("Setting to", GAME_TYPE.TIME_MODE);
     setConfigs({
       ...configs,
-      gameType: GAME_TYPE.TIME_MODE
+      gameType: GAME_TYPE.TIME_MODE,
+      timeLimit: 60
     });
   };
 
@@ -35,7 +36,8 @@ const GameTypeSelect = () => {
     console.log("Setting to", GAME_TYPE.SCORE_MODE);
     setConfigs({
       ...configs,
-      gameType: GAME_TYPE.SCORE_MODE
+      gameType: GAME_TYPE.SCORE_MODE,
+      timeLimit: "none"
     });
   };
 

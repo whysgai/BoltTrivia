@@ -3,6 +3,7 @@ import {
   ADD_MP_ANSWER,
   START_MP_QUIZ,
   END_MP_QUIZ,
+  UPDATE_SCOREBOARDS,
   UPDATE_MP_TIME,
   RESTART_SELECTIONS,
   UPDATE_MP_SCORES,
@@ -10,7 +11,8 @@ import {
 
 const INITIAL_STATE = {
   questions: [],
-  answersBool: [],
+  count: 0,
+  playerAnswers: null,
   answerStrings: [],
   quizInProgress: false,
   time: 0,
@@ -39,6 +41,19 @@ export const MPQuestionReducer = (state = INITIAL_STATE, action) => {
         ...state,
         scores: action.payload.scores
       }
+    case ADD_MP_ANSWER:
+      state.answerStrings.push(action.payload.answer)
+      let newCount = state.count + 1;
+      return {
+        ...state,
+        answerStrings: state.answerStrings,
+        count: newCount
+      };
+    case UPDATE_SCOREBOARDS:
+      return {
+        ...state,
+        playerAnswers: action.payload.playerAnswers,
+      };
     default:
       return state;
   }

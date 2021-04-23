@@ -10,7 +10,7 @@ const MPScoreboardScored = () => {
 
     return (
         <div>
-            <p>Scoreboard (timed)</p>
+            <p>Scoreboard (scored)</p>
                      
             <p>{player === 0 ? "P1" : "P2"}'s score: {scores[player]}</p>
             <p>{player === 0 ? "P2" : "P1"}'s score: {scores[player === 0 ? 1 : 0]}</p>

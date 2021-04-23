@@ -1,6 +1,7 @@
 import {
   SET_MP_QUESTIONS,
   ADD_MP_ANSWER,
+  UPDATE_SCOREBOARDS,
   START_MP_QUIZ,
   END_MP_QUIZ,
   UPDATE_MP_TIME,
@@ -40,3 +41,17 @@ export const stopMPTimer = () => {
     clearInterval(timer);
   };
 };
+
+export const setMPPlayerAnswers = (playerAnswers) => ({
+  type: UPDATE_SCOREBOARDS,
+  payload: {
+    playerAnswers: playerAnswers
+  }
+})
+
+export const addMPAnswer = (answer) => ({
+  type: ADD_MP_ANSWER,
+  payload: {
+    answer: answer
+  }
+})

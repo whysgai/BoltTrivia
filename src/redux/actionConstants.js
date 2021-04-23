@@ -20,3 +20,4 @@ export const START_MP_QUIZ = "START_MP_QUIZ";
 export const END_MP_QUIZ = "END_MP_QUIZ";
 export const UPDATE_MP_TIME = "UPDATE_MP_TIME";
 export const UPDATE_MP_SCORES = "UPDATE_MP_SCORES";
+export const UPDATE_SCOREBOARDS = "UPDATE_SCOREBOARDS"

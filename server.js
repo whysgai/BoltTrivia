@@ -145,7 +145,7 @@ io.on("connection", (client) => {
     gameConfigs = {};
     questionList = [];
     playerScores = [0, 0];
-    let playerAnswers = [[],[]];
+    playerAnswers = [[],[]];
     console.log("Sever restarted multiplayer availability", playerAvailability);
     io.sockets.emit("restart")
   })

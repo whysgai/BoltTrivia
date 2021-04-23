@@ -187,5 +187,6 @@ io.on("connection", (client) => {
     gameConfigs = {};
     questionList = [];
     playerScores = [0, 0];
+    playerAnswers = [[],[]];
   });
 });

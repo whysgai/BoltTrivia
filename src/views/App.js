@@ -13,6 +13,9 @@ import MPScoreboardScored from "../components/MPScoreboardScored";
 
 function App() {
   const gameState = useSelector((state) => state.gameStateReducer);
+  const spState = useSelector((state) => state.SPQuestionReducer);
+  const mpState = useSelector((state) => state.MPQuestionReducer);
+
 
   return (
     <div className="App">

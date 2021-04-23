@@ -10,6 +10,7 @@ import NavbarComponent from "../components/Navbar";
 import MPTimer from "../components/MPTimer";
 import MPScoreboardTimed from "../components/MPScoreboardTimed";
 import MPScoreboardScored from "../components/MPScoreboardScored";
+import MPQuiz from "../components/MPQuiz"
 
 function App() {
   const gameState = useSelector((state) => state.gameStateReducer);
@@ -43,6 +44,7 @@ function App() {
             <>
               <div>
                 <p>MP running the game</p>
+                <MPQuiz/>
                 {/* <MPTimer /> */}
                 <button onClick={() => updatePlayerScore(0, 10)}>
                   Update Player 1 Score by 10

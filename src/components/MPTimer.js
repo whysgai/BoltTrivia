@@ -14,10 +14,11 @@ const MPTimer = () => {
   const time = useSelector((state) => state.MPQuestionReducer.time);
   const dispatch = useDispatch();
   if (timeLimit !== "none" && time >= timeLimit) {
+    console.log("Timed and timelimt is exceeded - stopping timer")
     dispatch(stopMPTimer());
   } // add score completed condition to else if
-  else if (timeLimit === "none") {
-    console.log("stopping");
+  else if (timeLimit === "none" && time >= 5) {
+    console.log("Score - stopping after 5");
     dispatch(stopMPTimer());
   }
 

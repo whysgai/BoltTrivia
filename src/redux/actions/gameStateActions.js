@@ -1,5 +1,5 @@
 import {RESTART_SELECTIONS, SELECT_SINGLE_PLAYER_TYPE, SELECT_MULTI_PLAYER_TYPE, SELECT_PLAYER_NUMBER, UPDATE_PLAYER_AVAILABILITY,
-    SET_GAME_CONFIGS } from "../actionConstants";
+    SET_GAME_CONFIGS, OPEN_ONBOARDING, CLOSE_ONBOARDING } from "../actionConstants";
 import { selectMultiplayerMode } from "../../client";
 import { useDispatch } from "react-redux";
 
@@ -60,4 +60,12 @@ export const setGameConfigs = (configs) => ({
     payload: {
         configs
     }
+});
+
+export const openOnboarding = () => ({
+    type: OPEN_ONBOARDING
+})
+
+export const closeOnboarding = () => ({
+  type: CLOSE_ONBOARDING,
 });

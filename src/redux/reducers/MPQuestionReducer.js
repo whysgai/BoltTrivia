@@ -34,10 +34,6 @@ export const MPQuestionReducer = (state = INITIAL_STATE, action) => {
         ...state,
         time: state.time + 1,
       };
-    case RESTART_SELECTIONS:
-      return {
-        time: 0,
-      };
     case UPDATE_MP_SCORES:
       return {
         ...state,

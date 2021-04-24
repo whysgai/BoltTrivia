@@ -94,6 +94,11 @@ export const gameStateReducer = (state = INITIAL_STATE, action) => {
         ...state,
         phase: GAME_PHASE.PLAY_GAME,
       };
+    case AWAIT_FINAL_RESULTS:
+      return {
+        ...state,
+        phase: GAME_PHASE.AWAITING_RESULTS
+      }  
     case SET_FINAL_RESULTS:
       return {
         ...state,

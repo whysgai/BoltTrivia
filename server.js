@@ -195,20 +195,24 @@ io.on("connection", (client) => {
       // error, bad condition case
     }
     if (!waitingForOther) {
-      io.sockets.emit("MP game finished", )
+      io.sockets.emit("MP game finished");
     }
   });
 
-  client.on("finish MP game", () => {
-    console.log("finishing MP game");
+  // I commented the below out because I think we can just
+  // call the reset functionality when players exit the
+  // results page
 
-    io.sockets.emit("MP game finished", [...playerScores]);
-    playerAvailability = [true, true];
-    gameType = null;
-    gameConfigs = {};
-    questionList = [];
-    playerScores = [0, 0];
-  });
+  // client.on("finish MP game", () => {
+  //   console.log("finishing MP game");
+
+  //   io.sockets.emit("MP game finished", [...playerScores]);
+  //   playerAvailability = [true, true];
+  //   gameType = null;
+  //   gameConfigs = {};
+  //   questionList = [];
+  //   playerScores = [0, 0];
+  // });
 
   client.on("disconnect", () => {
     io.sockets.emit("disconnected");

@@ -184,7 +184,7 @@ export const finishMPGame = () => {
 
   // No redux store dispatch needed here because the server
   // will respond to this event with another event(the next one)
-};
+}; 
 
 socket.on("MP game finished", (playerAnswers, times) => {
   console.log("Game has finished: ", playerAnswers);

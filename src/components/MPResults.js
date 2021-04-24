@@ -76,27 +76,27 @@ const MPResults = () => {
 
     return (
         <>
-        <h3 className="mb-3">Results: {calculateWinner()}</h3>
-        <h5>Your Final Score {scores[player]}.</h5>
-        <h5>Your Opponents Final Score {scores[opponent]}.</h5>
-        <div className="card-group">
+            <h3 className="mb-3">Results: {calculateWinner()}</h3>
+            <h5>Your Final Score {scores[player]}.</h5>
+            <h5>Your Opponents Final Score {scores[opponent]}.</h5>
+            <div className="card-group text-center">
 
-            {
-                questions.length > 0 ?
-                <div>
-                    
-                    {
-                        questions.map((question, index) => 
-                            <MPResultsCard question={question} answerString={answerStrings[index]} playerAnswer={playerAnswers[player][index]} opponentAnswer={playerAnswers[opponent][index]}/>
-                        )
-                    }
-                </div>
-                :
-                <>
-                    <h3>Loading quiz results...</h3>
-                </>
-            }
-        </div>
+                {
+                    questions.length > 0 ?
+                    <div>
+                        
+                        {
+                            questions.map((question, index) => 
+                                <MPResultsCard question={question} answerString={answerStrings[index]} playerAnswer={playerAnswers[player][index]} opponentAnswer={playerAnswers[opponent][index]}/>
+                            )
+                        }
+                    </div>
+                    :
+                    <>
+                        <h3>Loading quiz results...</h3>
+                    </>
+                }
+            </div>
         </>
     )
 }

@@ -64,6 +64,8 @@ function App() {
                     <></>
                   )}
                 </>
+              ) : gameState.phase === GAME_PHASE.AWAITING_RESULTS ? (
+                <p>End condition reached, waiting on server</p>  
               ) : gameState.phase === GAME_PHASE.VIEW_SCORES ? (
                 <MPResults/>
               ) : (

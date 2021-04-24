@@ -6,6 +6,8 @@ import {
   END_MP_QUIZ,
   UPDATE_MP_TIME,
   UPDATE_MP_SCORES,
+  SET_FINAL_RESULTS,
+  AWAIT_FINAL_RESULTS,
 } from "../actionConstants";
 
 export const setMPQuestions = (questions) => ({
@@ -55,3 +57,15 @@ export const addMPAnswer = (answer) => ({
     answer: answer
   }
 })
+
+export const awaitFinalResults = () => ({
+  type: AWAIT_FINAL_RESULTS
+});
+
+export const setFinalResults = (playerAnswers, times) => ({
+  type: SET_FINAL_RESULTS,
+  payload: {
+    playerAnswers,
+    times
+  }
+});

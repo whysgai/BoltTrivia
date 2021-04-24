@@ -15,5 +15,6 @@ export const GAME_PHASE = {
     SET_CONFIGS: "set configs",
     LOADING_GAME: "loading game",
     PLAY_GAME: "play game",
+    AWAITING_RESULTS: "awaiting results",
     VIEW_SCORES: "view scores"
 };

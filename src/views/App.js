@@ -11,7 +11,8 @@ import MPTimer from "../components/MPTimer";
 import Onboarding from "../components/Onboarding";
 import MPScoreboardTimed from "../components/MPScoreboardTimed";
 import MPScoreboardScored from "../components/MPScoreboardScored";
-import MPQuiz from "../components/MPQuiz";
+import MPQuiz from "../components/MPQuiz"
+import MPResults from "../components/MPResults";
 
 function App() {
   const gameState = useSelector((state) => state.gameStateReducer);
@@ -64,7 +65,7 @@ function App() {
                   )}
                 </>
               ) : gameState.phase === GAME_PHASE.VIEW_SCORES ? (
-                <p>MP view the scores</p>
+                <MPResults/>
               ) : (
                 <p>MP Error catching</p>
               )

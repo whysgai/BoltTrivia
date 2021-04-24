@@ -1,9 +1,11 @@
 import {
   SET_MP_QUESTIONS,
   ADD_MP_ANSWER,
+  UPDATE_SCOREBOARDS,
   START_MP_QUIZ,
   END_MP_QUIZ,
   UPDATE_MP_TIME,
+  UPDATE_MP_SCORES,
 } from "../actionConstants";
 
 export const setMPQuestions = (questions) => ({
@@ -15,6 +17,13 @@ export const setMPQuestions = (questions) => ({
 
 export const updateMPTime = () => ({
   type: UPDATE_MP_TIME,
+});
+
+export const updateMPScores = (scores) => ({
+  type: UPDATE_MP_SCORES,
+  payload: {
+    scores
+  }
 });
 
 let timer = null;
@@ -32,3 +41,17 @@ export const stopMPTimer = () => {
     clearInterval(timer);
   };
 };
+
+export const setMPPlayerAnswers = (playerAnswers) => ({
+  type: UPDATE_SCOREBOARDS,
+  payload: {
+    playerAnswers: playerAnswers
+  }
+})
+
+export const addMPAnswer = (answer) => ({
+  type: ADD_MP_ANSWER,
+  payload: {
+    answer: answer
+  }
+})

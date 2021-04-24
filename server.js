@@ -77,7 +77,8 @@ const readQuestions = async (url) => {
 };
 
 const assembleURL = (gameConfigs) => {
-  let url = OPEN_TDB_URL + "?amount=" + gameConfigs.questionCount;
+  // let url = OPEN_TDB_URL + "?amount=" + gameConfigs.questionCount;
+  let url = OPEN_TDB_URL + "?amount=50";
   // url = url + "&category=any";
   if (gameConfigs.difficulty !== "any") {
     url = url + "&difficulty=" + gameConfigs.difficulty;
@@ -108,6 +109,7 @@ let gameType = null;
 let gameConfigs = {};
 let questionList = [];
 let playerScores = [0, 0];
+let playerAnswers = [[],[]]
 
 io.on("connection", (client) => {
   io.sockets.emit("notify all", `Client ${client.id} has connected`);
@@ -143,6 +145,7 @@ io.on("connection", (client) => {
     gameConfigs = {};
     questionList = [];
     playerScores = [0, 0];
+    playerAnswers = [[],[]];
     console.log("Sever restarted multiplayer availability", playerAvailability);
     io.sockets.emit("restart")
   })
@@ -158,6 +161,12 @@ io.on("connection", (client) => {
 
     playerScores[playerIndex] += pointsToAdd;
     io.sockets.emit("player scores updated", [...playerScores]);
+  });
+
+  client.on("update player answers", (playerIndex, answer) => {
+    console.log("updating answers for player " + playerIndex + " with " + answer + "." );
+    playerAnswers[playerIndex].push(answer);
+    io.sockets.emit("player answers updated", [...playerAnswers]);
   });
 
   client.on("finish MP game", () => {
@@ -178,5 +187,6 @@ io.on("connection", (client) => {
     gameConfigs = {};
     questionList = [];
     playerScores = [0, 0];
+    playerAnswers = [[],[]];
   });
 });

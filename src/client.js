@@ -6,9 +6,9 @@ import {
   updatePlayerAvailability,
   gameTypeSelection,
   setGameConfigs,
-  restartGame
+  restartGame,
 } from "./redux/actions/gameStateActions";
-import { setMPQuestions } from "./redux/actions/MPQuestionActions";
+import { setMPQuestions, stopMPTimer, updateMPScores, setMPPlayerAnswers } from "./redux/actions/MPQuestionActions";
 import {PLAYER_MODE, GAME_PHASE} from "./redux/storeConstants"
 
 /** CLIENT CONFIGURATION - connect to the server */
@@ -113,6 +113,7 @@ export const selectRestart = () => {
 socket.on("restart", () => {
   console.log("Server restarted game");
   if (store.getState().gameStateReducer.multiSelect === PLAYER_MODE.MULTI_PLAYER) {
+    store.dispatch(stopMPTimer());
     store.dispatch(restartGame(true));
   }
 });
@@ -161,6 +162,20 @@ socket.on("player scores updated", (scores) => {
 
   // redux action to update all player scores (e.g. below)
   // store.dispatch(setUpdatedPlayerScores(scores));
+  store.dispatch(updateMPScores(scores));
+});
+
+export const sendPlayerAnswer = (playerIndex, answer) => {
+  console.log("Sending players answer to server", answer);
+  socket.emit("update player answers", playerIndex, answer);
+
+  // No redux store dispatch needed here because the server
+  // will respond to this event with another event(the next one)
+};
+
+socket.on("player answers updated", (answers) => {
+  console.log("playerAnswersUpdated: ", answers);
+  store.dispatch(setMPPlayerAnswers(answers))
 });
 
 export const finishMPGame = () => {

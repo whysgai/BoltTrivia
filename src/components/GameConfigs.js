@@ -4,12 +4,6 @@ import { GAME_TYPE } from "../redux/storeConstants";
 import { selectGameConfig } from "../client";
 
 const GameConfigs = (props) => {
-  const [configs, setConfigs] = useState({
-    gameType: props.selectedType,
-    timeLimit: props.selectedType === GAME_TYPE.TIME_MODE ? 60 : "none",
-    questionCount: 50,
-    difficulty: "any",
-  });
 
   return (
     <>
@@ -17,7 +11,7 @@ const GameConfigs = (props) => {
 
       <div className="config">
         <div className="config-inputs">
-          {props.selectedType === GAME_TYPE.TIME_MODE ? (
+          {props.configs.gameType === GAME_TYPE.TIME_MODE ? (
             <label className="form-label config-setting">
               Time limit (seconds, max 120):
               <input
@@ -25,10 +19,10 @@ const GameConfigs = (props) => {
                 type="number"
                 min="1"
                 max="120"
-                value={configs.timeLimit}
+                value={props.configs.timeLimit}
                 onChange={(e) =>
-                  setConfigs({
-                    ...configs,
+                  props.setConfigs({
+                    ...props.configs,
                     timeLimit: e.target.value,
                   })
                 }
@@ -42,10 +36,10 @@ const GameConfigs = (props) => {
                 type="number"
                 min="1"
                 max="50"
-                value={configs.questionCount}
+                value={props.configs.questionCount}
                 onChange={(e) =>
-                  setConfigs({
-                    ...configs,
+                  props.setConfigs({
+                    ...props.configs,
                     questionCount: e.target.value,
                   })
                 }
@@ -56,10 +50,10 @@ const GameConfigs = (props) => {
             Difficulty:
             <select
               className="form-control"
-              value={configs.difficulty}
+              value={props.configs.difficulty}
               onChange={(e) =>
-                setConfigs({
-                  ...configs,
+                props.setConfigs({
+                  ...props.configs,
                   difficulty: e.target.value,
                 })
               }
@@ -71,10 +65,9 @@ const GameConfigs = (props) => {
             </select>
           </label>
         </div>
-        {/* selectGameConfig  */}
         <button
           className="btn btn-success config-confirm"
-          onClick={() => selectGameConfig(configs)}
+          onClick={() => props.selectGameConfig(props.configs)}
         >
           <span className="little-button-text">START</span>
         </button>

@@ -91,7 +91,7 @@ const SinglePlayer = () => {
               className="form-label mt-3 mr-3"
               htmlFor="trivia-category-selection"
             >
-              Trivia Category Selction:
+              Trivia Category Selection:
             </label>
             <select
               className="form-select"

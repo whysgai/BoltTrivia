@@ -109,7 +109,8 @@ let gameType = null;
 let gameConfigs = {};
 let questionList = [];
 let playerScores = [0, 0];
-let playerAnswers = [[],[]]
+let playerAnswers = [[], []];
+let receivedEndGame = [false, false];
 
 io.on("connection", (client) => {
   io.sockets.emit("notify all", `Client ${client.id} has connected`);
@@ -145,10 +146,10 @@ io.on("connection", (client) => {
     gameConfigs = {};
     questionList = [];
     playerScores = [0, 0];
-    playerAnswers = [[],[]];
+    playerAnswers = [[], []];
     console.log("Sever restarted multiplayer availability", playerAvailability);
-    io.sockets.emit("restart")
-  })
+    io.sockets.emit("restart");
+  });
 
   client.on("update player score", (playerIndex, pointsToAdd) => {
     console.log(
@@ -164,9 +165,38 @@ io.on("connection", (client) => {
   });
 
   client.on("update player answers", (playerIndex, answer) => {
-    console.log("updating answers for player " + playerIndex + " with " + answer + "." );
+    console.log(
+      "updating answers for player " + playerIndex + " with " + answer + "."
+    );
     playerAnswers[playerIndex].push(answer);
     io.sockets.emit("player answers updated", [...playerAnswers]);
+  });
+
+  client.on("end condition met", (playerIndex, condition, time) => {
+    console.log("Player met end condition", playerIndex);
+    receivedEndGame[playerIndex] = true;
+    let waitingForOther = true;
+    if (condition === "OUT_OF_QUESTIONS" || condition === "OUT_OF_TIME") {
+      // if both clients have reached the endgame state
+      if (receivedEndGame[0] && receivedEndGame[1]) {
+        //    process results as necessary
+        //    set waitingForOther to false
+      }
+      // else do nothing to waitForOther and keep waiting
+    } else if (condition === "SCORE_REACHED") {
+      // if both entires in recievedEndGame are true,
+      if (receivedEndGame[0] && receivedEndGame[1]) {
+        //    process results as necessary
+        //    set waitingForOther to false
+      } else {
+        //    io.sockets.broadcast.emit("other player reached goal")
+      }
+    } else {
+      // error, bad condition case
+    }
+    if (!waitingForOther) {
+      io.sockets.emit("MP game finished", )
+    }
   });
 
   client.on("finish MP game", () => {
@@ -178,15 +208,15 @@ io.on("connection", (client) => {
     gameConfigs = {};
     questionList = [];
     playerScores = [0, 0];
-  })
+  });
 
-  client.on('disconnect', () => {
-    io.sockets.emit('disconnected'); 
+  client.on("disconnect", () => {
+    io.sockets.emit("disconnected");
     playerAvailability = [true, true];
     gameType = null;
     gameConfigs = {};
     questionList = [];
     playerScores = [0, 0];
-    playerAnswers = [[],[]];
+    playerAnswers = [[], []];
   });
 });

@@ -8,7 +8,7 @@ import {
   setGameConfigs,
   restartGame,
 } from "./redux/actions/gameStateActions";
-import { setMPQuestions, stopMPTimer, updateMPScores, setMPPlayerAnswers, setFinalResults } from "./redux/actions/MPQuestionActions";
+import { setMPQuestions, stopMPTimer, updateMPScores, setMPPlayerAnswers, setFinalResults, awaitFinalResults } from "./redux/actions/MPQuestionActions";
 import {PLAYER_MODE, GAME_PHASE} from "./redux/storeConstants"
 
 /** CLIENT CONFIGURATION - connect to the server */
@@ -178,12 +178,10 @@ socket.on("player answers updated", (answers) => {
   store.dispatch(setMPPlayerAnswers(answers))
 });
 
-export const finishMPGame = () => {
+export const finishMPGame = (playerIndex, condition, time) => {
   console.log("Sending game finish update to server");
-  socket.emit("finish MP game");
-
-  // No redux store dispatch needed here because the server
-  // will respond to this event with another event(the next one)
+  socket.emit("end condition met", playerIndex, condition, time);
+  store.dispatch(awaitFinalResults());
 }; 
 
 socket.on("MP game finished", (playerAnswers, times) => {

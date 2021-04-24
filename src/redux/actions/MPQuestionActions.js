@@ -24,8 +24,8 @@ export const updateMPTime = () => ({
 export const updateMPScores = (scores) => ({
   type: UPDATE_MP_SCORES,
   payload: {
-    scores
-  }
+    scores,
+  },
 });
 
 let timer = null;
@@ -38,7 +38,7 @@ export const startMPTimer = () => {
 };
 
 export const stopMPTimer = () => {
-  console.log("stop timer")
+  console.log("stop timer");
   return (dispatch) => {
     clearInterval(timer);
   };
@@ -47,25 +47,24 @@ export const stopMPTimer = () => {
 export const setMPPlayerAnswers = (playerAnswers) => ({
   type: UPDATE_SCOREBOARDS,
   payload: {
-    playerAnswers: playerAnswers
-  }
-})
+    playerAnswers: playerAnswers,
+  },
+});
 
 export const addMPAnswer = (answer) => ({
   type: ADD_MP_ANSWER,
   payload: {
-    answer: answer
-  }
-})
-
-export const awaitFinalResults = () => ({
-  type: AWAIT_FINAL_RESULTS
+    answer: answer,
+  },
 });
 
-export const setFinalResults = (playerAnswers, times) => ({
+export const awaitFinalResults = () => ({
+  type: AWAIT_FINAL_RESULTS,
+});
+
+export const setFinalResults = (finalResults) => ({
   type: SET_FINAL_RESULTS,
   payload: {
-    playerAnswers,
-    times
-  }
+    finalResults,
+  },
 });

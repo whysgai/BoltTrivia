@@ -19,15 +19,15 @@ const INITIAL_STATE = {
   time: 0,
   scores: [0, 0],
   winner: null, // winner can be P1, P2 or Draw
-  finalTimes: [0, 0]
+  finalTimes: [0, 0],
 };
 
 export const MPQuestionReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case RESTART_SELECTIONS:
       return {
-        ...INITIAL_STATE
-      }
+        ...INITIAL_STATE,
+      };
     case SET_MP_QUESTIONS:
       console.log("New questions", action.payload.questions);
       return {
@@ -42,15 +42,15 @@ export const MPQuestionReducer = (state = INITIAL_STATE, action) => {
     case UPDATE_MP_SCORES:
       return {
         ...state,
-        scores: action.payload.scores
-      }
+        scores: action.payload.scores,
+      };
     case ADD_MP_ANSWER:
-      state.answerStrings.push(action.payload.answer)
+      state.answerStrings.push(action.payload.answer);
       let newCount = state.count + 1;
       return {
         ...state,
         answerStrings: state.answerStrings,
-        count: newCount
+        count: newCount,
       };
     case UPDATE_SCOREBOARDS:
       return {
@@ -60,10 +60,11 @@ export const MPQuestionReducer = (state = INITIAL_STATE, action) => {
     case SET_FINAL_RESULTS:
       return {
         ...state,
-        playerAnswers: action.payload.playerAnswers,
-        finalTimes: action.payload.finalTimes,
+        playerAnswers: action.payload.finalResults.playerAnswers,
+        finalTimes: action.payload.finalResults.finalTimes,
+        winner: action.payload.finalResults.winner,
         // quizInProgress: false,
-      }
+      };
     default:
       return state;
   }

@@ -8,8 +8,15 @@ import {
   setGameConfigs,
   restartGame,
 } from "./redux/actions/gameStateActions";
-import { setMPQuestions, stopMPTimer, updateMPScores, setMPPlayerAnswers, setFinalResults, awaitFinalResults } from "./redux/actions/MPQuestionActions";
-import {PLAYER_MODE, GAME_PHASE} from "./redux/storeConstants"
+import {
+  setMPQuestions,
+  stopMPTimer,
+  updateMPScores,
+  setMPPlayerAnswers,
+  setFinalResults,
+  awaitFinalResults,
+} from "./redux/actions/MPQuestionActions";
+import { PLAYER_MODE, GAME_PHASE } from "./redux/storeConstants";
 
 /** CLIENT CONFIGURATION - connect to the server */
 const socketIOClient = require("socket.io-client");
@@ -98,21 +105,22 @@ socket.on("start game", (questions) => {
   questions.map((question, index) => processQuestion(question));
   store.dispatch(setMPQuestions(questions));
   console.log("Questions from server", questions);
-})
+});
 
 // Restart selected
 export const selectRestart = () => {
-  console.log("Sending restart to server")
+  console.log("Sending restart to server");
   socket.emit("restart selected");
 
   // No redux store dispatch needed here because the server
   // will respond to this event with another event(the next one)
 };
 
-
 socket.on("restart", () => {
   console.log("Server restarted game");
-  if (store.getState().gameStateReducer.multiSelect === PLAYER_MODE.MULTI_PLAYER) {
+  if (
+    store.getState().gameStateReducer.multiSelect === PLAYER_MODE.MULTI_PLAYER
+  ) {
     store.dispatch(stopMPTimer());
     store.dispatch(restartGame(true));
   }
@@ -120,7 +128,11 @@ socket.on("restart", () => {
 
 socket.on("disconnected", () => {
   console.log("User has disconnected");
-  if (store.getState().gameStateReducer.multiSelect === PLAYER_MODE.MULTI_PLAYER && store.getState().gameStateReducer.phase !== GAME_PHASE.SELECT_PLAYER) {
+  if (
+    store.getState().gameStateReducer.multiSelect ===
+      PLAYER_MODE.MULTI_PLAYER &&
+    store.getState().gameStateReducer.phase !== GAME_PHASE.SELECT_PLAYER
+  ) {
     store.dispatch(restartGame(true));
   }
 });
@@ -175,18 +187,18 @@ export const sendPlayerAnswer = (playerIndex, answer) => {
 
 socket.on("player answers updated", (answers) => {
   console.log("playerAnswersUpdated: ", answers);
-  store.dispatch(setMPPlayerAnswers(answers))
+  store.dispatch(setMPPlayerAnswers(answers));
 });
 
 export const finishMPGame = (playerIndex, condition, time) => {
   console.log("Sending game finish update to server");
   socket.emit("end condition met", playerIndex, condition, time);
   store.dispatch(awaitFinalResults());
-}; 
+};
 
-socket.on("MP game finished", (playerAnswers, times) => {
-  console.log("Game has finished: ", playerAnswers);
-  store.dispatch(setFinalResults(playerAnswers, times));
+socket.on("MP game finished", (finalResults) => {
+  console.log("Game has finished: ", finalResults);
+  store.dispatch(setFinalResults(finalResults));
 
   // redux action to finish game and set final score
 });

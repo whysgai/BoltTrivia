@@ -55,15 +55,17 @@ const NavbarComponent = () => {
               Home
             </button>
           </li>
-          <li className="nav-item">
-            <button
-              type="button"
-              className="btn btn-link nav-link"
-              onClick={() => dispatch(openOnboarding())}
-            >
-              Onboarding
-            </button>
-          </li>
+          {phase === GAME_PHASE.SELECT_MULTI && (
+            <li className="nav-item">
+              <button
+                type="button"
+                className="btn btn-link nav-link"
+                onClick={() => dispatch(openOnboarding())}
+              >
+                Onboarding
+              </button>
+            </li>
+          )}
         </ul>
       </div>
     </nav>

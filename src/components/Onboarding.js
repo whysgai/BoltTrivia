@@ -16,7 +16,7 @@ const Onboarding = () => {
   };
 
   return (
-    <>
+    <div className="mt-4">
       {slide === 1 ? (
         <p>Slide 1 Instructions</p>
       ) : slide === 2 ? (
@@ -34,7 +34,7 @@ const Onboarding = () => {
       <button onClick={clickNext} className="btn btn-primary">
         Next
       </button>
-    </>
+    </div>
   );
 };
 

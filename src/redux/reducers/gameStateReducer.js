@@ -8,6 +8,7 @@ import {
   RESTART_SELECTIONS,
   OPEN_ONBOARDING,
   CLOSE_ONBOARDING,
+  SET_FINAL_RESULTS,
 } from "../actionConstants";
 import {
   SET_MP_QUESTIONS,
@@ -93,6 +94,11 @@ export const gameStateReducer = (state = INITIAL_STATE, action) => {
         ...state,
         phase: GAME_PHASE.PLAY_GAME,
       };
+    case SET_FINAL_RESULTS:
+      return {
+        ...state,
+        phase: GAME_PHASE.VIEW_SCORES,
+      }
     case OPEN_ONBOARDING:
       return {
         ...state,

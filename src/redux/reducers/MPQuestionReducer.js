@@ -7,6 +7,7 @@ import {
   UPDATE_MP_TIME,
   RESTART_SELECTIONS,
   UPDATE_MP_SCORES,
+  SET_FINAL_RESULTS,
 } from "../actionConstants";
 
 const INITIAL_STATE = {
@@ -16,7 +17,8 @@ const INITIAL_STATE = {
   answerStrings: [], //actual answer provided, NOT True or False
   quizInProgress: false,
   time: 0,
-  scores: [0, 0]
+  scores: [0, 0],
+  finalTimes: [0, 0]
 };
 
 export const MPQuestionReducer = (state = INITIAL_STATE, action) => {
@@ -54,6 +56,13 @@ export const MPQuestionReducer = (state = INITIAL_STATE, action) => {
         ...state,
         playerAnswers: action.payload.playerAnswers,
       };
+    case SET_FINAL_RESULTS:
+      return {
+        ...state,
+        playerAnswers: action.payload.playerAnswers,
+        finalTimes: action.payload.finalTimes,
+        // quizInProgress: false,
+      }
     default:
       return state;
   }

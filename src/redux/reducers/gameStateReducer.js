@@ -6,6 +6,8 @@ import {
   UPDATE_PLAYER_AVAILABILITY,
   SET_GAME_CONFIGS,
   RESTART_SELECTIONS,
+  OPEN_ONBOARDING,
+  CLOSE_ONBOARDING,
 } from "../actionConstants";
 import {
   SET_MP_QUESTIONS,
@@ -26,6 +28,7 @@ const INITIAL_STATE = {
     difficulty: "any",
   },
   restart: false,
+  onboarding: false,
 };
 
 export const gameStateReducer = (state = INITIAL_STATE, action) => {
@@ -89,6 +92,16 @@ export const gameStateReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         phase: GAME_PHASE.PLAY_GAME,
+      };
+    case OPEN_ONBOARDING:
+      return {
+        ...state,
+        onboarding: true,
+      };
+    case CLOSE_ONBOARDING:
+      return {
+        ...state,
+        onboarding: false,
       };
     default:
       return state;

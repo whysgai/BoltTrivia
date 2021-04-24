@@ -8,7 +8,7 @@ import {
   setGameConfigs,
   restartGame,
 } from "./redux/actions/gameStateActions";
-import { setMPQuestions, stopMPTimer, updateMPScores, setMPPlayerAnswers } from "./redux/actions/MPQuestionActions";
+import { setMPQuestions, stopMPTimer, updateMPScores, setMPPlayerAnswers, setFinalResults } from "./redux/actions/MPQuestionActions";
 import {PLAYER_MODE, GAME_PHASE} from "./redux/storeConstants"
 
 /** CLIENT CONFIGURATION - connect to the server */
@@ -186,8 +186,9 @@ export const finishMPGame = () => {
   // will respond to this event with another event(the next one)
 };
 
-socket.on("MP game finished", (scores) => {
-  console.log("Game has finished: " + scores);
+socket.on("MP game finished", (playerAnswers, times) => {
+  console.log("Game has finished: ", playerAnswers);
+  store.dispatch(setFinalResults(playerAnswers, times));
 
   // redux action to finish game and set final score
 });

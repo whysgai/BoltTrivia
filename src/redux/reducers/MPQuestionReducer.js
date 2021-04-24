@@ -16,7 +16,8 @@ const INITIAL_STATE = {
   answerStrings: [], //actual answer provided, NOT True or False
   quizInProgress: false,
   time: 0,
-  scores: [0, 0]
+  scores: [0, 0],
+  winner: null // winner can be P1, P2 or Draw
 };
 
 export const MPQuestionReducer = (state = INITIAL_STATE, action) => {

@@ -102,6 +102,11 @@ export const gameStateReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         onboarding: false,
+      }
+    case END_MP_QUIZ:
+      return {
+        ...state,
+        phase: GAME_PHASE.VIEW_SCORES,
       };
     default:
       return state;

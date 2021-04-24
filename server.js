@@ -111,6 +111,11 @@ let questionList = [];
 let playerScores = [0, 0];
 let playerAnswers = [[], []];
 let receivedEndGame = [false, false];
+let finalResults = {
+  winner: "",
+  finalTimes: [0, 0],
+  playerAnswers: [[],[]],
+}
 
 io.on("connection", (client) => {
   io.sockets.emit("notify all", `Client ${client.id} has connected`);
@@ -195,7 +200,7 @@ io.on("connection", (client) => {
       // error, bad condition case
     }
     if (!waitingForOther) {
-      io.sockets.emit("MP game finished");
+      io.sockets.emit("MP game finished", finalResults);
     }
   });
 

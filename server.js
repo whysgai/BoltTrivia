@@ -117,16 +117,20 @@ const processResults = () => {
   playerScores[1] = numberRight(playerAnswers[1]);
   if (gameType === "time mode") {
     if (playerScores[0] > playerScores[1]) {
+      console.log("P1 answered more correctly")
       finalResults.winner = "P1";
     } else if (playerScores[0] < playerScores[1]) {
+      console.log("P2 answered more correctly")
       finalResults.winner = "P2";
     } else {
+      console.log("Timed tie")
       finalResults.winner = "Draw";
     }
   } else if (gameType === "score mode") {
-    console.log("P1 score:", playerScores[0], "P2 score:", playerScores[1]);
-    console.log("Goal", gameConfigs.questionCount);
-    if (playerScores[0] === gameConfigs.questionCount && playerScores[1] < gameConfigs.questionCount) {
+    if (playerScores[0] < gameConfigs.questionCount && playerScores[1] < gameConfigs.questionCount) {
+      console.log("Neither met goal");
+      finalResults.winner = "Draw";
+    } else if (playerScores[0] === gameConfigs.questionCount && playerScores[1] < gameConfigs.questionCount) {
       console.log("P1 met goal, P2 did not");
       finalResults.winner = "P1";
     } else if (playerScores[0] < gameConfigs.questionCount && playerScores[1] === gameConfigs.questionCount) {

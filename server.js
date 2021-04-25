@@ -218,12 +218,14 @@ io.on("connection", (client) => {
       }
       // else do nothing to waitForOther and keep waiting
     } else if (condition === "SCORE_REACHED") {
+      console.log("Player ", playerIndex, " has reached the goal");
       // if both entires in recievedEndGame are true,
       if (receivedEndGame[0] && receivedEndGame[1]) {
         //    process results as necessary
         //    set waitingForOther to false
       } else {
         //    io.sockets.broadcast.emit("other player reached goal")
+        io.sockets.emit("other player has reached goal", playerIndex);
       }
     } else {
       // error, bad condition case

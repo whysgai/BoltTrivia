@@ -1,6 +1,6 @@
 import {useSelector, useDispatch} from "react-redux";
 import { useState } from "react";
-import {sendPlayerAnswer} from "../client"
+import {finishMPGame, sendPlayerAnswer} from "../client"
 import {addMPAnswer} from "../redux/actions/MPQuestionActions"
 import { GAME_TYPE } from "../redux/storeConstants";
 
@@ -11,6 +11,7 @@ const MPQuestionCard = (props) => {
     const [answer, setAnswer] = useState('');
     const playerIndex = useSelector(state => state.gameStateReducer.player);
     const answers = useSelector(state => state.MPQuestionReducer.playerAnswers);
+    const time = useSelector((state) => state.MPQuestionReducer.time);
     const gameType = useSelector(state => state.gameStateReducer.type);
     const goal = useSelector(state => state.gameStateReducer.configs.questionCount);
 
@@ -30,6 +31,7 @@ const MPQuestionCard = (props) => {
             sendPlayerAnswer(playerIndex,true);
             if (gameType === GAME_TYPE.SCORE_MODE && numRight === goal - 1) {
                 console.log("==========GOAL REACHED=============");
+                finishMPGame(playerIndex, "SCORE_REACHED", time);
             }
         } else {
             sendPlayerAnswer(playerIndex,false);

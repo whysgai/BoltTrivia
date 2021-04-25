@@ -13,7 +13,7 @@ import {
 const INITIAL_STATE = {
   questions: [],
   count: 0,
-  playerAnswers: null, //an array of both P1 and P2's booleans for the questions
+  playerAnswers: [[], []], //an array of both P1 and P2's booleans for the questions
   answerStrings: [], //actual answer provided, NOT True or False
   quizInProgress: false,
   time: 0,

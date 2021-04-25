@@ -62,6 +62,7 @@ export const MPQuestionReducer = (state = INITIAL_STATE, action) => {
         ...state,
         playerAnswers: action.payload.finalResults.playerAnswers,
         finalTimes: action.payload.finalResults.finalTimes,
+        scores: action.payload.finalResults.playerScores,
         winner: action.payload.finalResults.winner,
         // quizInProgress: false,
       };

@@ -19,7 +19,7 @@ const GameTypeSelect = () => {
   const [configs, setConfigs] = useState({
     gameType: null,
     timeLimit: null,
-    questionCount: 50,
+    scoreGoal: 10,
     difficulty: "any",
   });
 

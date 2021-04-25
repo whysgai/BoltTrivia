@@ -77,7 +77,6 @@ const readQuestions = async (url) => {
 };
 
 const assembleURL = (gameConfigs) => {
-  // let url = OPEN_TDB_URL + "?amount=" + gameConfigs.questionCount;
   let url = OPEN_TDB_URL + "?amount=50";
   // url = url + "&category=any";
   if (gameConfigs.difficulty !== "any") {
@@ -127,13 +126,13 @@ const processResults = () => {
       finalResults.winner = "Draw";
     }
   } else if (gameType === "score mode") {
-    if (playerScores[0] < gameConfigs.questionCount && playerScores[1] < gameConfigs.questionCount) {
+    if (playerScores[0] < gameConfigs.scoreGoal && playerScores[1] < gameConfigs.scoreGoal) {
       console.log("Neither met goal");
       finalResults.winner = "Draw";
-    } else if (playerScores[0] === gameConfigs.questionCount && playerScores[1] < gameConfigs.questionCount) {
+    } else if (playerScores[0] === gameConfigs.scoreGoal && playerScores[1] < gameConfigs.scoreGoal) {
       console.log("P1 met goal, P2 did not");
       finalResults.winner = "P1";
-    } else if (playerScores[0] < gameConfigs.questionCount && playerScores[1] === gameConfigs.questionCount) {
+    } else if (playerScores[0] < gameConfigs.scoreGoal && playerScores[1] === gameConfigs.scoreGoal) {
       console.log("P2 met goal, P1 did not");
       finalResults.winner = "P2";
     } else {

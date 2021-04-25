@@ -1,7 +1,5 @@
 import {RESTART_SELECTIONS, SELECT_SINGLE_PLAYER_TYPE, SELECT_MULTI_PLAYER_TYPE, SELECT_PLAYER_NUMBER, UPDATE_PLAYER_AVAILABILITY,
     SET_GAME_CONFIGS, OPEN_ONBOARDING, CLOSE_ONBOARDING, END_MP_QUIZ} from "../actionConstants";
-import { selectMultiplayerMode } from "../../client";
-import { useDispatch } from "react-redux";
 
 export const restartGame = (restart) => ({
     type: RESTART_SELECTIONS,

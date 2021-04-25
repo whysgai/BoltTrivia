@@ -13,7 +13,7 @@ const MPQuestionCard = (props) => {
     const answers = useSelector(state => state.MPQuestionReducer.playerAnswers);
     const time = useSelector((state) => state.MPQuestionReducer.time);
     const gameType = useSelector(state => state.gameStateReducer.type);
-    const goal = useSelector(state => state.gameStateReducer.configs.questionCount);
+    const goal = useSelector(state => state.gameStateReducer.configs.scoreGoal);
 
     const characterCheck = (value) => {
         return new DOMParser().parseFromString(value, "text/html").body.innerText;

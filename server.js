@@ -123,6 +123,27 @@ const processResults = () => {
     } else {
       finalResults.winner = "Draw";
     }
+  } else if (gameType === "score mode") {
+    console.log("P1 score:", playerScores[0], "P2 score:", playerScores[1]);
+    console.log("Goal", gameConfigs.questionCount);
+    if (playerScores[0] === gameConfigs.questionCount && playerScores[1] < gameConfigs.questionCount) {
+      console.log("P1 met goal, P2 did not");
+      finalResults.winner = "P1";
+    } else if (playerScores[0] < gameConfigs.questionCount && playerScores[1] === gameConfigs.questionCount) {
+      console.log("P2 met goal, P1 did not");
+      finalResults.winner = "P2";
+    } else {
+      if (finalResults.finalTimes[0] < finalResults.finalTimes[1]) {
+        console.log("Both met goal, P1 faster");
+        finalResults.winner = "P1";
+      } else if (finalResults.finalTimes[0] > finalResults.finalTimes[1]) {
+        console.log("Both met goal, P2 faster");
+        finalResults.winner = "P2";
+      } else {
+        console.log("Both met goal, times tied");
+        finalResults.winner = "Draw";
+      };      
+    };
   }
   finalResults.playerAnswers = playerAnswers;
   finalResults.playerScores = playerScores;
@@ -219,10 +240,14 @@ io.on("connection", (client) => {
       // else do nothing to waitForOther and keep waiting
     } else if (condition === "SCORE_REACHED") {
       console.log("Player ", playerIndex, " has reached the goal");
+      finalResults.finalTimes[playerIndex] = time;
       // if both entires in recievedEndGame are true,
       if (receivedEndGame[0] && receivedEndGame[1]) {
+        console.log("Both players are done in score mode");
         //    process results as necessary
+        processResults();
         //    set waitingForOther to false
+        waitingForOther = false;
       } else {
         //    io.sockets.broadcast.emit("other player reached goal")
         io.sockets.emit("other player has reached goal", playerIndex);

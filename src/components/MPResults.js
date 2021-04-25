@@ -37,21 +37,15 @@ const MPResults = () => {
             <h3 className="mb-3">Results: {calculateWinner()}</h3>
             <h5>Your Final Score {scores[player]}.</h5>
             <h5>Your Opponents Final Score {scores[opponent]}.</h5>
+            {console.log("Questions answered", playerAnswers[player].length)}
             <div className="card-group text-center">
-
                 {
                     questions.length > 0 ?
                     <div>
                         
                         {
-                            questions.map((question, index) => 
-                                {
-                                    index < playerAnswers[player].length ?
-                                        <MPResultsCard question={question} answerString={answerStrings[index]} playerAnswer={playerAnswers[player][index]} opponentAnswer={playerAnswers[opponent][index]}/>
-                                        :
-                                        <></>
-                                }
-                                
+                            questions.slice(0, playerAnswers[player].length).map((question, index) =>
+                                <MPResultsCard question={question} answerString={answerStrings[index]} playerAnswer={playerAnswers[player][index]} opponentAnswer={playerAnswers[opponent][index]}/>                                
                             )
                         }
                     </div>

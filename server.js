@@ -259,6 +259,7 @@ io.on("connection", (client) => {
       // error, bad condition case
     }
     if (!waitingForOther) {
+      console.log("No longer waiting for other");
       io.sockets.emit("MP game finished", finalResults);
       playerAvailability = [true, true];
       gameType = null;

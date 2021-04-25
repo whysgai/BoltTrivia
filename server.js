@@ -114,8 +114,8 @@ let receivedEndGame = [false, false];
 let finalResults = {
   winner: "",
   finalTimes: [0, 0],
-  playerAnswers: [[],[]],
-}
+  playerAnswers: [[], []],
+};
 
 io.on("connection", (client) => {
   io.sockets.emit("notify all", `Client ${client.id} has connected`);
@@ -186,6 +186,7 @@ io.on("connection", (client) => {
       if (receivedEndGame[0] && receivedEndGame[1]) {
         //    process results as necessary
         //    set waitingForOther to false
+        waitingForOther = false;
       }
       // else do nothing to waitForOther and keep waiting
     } else if (condition === "SCORE_REACHED") {
@@ -201,6 +202,18 @@ io.on("connection", (client) => {
     }
     if (!waitingForOther) {
       io.sockets.emit("MP game finished", finalResults);
+      playerAvailability = [true, true];
+      gameType = null;
+      gameConfigs = {};
+      questionList = [];
+      playerScores = [0, 0];
+      playerAnswers = [[], []];
+      receivedEndGame = [false, false];
+      finalResults = {
+        winner: "",
+        finalTimes: [0, 0],
+        playerAnswers: [[], []],
+      };
     }
   });
 

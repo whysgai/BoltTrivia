@@ -4,7 +4,7 @@ import MPTimer from "./MPTimer";
 const MPScoreboardScored = () => {
     const player = useSelector(state => state.gameStateReducer.player);
     const answers = useSelector(state => state.MPQuestionReducer.playerAnswers);
-    const goal = useSelector(state => state.gameStateReducer.configs.questionCount);
+    const goal = useSelector(state => state.gameStateReducer.configs.scoreGoal);
     //dummy score history
     // const wins = [true, false, true, true, false, true];
     let p1Answers = [];
@@ -36,7 +36,7 @@ const MPScoreboardScored = () => {
             <div>
                 {
                     wins.map((question, index) => 
-                        <div>Question {index}: {question ? "Correct" : "Wrong"}</div>
+                        <div index={index}>Question {index}: {question ? "Correct" : "Wrong"}</div>
                     )
                 }
             </div>

@@ -26,7 +26,7 @@ const INITIAL_STATE = {
   playerAvailability: [true, true],
   configs: {
     timeLimit: "none",
-    questionCount: 50,
+    scoreGoal: 10,
     difficulty: "any",
   },
   restart: false,
@@ -44,10 +44,11 @@ export const gameStateReducer = (state = INITIAL_STATE, action) => {
         playerAvailability: [true, true],
         configs: {
           timeLimit: "none",
-          questionCount: 50,
+          scoreGoal: 10,
           difficulty: "any",
         },
         restart: action.payload.restart,
+        onboarding: false,
       };
     case SELECT_SINGLE_PLAYER_TYPE:
       return {

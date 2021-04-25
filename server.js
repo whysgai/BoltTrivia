@@ -77,7 +77,6 @@ const readQuestions = async (url) => {
 };
 
 const assembleURL = (gameConfigs) => {
-  // let url = OPEN_TDB_URL + "?amount=" + gameConfigs.questionCount;
   let url = OPEN_TDB_URL + "?amount=50";
   // url = url + "&category=any";
   if (gameConfigs.difficulty !== "any") {
@@ -102,6 +101,57 @@ const contactAPI = (gameConfigs) => {
     });
 };
 
+const numberRight = (answers) => {
+  let numRight = 0;
+  for (let answer of answers) {
+    if (answer) {
+      numRight++;
+    }
+  }
+  return numRight;
+};
+
+const processResults = () => {
+  playerScores[0] = numberRight(playerAnswers[0]);
+  playerScores[1] = numberRight(playerAnswers[1]);
+  if (gameType === "time mode") {
+    if (playerScores[0] > playerScores[1]) {
+      console.log("P1 answered more correctly")
+      finalResults.winner = "P1";
+    } else if (playerScores[0] < playerScores[1]) {
+      console.log("P2 answered more correctly")
+      finalResults.winner = "P2";
+    } else {
+      console.log("Timed tie")
+      finalResults.winner = "Draw";
+    }
+  } else if (gameType === "score mode") {
+    if (playerScores[0] < gameConfigs.scoreGoal && playerScores[1] < gameConfigs.scoreGoal) {
+      console.log("Neither met goal");
+      finalResults.winner = "Draw";
+    } else if (playerScores[0] === gameConfigs.scoreGoal && playerScores[1] < gameConfigs.scoreGoal) {
+      console.log("P1 met goal, P2 did not");
+      finalResults.winner = "P1";
+    } else if (playerScores[0] < gameConfigs.scoreGoal && playerScores[1] === gameConfigs.scoreGoal) {
+      console.log("P2 met goal, P1 did not");
+      finalResults.winner = "P2";
+    } else {
+      if (finalResults.finalTimes[0] < finalResults.finalTimes[1]) {
+        console.log("Both met goal, P1 faster");
+        finalResults.winner = "P1";
+      } else if (finalResults.finalTimes[0] > finalResults.finalTimes[1]) {
+        console.log("Both met goal, P2 faster");
+        finalResults.winner = "P2";
+      } else {
+        console.log("Both met goal, times tied");
+        finalResults.winner = "Draw";
+      };      
+    };
+  }
+  finalResults.playerAnswers = playerAnswers;
+  finalResults.playerScores = playerScores;
+};
+
 // This array keeps track of availability of both players,
 // which will help UI determine which button to disable, if any
 let playerAvailability = [true, true];
@@ -115,6 +165,7 @@ let finalResults = {
   winner: "",
   finalTimes: [0, 0],
   playerAnswers: [[], []],
+  playerScores: [0, 0]
 };
 
 io.on("connection", (client) => {
@@ -185,22 +236,30 @@ io.on("connection", (client) => {
       // if both clients have reached the endgame state
       if (receivedEndGame[0] && receivedEndGame[1]) {
         //    process results as necessary
+        processResults();
         //    set waitingForOther to false
         waitingForOther = false;
       }
       // else do nothing to waitForOther and keep waiting
     } else if (condition === "SCORE_REACHED") {
+      console.log("Player ", playerIndex, " has reached the goal");
+      finalResults.finalTimes[playerIndex] = time;
       // if both entires in recievedEndGame are true,
       if (receivedEndGame[0] && receivedEndGame[1]) {
+        console.log("Both players are done in score mode");
         //    process results as necessary
+        processResults();
         //    set waitingForOther to false
+        waitingForOther = false;
       } else {
         //    io.sockets.broadcast.emit("other player reached goal")
+        io.sockets.emit("other player has reached goal", playerIndex);
       }
     } else {
       // error, bad condition case
     }
     if (!waitingForOther) {
+      console.log("No longer waiting for other");
       io.sockets.emit("MP game finished", finalResults);
       playerAvailability = [true, true];
       gameType = null;
@@ -213,6 +272,7 @@ io.on("connection", (client) => {
         winner: "",
         finalTimes: [0, 0],
         playerAnswers: [[], []],
+        playerScores: [0, 0]
       };
     }
   });

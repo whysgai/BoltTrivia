@@ -13,7 +13,7 @@ import {
 const INITIAL_STATE = {
   questions: [],
   count: 0,
-  playerAnswers: null, //an array of both P1 and P2's booleans for the questions
+  playerAnswers: [[], []], //an array of both P1 and P2's booleans for the questions
   answerStrings: [], //actual answer provided, NOT True or False
   quizInProgress: false,
   time: 0,
@@ -62,6 +62,7 @@ export const MPQuestionReducer = (state = INITIAL_STATE, action) => {
         ...state,
         playerAnswers: action.payload.finalResults.playerAnswers,
         finalTimes: action.payload.finalResults.finalTimes,
+        scores: action.payload.finalResults.playerScores,
         winner: action.payload.finalResults.winner,
         // quizInProgress: false,
       };

@@ -1,14 +1,11 @@
-import { useState } from "react";
 import PropTypes from "prop-types";
 import { GAME_TYPE } from "../redux/storeConstants";
-import { selectGameConfig } from "../client";
 
 const GameConfigs = (props) => {
 
   return (
     <>
       <p>Set time configs:</p>
-
       <div className="config">
         <div className="config-inputs">
           {props.configs.gameType === GAME_TYPE.TIME_MODE ? (
@@ -30,17 +27,17 @@ const GameConfigs = (props) => {
             </label>
           ) : (
             <label className="form-label config-setting">
-              Number of questions (50 max):
+              Right answers to win (50 max):
               <input
                 className="form-control"
                 type="number"
                 min="1"
                 max="50"
-                value={props.configs.questionCount}
+                value={props.configs.scoreGoal}
                 onChange={(e) =>
                   props.setConfigs({
                     ...props.configs,
-                    questionCount: e.target.value,
+                    scoreGoal: parseInt(e.target.value),
                   })
                 }
               />

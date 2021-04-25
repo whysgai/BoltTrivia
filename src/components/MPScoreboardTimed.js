@@ -31,7 +31,7 @@ const MPScoreboardTimed = () => {
             <div>
                 {
                     wins.map((question, index) => 
-                        <div>Question {index}: {question ? "Correct" : "Wrong"}</div>
+                        <div key={index}>Question {index}: {question ? "Correct" : "Wrong"}</div>
                     )
                 }
             </div>

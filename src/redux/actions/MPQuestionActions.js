@@ -1,3 +1,4 @@
+import store from "../store";
 import {
   SET_MP_QUESTIONS,
   ADD_MP_ANSWER,

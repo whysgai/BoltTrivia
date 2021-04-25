@@ -40,7 +40,7 @@ const GameConfigs = (props) => {
                 onChange={(e) =>
                   props.setConfigs({
                     ...props.configs,
-                    questionCount: e.target.value,
+                    questionCount: parseInt(e.target.value),
                   })
                 }
               />

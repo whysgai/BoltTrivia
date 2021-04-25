@@ -6,6 +6,8 @@ import {
   END_MP_QUIZ,
   UPDATE_MP_TIME,
   UPDATE_MP_SCORES,
+  SET_FINAL_RESULTS,
+  AWAIT_FINAL_RESULTS,
 } from "../actionConstants";
 
 export const setMPQuestions = (questions) => ({
@@ -22,8 +24,8 @@ export const updateMPTime = () => ({
 export const updateMPScores = (scores) => ({
   type: UPDATE_MP_SCORES,
   payload: {
-    scores
-  }
+    scores,
+  },
 });
 
 let timer = null;
@@ -36,7 +38,7 @@ export const startMPTimer = () => {
 };
 
 export const stopMPTimer = () => {
-  console.log("stop timer")
+  console.log("stop timer");
   return (dispatch) => {
     clearInterval(timer);
   };
@@ -45,13 +47,24 @@ export const stopMPTimer = () => {
 export const setMPPlayerAnswers = (playerAnswers) => ({
   type: UPDATE_SCOREBOARDS,
   payload: {
-    playerAnswers: playerAnswers
-  }
-})
+    playerAnswers: playerAnswers,
+  },
+});
 
 export const addMPAnswer = (answer) => ({
   type: ADD_MP_ANSWER,
   payload: {
-    answer: answer
-  }
-})
+    answer: answer,
+  },
+});
+
+export const awaitFinalResults = () => ({
+  type: AWAIT_FINAL_RESULTS,
+});
+
+export const setFinalResults = (finalResults) => ({
+  type: SET_FINAL_RESULTS,
+  payload: {
+    finalResults,
+  },
+});

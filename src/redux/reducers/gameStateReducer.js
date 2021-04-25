@@ -8,6 +8,8 @@ import {
   RESTART_SELECTIONS,
   OPEN_ONBOARDING,
   CLOSE_ONBOARDING,
+  SET_FINAL_RESULTS,
+  AWAIT_FINAL_RESULTS,
 } from "../actionConstants";
 import {
   SET_MP_QUESTIONS,
@@ -93,6 +95,16 @@ export const gameStateReducer = (state = INITIAL_STATE, action) => {
         ...state,
         phase: GAME_PHASE.PLAY_GAME,
       };
+    case AWAIT_FINAL_RESULTS:
+      return {
+        ...state,
+        phase: GAME_PHASE.AWAITING_RESULTS,
+      };
+    case SET_FINAL_RESULTS:
+      return {
+        ...state,
+        phase: GAME_PHASE.VIEW_SCORES,
+      };
     case OPEN_ONBOARDING:
       return {
         ...state,
@@ -102,7 +114,7 @@ export const gameStateReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         onboarding: false,
-      }
+      };
     case END_MP_QUIZ:
       return {
         ...state,

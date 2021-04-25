@@ -201,6 +201,8 @@ socket.on("other player has reached goal", (otherPlayer) => {
   console.log("Comparing", thisPlayer, " to ", otherPlayer);
   if (thisPlayer !== otherPlayer) {
     console.log("Other player has reached the goal");
+    const time = store.getState().MPQuestionReducer.time;
+    finishMPGame(thisPlayer, "SCORE_REACHED", time);
   } 
 });
 

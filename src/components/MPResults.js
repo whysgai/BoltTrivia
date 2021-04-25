@@ -45,7 +45,13 @@ const MPResults = () => {
                         
                         {
                             questions.map((question, index) => 
-                                <MPResultsCard question={question} answerString={answerStrings[index]} playerAnswer={playerAnswers[player][index]} opponentAnswer={playerAnswers[opponent][index]}/>
+                                {
+                                    index < playerAnswers[player].length ?
+                                        <MPResultsCard question={question} answerString={answerStrings[index]} playerAnswer={playerAnswers[player][index]} opponentAnswer={playerAnswers[opponent][index]}/>
+                                        :
+                                        <></>
+                                }
+                                
                             )
                         }
                     </div>

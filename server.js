@@ -112,11 +112,10 @@ const numberRight = (answers) => {
   return numRight;
 };
 
-const processResults = (condition) => {
+const processResults = () => {
   playerScores[0] = numberRight(playerAnswers[0]);
   playerScores[1] = numberRight(playerAnswers[1]);
-
-  if (condition === "OUT_OF_TIME") {
+  if (gameType === "time mode") {
     if (playerScores[0] > playerScores[1]) {
       finalResults.winner = "P1";
     } else if (playerScores[0] < playerScores[1]) {
@@ -124,9 +123,9 @@ const processResults = (condition) => {
     } else {
       finalResults.winner = "Draw";
     }
-    finalResults.playerAnswers = playerAnswers;
-    finalResults.playerScores = playerScores;
   }
+  finalResults.playerAnswers = playerAnswers;
+  finalResults.playerScores = playerScores;
 };
 
 // This array keeps track of availability of both players,
@@ -213,7 +212,7 @@ io.on("connection", (client) => {
       // if both clients have reached the endgame state
       if (receivedEndGame[0] && receivedEndGame[1]) {
         //    process results as necessary
-        processResults(condition);
+        processResults();
         //    set waitingForOther to false
         waitingForOther = false;
       }

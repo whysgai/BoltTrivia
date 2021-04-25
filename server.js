@@ -102,6 +102,33 @@ const contactAPI = (gameConfigs) => {
     });
 };
 
+const numberRight = (answers) => {
+  let numRight = 0;
+  for (answer of answers) {
+    if (answer) {
+      numRight++;
+    }
+  }
+  return numRight;
+};
+
+const processResults = (condition) => {
+  playerScores[0] = numberRight(playerAnswers[0]);
+  playerScores[1] = numberRight(playerAnswers[1]);
+
+  if (condition === "OUT_OF_TIME") {
+    if (playerScores[0] > playerScores[1]) {
+      finalResults.winner = "P1";
+    } else if (playerScores[0] < playerScores[1]) {
+      finalResults.winner = "P2";
+    } else {
+      finalResults.winner = "Draw";
+    }
+    finalResults.playerAnswers = playerAnswers;
+    finalResults.playerScores = playerScores;
+  }
+};
+
 // This array keeps track of availability of both players,
 // which will help UI determine which button to disable, if any
 let playerAvailability = [true, true];
@@ -115,6 +142,7 @@ let finalResults = {
   winner: "",
   finalTimes: [0, 0],
   playerAnswers: [[], []],
+  playerScores: [0, 0]
 };
 
 io.on("connection", (client) => {
@@ -185,6 +213,7 @@ io.on("connection", (client) => {
       // if both clients have reached the endgame state
       if (receivedEndGame[0] && receivedEndGame[1]) {
         //    process results as necessary
+        processResults(condition);
         //    set waitingForOther to false
         waitingForOther = false;
       }
@@ -213,6 +242,7 @@ io.on("connection", (client) => {
         winner: "",
         finalTimes: [0, 0],
         playerAnswers: [[], []],
+        playerScores: [0, 0]
       };
     }
   });

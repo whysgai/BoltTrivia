@@ -104,7 +104,7 @@ const contactAPI = (gameConfigs) => {
 
 const numberRight = (answers) => {
   let numRight = 0;
-  for (answer of answers) {
+  for (let answer of answers) {
     if (answer) {
       numRight++;
     }

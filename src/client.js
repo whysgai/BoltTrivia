@@ -16,7 +16,7 @@ import {
   setFinalResults,
   awaitFinalResults
 } from "./redux/actions/MPQuestionActions";
-import { PLAYER_MODE, GAME_PHASE } from "./redux/storeConstants";
+import { PLAYER_MODE, GAME_PHASE, END_CONDITION } from "./redux/storeConstants";
 
 /** CLIENT CONFIGURATION - connect to the server */
 const socketIOClient = require("socket.io-client");
@@ -202,7 +202,7 @@ socket.on("other player has reached goal", (otherPlayer) => {
   if (thisPlayer !== otherPlayer) {
     console.log("Other player has reached the goal");
     const time = store.getState().MPQuestionReducer.time;
-    finishMPGame(thisPlayer, "SCORE_REACHED", time);
+    finishMPGame(thisPlayer, END_CONDITION.OTHER_SCORE_REACHED, time);
   } 
 });
 

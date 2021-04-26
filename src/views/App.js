@@ -13,6 +13,7 @@ import MPScoreboardTimed from "../components/MPScoreboardTimed";
 import MPScoreboardScored from "../components/MPScoreboardScored";
 import MPQuiz from "../components/MPQuiz"
 import MPResults from "../components/MPResults";
+import WaitingScreen from "../components/WaitingScreen";
 
 function App() {
   const gameState = useSelector((state) => state.gameStateReducer);
@@ -44,7 +45,7 @@ function App() {
               ) : gameState.phase === GAME_PHASE.SELECT_GAME_TYPE ? (
                 <GameTypeSelect />
               ) : gameState.phase === GAME_PHASE.LOADING_GAME ? (
-                <p>MP loading the game {console.log("Loading game")}</p>
+                <WaitingScreen />
               ) : gameState.phase === GAME_PHASE.PLAY_GAME ? (
                 <>
                   <div>
@@ -65,7 +66,7 @@ function App() {
                   )}
                 </>
               ) : gameState.phase === GAME_PHASE.AWAITING_RESULTS ? (
-                <p>End condition reached, waiting on server</p>  
+                < WaitingScreen/>  
               ) : gameState.phase === GAME_PHASE.VIEW_SCORES ? (
                 <MPResults/>
               ) : (

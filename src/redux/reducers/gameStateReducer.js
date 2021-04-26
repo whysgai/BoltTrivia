@@ -29,6 +29,7 @@ const INITIAL_STATE = {
     scoreGoal: 10,
     difficulty: "any",
   },
+  endCondition: null,
   restart: false,
   onboarding: false,
 };
@@ -47,6 +48,7 @@ export const gameStateReducer = (state = INITIAL_STATE, action) => {
           scoreGoal: 10,
           difficulty: "any",
         },
+        endCondition: null,
         restart: action.payload.restart,
         onboarding: false,
       };
@@ -100,6 +102,7 @@ export const gameStateReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         phase: GAME_PHASE.AWAITING_RESULTS,
+        endCondition: action.payload.condition
       };
     case SET_FINAL_RESULTS:
       return {

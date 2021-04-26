@@ -16,7 +16,7 @@ import {
   setFinalResults,
   awaitFinalResults
 } from "./redux/actions/MPQuestionActions";
-import { PLAYER_MODE, GAME_PHASE } from "./redux/storeConstants";
+import { PLAYER_MODE, GAME_PHASE, END_CONDITION } from "./redux/storeConstants";
 
 /** CLIENT CONFIGURATION - connect to the server */
 const socketIOClient = require("socket.io-client");
@@ -191,9 +191,16 @@ socket.on("player answers updated", (answers) => {
 });
 
 export const finishMPGame = (playerIndex, condition, time) => {
-  console.log("Sending game finish update to server");
-  socket.emit("end condition met", playerIndex, condition, time);
-  store.dispatch(awaitFinalResults());
+  console.log("Sending game finish update to server", condition);
+  store.dispatch(awaitFinalResults(condition));
+  if (condition === END_CONDITION.OTHER_SCORE_REACHED) {
+    setTimeout(function(){
+      console.log("Pause so player can see wait screen");
+      socket.emit("end condition met", playerIndex, condition, time);     
+    }, 4000);
+  } else {
+    socket.emit("end condition met", playerIndex, condition, time);
+  }; 
 };
 
 socket.on("other player has reached goal", (otherPlayer) => {  
@@ -202,7 +209,7 @@ socket.on("other player has reached goal", (otherPlayer) => {
   if (thisPlayer !== otherPlayer) {
     console.log("Other player has reached the goal");
     const time = store.getState().MPQuestionReducer.time;
-    finishMPGame(thisPlayer, "SCORE_REACHED", time);
+    finishMPGame(thisPlayer, END_CONDITION.OTHER_SCORE_REACHED, time);
   } 
 });
 

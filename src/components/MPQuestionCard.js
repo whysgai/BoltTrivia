@@ -2,7 +2,7 @@ import {useSelector, useDispatch} from "react-redux";
 import { useState } from "react";
 import {finishMPGame, sendPlayerAnswer} from "../client"
 import {addMPAnswer} from "../redux/actions/MPQuestionActions"
-import { GAME_TYPE } from "../redux/storeConstants";
+import { GAME_TYPE, END_CONDITION } from "../redux/storeConstants";
 
 
 const MPQuestionCard = (props) => {
@@ -30,7 +30,7 @@ const MPQuestionCard = (props) => {
             sendPlayerAnswer(playerIndex,true);
             if (gameType === GAME_TYPE.SCORE_MODE && numRight === goal - 1) {
                 console.log("==========GOAL REACHED=============");
-                finishMPGame(playerIndex, "SCORE_REACHED", time);
+                finishMPGame(playerIndex, END_CONDITION.SCORE_REACHED, time);
             }
         } else {
             sendPlayerAnswer(playerIndex,false);

@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 
 import { startMPTimer, stopMPTimer } from "../redux/actions/MPQuestionActions";
-import { GAME_TYPE } from "../redux/storeConstants";
+import { END_CONDITION, GAME_TYPE } from "../redux/storeConstants";
 import { finishMPGame } from "../client";
 
 const MPTimer = () => {
@@ -18,7 +18,7 @@ const MPTimer = () => {
   if (timeLimit !== "none" && time >= timeLimit) {
     console.log("Timed and timelimt is exceeded - stopping timer");
     dispatch(stopMPTimer());
-    finishMPGame(player, "OUT_OF_TIME", timeLimit);
+    finishMPGame(player, END_CONDITION.OUT_OF_TIME, timeLimit);
   } else if (timeLimit === "none" && time >= 5) {
     console.log("Score - stopping after 5");
     dispatch(stopMPTimer());

@@ -25,10 +25,10 @@ const MPQuiz = () => {
                 :
                 <div>
                     {
-                        questions.length > 0 && count === 50 ? //change count to 5 for testing
-                        endGame()
-                        :
-                        <MPQuestionCard question={questions[count]}/>
+                        questions.length > 0 && count === questions.length ?
+                            endGame()
+                            :
+                            <MPQuestionCard question={questions[count]}/>
                     }
                 </div>
             }

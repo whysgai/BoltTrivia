@@ -2,6 +2,7 @@ import {useSelector, useDispatch} from "react-redux";
 import MPQuestionCard from "./MPQuestionCard"
 import { useState } from "react";
 import {finishMPGame} from "../client"
+import { END_CONDITION } from "../redux/storeConstants";
 
 const MPQuiz = () => {
     const questions = useSelector(state => state.MPQuestionReducer.questions)
@@ -13,7 +14,7 @@ const MPQuiz = () => {
 
     const endGame = () => {
         console.log("==========OUT OF QUESTIONS=============");
-        finishMPGame(playerIndex, "OUT_OF_QUESTIONS", time);
+        finishMPGame(playerIndex, END_CONDITION.OUT_OF_QUESTIONS, time);
     }
 
 

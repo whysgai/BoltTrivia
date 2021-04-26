@@ -14,7 +14,7 @@ import {
   updateMPScores,
   setMPPlayerAnswers,
   setFinalResults,
-  awaitFinalResults
+  awaitFinalResults,
 } from "./redux/actions/MPQuestionActions";
 import { PLAYER_MODE, GAME_PHASE } from "./redux/storeConstants";
 
@@ -133,6 +133,7 @@ socket.on("disconnected", () => {
       PLAYER_MODE.MULTI_PLAYER &&
     store.getState().gameStateReducer.phase !== GAME_PHASE.SELECT_PLAYER
   ) {
+    store.dispatch(stopMPTimer());
     store.dispatch(restartGame(true));
   }
 });
@@ -196,14 +197,14 @@ export const finishMPGame = (playerIndex, condition, time) => {
   store.dispatch(awaitFinalResults());
 };
 
-socket.on("other player has reached goal", (otherPlayer) => {  
+socket.on("other player has reached goal", (otherPlayer) => {
   const thisPlayer = store.getState().gameStateReducer.player;
   console.log("Comparing", thisPlayer, " to ", otherPlayer);
   if (thisPlayer !== otherPlayer) {
     console.log("Other player has reached the goal");
     const time = store.getState().MPQuestionReducer.time;
     finishMPGame(thisPlayer, "SCORE_REACHED", time);
-  } 
+  }
 });
 
 socket.on("MP game finished", (finalResults) => {

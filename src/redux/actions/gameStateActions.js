@@ -12,6 +12,10 @@ export const connectSinglePlayerMode = () => ({
     type: SELECT_SINGLE_PLAYER_TYPE
 });
 
+export const errorOccurred = () => ({
+    type: ERROR_OCCURRED
+})
+
 // export const connectMultiPlayerMode = () => {
 //     return dispatch => {
 //         selectMultiplayerMode()

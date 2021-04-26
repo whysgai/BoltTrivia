@@ -73,7 +73,10 @@ function App() {
                 <p>An error occurred connecting to the server. Please select the Home button and try again.</p>
               )
             ) : (
-              <SinglePlayer />
+              gameState.phase === GAME_PHASE.ERROR_OCCURRED ? 
+                <p>An error occurred connecting to the server. Please select the Home button and try again.</p>
+                :
+                <SinglePlayer />
             )
           }
         </>

@@ -61,6 +61,7 @@ const SinglePlayer = () => {
         dispatch(setSPQuestions(data.results));
       })
       .catch((error) => {
+        dispatch(errorOccurred())
         console.log(error);
       });
     dispatch(setSPBeginQuiz());

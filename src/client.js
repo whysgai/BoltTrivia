@@ -7,6 +7,7 @@ import {
   gameTypeSelection,
   setGameConfigs,
   restartGame,
+  errorOccurred,
 } from "./redux/actions/gameStateActions";
 import {
   setMPQuestions,
@@ -218,4 +219,9 @@ socket.on("MP game finished", (finalResults) => {
   store.dispatch(setFinalResults(finalResults));
 
   // redux action to finish game and set final score
+});
+
+socket.on("connect failed", () => {
+  console.log("Initial connection failed, please try again");
+  store.dispatch(errorOccurred());
 });

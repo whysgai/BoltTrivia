@@ -20,7 +20,6 @@ const MPQuestionCard = (props) => {
       };
 
     const submitAnswer = () => {
-        console.log("submitAnswer submit")
         let numRight = 0;
         for (let answer of answers[playerIndex]) {
           if (answer) {
@@ -43,7 +42,7 @@ const MPQuestionCard = (props) => {
         <div>
             <h4 className="pb-3 text-center">Category: {question.category}</h4>
             <h5>Question: {characterCheck(question.question)}</h5>
-            {question.allAnswers.map((selection, index) => (
+            { question.allAnswers.map((selection, index) => (
                 <div key={index} className="form-check pb-2">
                     <input
                         required

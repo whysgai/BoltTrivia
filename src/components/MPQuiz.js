@@ -1,12 +1,20 @@
 import {useSelector, useDispatch} from "react-redux";
 import MPQuestionCard from "./MPQuestionCard"
 import { useState } from "react";
+import {finishMPGame} from "../client"
 
 const MPQuiz = () => {
     const questions = useSelector(state => state.MPQuestionReducer.questions)
     const [start, setStart] = useState(false)
     const count = useSelector(state => state.MPQuestionReducer.count)
-    const dispatch = useDispatch();
+    const playerIndex = useSelector(state => state.gameStateReducer.player)
+    const time = useSelector((state) => state.MPQuestionReducer.time);
+
+
+    const endGame = () => {
+        console.log("==========OUT OF QUESTIONS=============");
+        finishMPGame(playerIndex, "OUT_OF_QUESTIONS", time);
+    }
 
 
     return (
@@ -17,8 +25,10 @@ const MPQuiz = () => {
                 :
                 <div>
                     {
-                        questions.length > 0 &&
-                        <MPQuestionCard question={questions[count]}/>
+                        questions.length > 0 && count === questions.length ?
+                            endGame()
+                            :
+                            <MPQuestionCard question={questions[count]}/>
                     }
                 </div>
             }

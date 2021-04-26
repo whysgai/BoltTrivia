@@ -9,6 +9,8 @@ const MPResults = () => {
     const player = useSelector(state => state.gameStateReducer.player);
     const winner = useSelector(state => state.MPQuestionReducer.winner);
     const scores = useSelector(state => state.MPQuestionReducer.scores);
+    const scoreGoal = useSelector((state) => state.gameStateReducer.scoreGoal);
+    const gameType = useSelector((state) => state.gameStateReducer.type);
 
     const gameOpponent = () => {
         if (player === 0) {
@@ -35,8 +37,18 @@ const MPResults = () => {
     return (
         <>
             <h3 className="mb-3">Results: {calculateWinner()}</h3>
-            <h5>Your Final Score {scores[player]}.</h5>
-            <h5>Your Opponents Final Score {scores[opponent]}.</h5>
+            {
+                gameType === "SCORE_MODE" ?
+                <>
+                    <h5>Your Final Score {scores[player]} out of {scoreGoal}.</h5>
+                    <h5>Your Opponents Final Score {scores[opponent]} out of {scoreGoal}.</h5>
+                </>
+                :
+                <>
+                    <h5>Your Final Score {scores[player]}.</h5>
+                    <h5>Your Opponents Final Score {scores[opponent]}.</h5>
+                </>
+            }
             {console.log("Questions answered", playerAnswers[player].length)}
             <div className="card-group text-center">
                 {

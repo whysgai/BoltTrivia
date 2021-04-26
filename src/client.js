@@ -197,7 +197,7 @@ export const finishMPGame = (playerIndex, condition, time) => {
     setTimeout(function(){
       console.log("Pause so player can see wait screen");
       socket.emit("end condition met", playerIndex, condition, time);     
-    }, 7000);
+    }, 4000);
   } else {
     socket.emit("end condition met", playerIndex, condition, time);
   }; 

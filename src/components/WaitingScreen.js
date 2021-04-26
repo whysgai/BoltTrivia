@@ -18,7 +18,7 @@ const WaitingScreen = () => {
             <p>MP loading the game</p>
             :
             gamePhase === GAME_PHASE.AWAITING_RESULTS && endCondition === END_CONDITION.OUT_OF_QUESTIONS ?
-              <p>No more questions: processing results</p>
+              <p>No more questions: waiting for other player to finish</p>
               :
               gamePhase === GAME_PHASE.AWAITING_RESULTS && endCondition === END_CONDITION.OUT_OF_TIME ?
                 <p>Out of time: processing results</p>

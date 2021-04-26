@@ -5,6 +5,7 @@ import {
   setSPBeginQuiz,
 } from "../redux/actions/SPQuestionActions";
 import SPQuiz from "./SPQuiz";
+import { errorOccurred } from "../redux/actions/gameStateActions";
 
 const requestTriviaCategories = async () => {
   let response = await fetch("https://opentdb.com/api_category.php");
@@ -49,6 +50,7 @@ const SinglePlayer = () => {
         setCategory(data.trivia_categories);
       })
       .catch((error) => {
+        dispatch(errorOccurred())
         console.log(error);
       });
   }, []);

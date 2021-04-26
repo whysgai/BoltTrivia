@@ -23,5 +23,6 @@ export const GAME_PHASE = {
     LOADING_GAME: "loading game",
     PLAY_GAME: "play game",
     AWAITING_RESULTS: "awaiting results",
-    VIEW_SCORES: "view scores"
+    VIEW_SCORES: "view scores",
+    ERROR_OCCURRED: "error occurred"
 };

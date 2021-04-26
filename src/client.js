@@ -225,3 +225,9 @@ socket.on("connect failed", () => {
   console.log("Initial connection failed, please try again");
   store.dispatch(errorOccurred());
 });
+
+socket.on("connect_error", (error) => {
+  console.log("Couldn't connect to server.")
+  socket.disconnect()
+  store.dispatch(errorOccurred());
+})

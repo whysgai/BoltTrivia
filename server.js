@@ -277,25 +277,6 @@ io.on("connection", (client) => {
     }
   });
 
-  // I commented the below out because I think we can just
-  // call the reset functionality when players exit the
-  // results page
-
-  // client.on("finish MP game", () => {
-  //   console.log("finishing MP game");
-
-  //   io.sockets.emit("MP game finished", [...playerScores]);
-  //   playerAvailability = [true, true];
-  //   gameType = null;
-  //   gameConfigs = {};
-  //   questionList = [];
-  //   playerScores = [0, 0];
-  // });
-
-  client.on('connect_failed', function() {
-    io.sockets.emit("connect failed");
- })
-
   client.on("disconnect", () => {
     io.sockets.emit("disconnected");
     playerAvailability = [true, true];

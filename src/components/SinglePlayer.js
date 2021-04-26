@@ -27,7 +27,7 @@ const SinglePlayer = () => {
 
   const SPTriviaQuestions = async (query) => {
     let response = await fetch(
-      "https://opentdb.com/api.php" + query + "&type=multiple"
+      "https://opentdbb.com/api.php" + query + "&type=multiple"
     );
     let triviaData = await response.json();
     return triviaData;

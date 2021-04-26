@@ -233,8 +233,10 @@ io.on("connection", (client) => {
     receivedEndGame[playerIndex] = true;
     let waitingForOther = true;
     if (condition === "OUT_OF_QUESTIONS" || condition === "OUT_OF_TIME") {
+      console.log('Received end condition', receivedEndGame)
       // if both clients have reached the endgame state
       if (receivedEndGame[0] && receivedEndGame[1]) {
+        console.log('Received end game for both players.')
         //    process results as necessary
         processResults();
         //    set waitingForOther to false
@@ -300,5 +302,12 @@ io.on("connection", (client) => {
     questionList = [];
     playerScores = [0, 0];
     playerAnswers = [[], []];
+    receivedEndGame = [false, false];
+    finalResults = {
+      winner: "",
+      finalTimes: [0, 0],
+      playerAnswers: [[], []],
+      playerScores: [0, 0]
+    };
   });
 });

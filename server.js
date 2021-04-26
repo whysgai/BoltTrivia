@@ -96,7 +96,7 @@ const contactAPI = (gameConfigs) => {
       io.sockets.emit("start game", [...questionList]);
     })
     .catch((error) => {
-      //setStatus(STATUS.FAIL);
+      io.sockets.emit("connect failed");
       console.log(error);
     });
 };
@@ -291,6 +291,10 @@ io.on("connection", (client) => {
   //   questionList = [];
   //   playerScores = [0, 0];
   // });
+
+  socket.on('connect_failed', function() {
+    io.sockets.emit("connect failed");
+ })
 
   client.on("disconnect", () => {
     io.sockets.emit("disconnected");

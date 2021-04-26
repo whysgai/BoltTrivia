@@ -17,23 +17,19 @@ const WaitingScreen = () => {
           gamePhase === GAME_PHASE.LOADING_GAME ? 
             <p>MP loading the game</p>
             :
-            gameState.phase === GAME_PHASE.AWAITING_RESULTS && endCondition === END_CONDITION.OUT_OF_QUESTIONS ?
+            gamePhase === GAME_PHASE.AWAITING_RESULTS && endCondition === END_CONDITION.OUT_OF_QUESTIONS ?
               <p>No more questions: processing results</p>
               :
-              gameState.phase === GAME_PHASE.AWAITING_RESULTS && endCondition === END_CONDITION.OUT_OF_TIME ?
+              gamePhase === GAME_PHASE.AWAITING_RESULTS && endCondition === END_CONDITION.OUT_OF_TIME ?
                 <p>Out of time: processing results</p>
                 :
-                gameState.phase === GAME_PHASE.AWAITING_RESULTS && endCondition === END_CONDITION.SCORE_REACHED ?
+                gamePhase === GAME_PHASE.AWAITING_RESULTS && endCondition === END_CONDITION.SCORE_REACHED ?
                   <p>Goal reached: processing results</p>
                   :
-                  gameState.phase === GAME_PHASE.AWAITING_RESULTS && endCondition === END_CONDITION.OTHER_SCORE_REACHED ?
+                  gamePhase === GAME_PHASE.AWAITING_RESULTS && endCondition === END_CONDITION.OTHER_SCORE_REACHED ?
                   <p>Other player has reached goal: processing results</p>
-              // Ran out of questions
-              // Ran out of time
-              // Reached goal
-              // Other player reached goal
-              :
-              <></>
+                  :
+                  <></>
       }
     </>
   );

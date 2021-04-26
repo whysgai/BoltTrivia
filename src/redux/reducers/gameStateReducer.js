@@ -10,6 +10,7 @@ import {
   CLOSE_ONBOARDING,
   SET_FINAL_RESULTS,
   AWAIT_FINAL_RESULTS,
+  ERROR_OCCURRED
 } from "../actionConstants";
 import {
   SET_MP_QUESTIONS,

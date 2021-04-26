@@ -292,7 +292,7 @@ io.on("connection", (client) => {
   //   playerScores = [0, 0];
   // });
 
-  socket.on('connect_failed', function() {
+  client.on('connect_failed', function() {
     io.sockets.emit("connect failed");
  })
 

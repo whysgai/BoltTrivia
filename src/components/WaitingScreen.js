@@ -1,9 +1,10 @@
-import { GAME_PHASE } from "../redux/storeConstants";
+import { GAME_PHASE, END_CONDITION } from "../redux/storeConstants";
 import { useSelector } from "react-redux";
 
 const WaitingScreen = () => {
   const gamePhase = useSelector((state) => state.gameStateReducer.phase);
   const playerNumber = useSelector((state) => state.gameStateReducer.player);
+  const endCondition = useSelector((state) => state.gameStateReducer.endCondition);
 
   return (
     <>
@@ -16,8 +17,17 @@ const WaitingScreen = () => {
           gamePhase === GAME_PHASE.LOADING_GAME ? 
             <p>MP loading the game</p>
             :
-            gameState.phase === GAME_PHASE.AWAITING_RESULTS ?
-              <p>End condition reached, waiting on server</p>
+            gameState.phase === GAME_PHASE.AWAITING_RESULTS && endCondition === END_CONDITION.OUT_OF_QUESTIONS ?
+              <p>No more questions: processing results</p>
+              :
+              gameState.phase === GAME_PHASE.AWAITING_RESULTS && endCondition === END_CONDITION.OUT_OF_TIME ?
+                <p>Out of time: processing results</p>
+                :
+                gameState.phase === GAME_PHASE.AWAITING_RESULTS && endCondition === END_CONDITION.SCORE_REACHED ?
+                  <p>Goal reached: processing results</p>
+                  :
+                  gameState.phase === GAME_PHASE.AWAITING_RESULTS && endCondition === END_CONDITION.OTHER_SCORE_REACHED ?
+                  <p>Other player has reached goal: processing results</p>
               // Ran out of questions
               // Ran out of time
               // Reached goal

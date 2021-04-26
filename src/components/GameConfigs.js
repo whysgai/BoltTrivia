@@ -2,20 +2,25 @@ import PropTypes from "prop-types";
 import { GAME_TYPE } from "../redux/storeConstants";
 
 const GameConfigs = (props) => {
-
   return (
     <>
       <p>Set time configs:</p>
-      <div className="config">
+      <form
+        className="config"
+        onSubmit={(e) => {
+          e.preventDefault();
+          props.selectGameConfig(props.configs);
+        }}
+      >
         <div className="config-inputs">
           {props.configs.gameType === GAME_TYPE.TIME_MODE ? (
             <label className="form-label config-setting">
-              Time limit (seconds, max 120):
+              Time limit (seconds, max 300):
               <input
                 className="form-control"
                 type="number"
                 min="1"
-                max="120"
+                max="300"
                 value={props.configs.timeLimit}
                 onChange={(e) =>
                   props.setConfigs({
@@ -62,13 +67,10 @@ const GameConfigs = (props) => {
             </select>
           </label>
         </div>
-        <button
-          className="btn btn-success config-confirm"
-          onClick={() => props.selectGameConfig(props.configs)}
-        >
+        <button className="btn btn-success config-confirm" type="submit">
           <span className="little-button-text">START</span>
         </button>
-      </div>
+      </form>
     </>
   );
 };

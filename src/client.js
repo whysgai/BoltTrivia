@@ -191,9 +191,16 @@ socket.on("player answers updated", (answers) => {
 });
 
 export const finishMPGame = (playerIndex, condition, time) => {
-  console.log("Sending game finish update to server");
-  socket.emit("end condition met", playerIndex, condition, time);
+  console.log("Sending game finish update to server", condition);
   store.dispatch(awaitFinalResults(condition));
+  if (condition === END_CONDITION.OTHER_SCORE_REACHED) {
+    setTimeout(function(){
+      console.log("Pause so player can see wait screen");
+      socket.emit("end condition met", playerIndex, condition, time);     
+    }, 7000);
+  } else {
+    socket.emit("end condition met", playerIndex, condition, time);
+  }; 
 };
 
 socket.on("other player has reached goal", (otherPlayer) => {  

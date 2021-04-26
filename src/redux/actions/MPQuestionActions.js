@@ -59,8 +59,11 @@ export const addMPAnswer = (answer) => ({
   },
 });
 
-export const awaitFinalResults = () => ({
+export const awaitFinalResults = (condition) => ({
   type: AWAIT_FINAL_RESULTS,
+  payload: {
+    condition
+  }
 });
 
 export const setFinalResults = (finalResults) => ({

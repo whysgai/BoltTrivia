@@ -193,7 +193,7 @@ socket.on("player answers updated", (answers) => {
 export const finishMPGame = (playerIndex, condition, time) => {
   console.log("Sending game finish update to server");
   socket.emit("end condition met", playerIndex, condition, time);
-  store.dispatch(awaitFinalResults());
+  store.dispatch(awaitFinalResults(condition));
 };
 
 socket.on("other player has reached goal", (otherPlayer) => {  

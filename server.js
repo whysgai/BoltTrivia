@@ -215,7 +215,7 @@ io.on("connection", (client) => {
         waitingForOther = false;
       }
       // else do nothing to waitForOther and keep waiting
-    } else if (condition === "SCORE_REACHED") {
+    } else if (condition === "SCORE_REACHED" || condition === "OTHER_SCORE_REACHED") {
       console.log("Player ", playerIndex, " has reached the goal");
       finalResults.finalTimes[playerIndex] = time;
       // if both entires in recievedEndGame are true,

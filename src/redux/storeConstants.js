@@ -8,6 +8,13 @@ export const GAME_TYPE = {
     SCORE_MODE: "score mode"
 };
 
+export const END_CONDITION = {
+    OUT_OF_TIME: "OUT_OF_TIME",
+    SCORE_REACHED: "SCORE_REACHED",
+    OUT_OF_QUESTIONS: "OUT_OF_QUESTIONS",
+    OTHER_SCORE_REACHED: "OTHER_SCORE_REACHED"
+}
+
 export const GAME_PHASE = {
     SELECT_MULTI: "select multi player",
     SELECT_PLAYER: "select player 1 or player 2",

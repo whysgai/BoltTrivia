@@ -4,7 +4,11 @@ import { GAME_TYPE } from "../redux/storeConstants";
 const GameConfigs = (props) => {
   return (
     <>
-      <p>Set time configs:</p>
+      {props.configs.gameType === GAME_TYPE.TIME_MODE ? (
+        <p>Set Game Configurations for Timed Mode:</p>
+      ) : (
+        <p>Set Game Configurations for Score Mode:</p>
+      )}
       <form
         className="config"
         onSubmit={(e) => {
@@ -17,7 +21,7 @@ const GameConfigs = (props) => {
             <label className="form-label config-setting">
               Time limit (seconds, max 300):
               <input
-                className="form-control"
+                className="form-control my-2"
                 type="number"
                 min="1"
                 max="300"
@@ -34,7 +38,7 @@ const GameConfigs = (props) => {
             <label className="form-label config-setting">
               Right answers to win (50 max):
               <input
-                className="form-control"
+                className="form-control my-2"
                 type="number"
                 min="1"
                 max="50"
@@ -51,7 +55,7 @@ const GameConfigs = (props) => {
           <label className="form-label config-setting">
             Difficulty:
             <select
-              className="form-control"
+              className="form-control mx-3 my-2"
               value={props.configs.difficulty}
               onChange={(e) =>
                 props.setConfigs({

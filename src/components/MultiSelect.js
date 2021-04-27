@@ -18,9 +18,12 @@ const MultiSelect = () => {
 
   return (
     <>
-      <p>Choose single player or multiplayer.</p>
+      <h6 className="mt-4 text-center mb-4">
+        Select Whether You Want to Play in Single Player or Multiplayer Mode.
+        View the Tutorial from the Menu to Learn More.
+      </h6>
       <button
-        className="btn-sm btn-primary"
+        className="btn-sm btn-primary mx-3"
         onClick={() => selectMultiPlayerClick()}
       >
         Multiplayer

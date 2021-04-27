@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { GAME_TYPE } from "../redux/storeConstants";
 // import { selectGameType } from "../client";
 //import { gameTypeSelection } from "../redux/actions/gameStateActions";
@@ -6,7 +6,6 @@ import { useSelector, useDispatch } from "react-redux";
 import WaitingScreen from "./WaitingScreen";
 import GameConfigs from "./GameConfigs";
 import { selectGameConfig } from "../client";
-
 
 const GameTypeSelect = () => {
   //const selectedType = useSelector((state) => state.gameStateReducer.type);
@@ -28,7 +27,7 @@ const GameTypeSelect = () => {
     setConfigs({
       ...configs,
       gameType: GAME_TYPE.TIME_MODE,
-      timeLimit: 60
+      timeLimit: 60,
     });
   };
 
@@ -37,7 +36,7 @@ const GameTypeSelect = () => {
     setConfigs({
       ...configs,
       gameType: GAME_TYPE.SCORE_MODE,
-      timeLimit: "none"
+      timeLimit: "none",
     });
   };
 
@@ -46,20 +45,43 @@ const GameTypeSelect = () => {
       {console.log("Mode selected:", configs.gameType)}
       {playerNumber === 0 && !playerAvailability[1] ? (
         <>
-          <p>Player 1: select a game mode:</p>
-          <button className="btn btn-info" onClick={() => selectTimed()}>Timed</button>
-          <button className="btn btn-warning" onClick={() => selectScore()}>Score</button>
+          <h6 className="my-4">Player 1: Select a Game Mode:</h6>
+          <h6 className="my-4">
+            In Timed Mode, you Compete to Score More in the Same Time. In Score
+            Mode, the First Person to Reach the Selected Score Wins. You get One
+            Point per Correct Question Answered in Both Modes. If Both Players
+            Run Out of Questions, you will End Up in a Draw, otherwise the First
+            Player to Finish must Wait for the Other Player to Complete before
+            Viewing the Results.
+          </h6>
+          <button className="btn btn-info mx-3" onClick={() => selectTimed()}>
+            Timed
+          </button>
+          <button className="btn btn-warning" onClick={() => selectScore()}>
+            Score
+          </button>
           {configs.gameType !== null ? (
-            <p>You chose game type {configs.gameType}</p>
+            configs.gameType === GAME_TYPE.TIME_MODE ? (
+              <p className="text-center mt-4 text-success">
+                Great Choice ! TIME is Money.
+              </p>
+            ) : (
+              <p className="text-center mt-4 text-success">
+                Nice Choice ! GOALS MATTER.
+              </p>
+            )
           ) : (
             <></>
           )}
-          {
-            configs.gameType !== null && configs.gameType !== undefined ?
-              <GameConfigs configs={configs} setConfigs={setConfigs} selectGameConfig={selectGameConfig}/>
-              :
-              <></>
-          }
+          {configs.gameType !== null && configs.gameType !== undefined ? (
+            <GameConfigs
+              configs={configs}
+              setConfigs={setConfigs}
+              selectGameConfig={selectGameConfig}
+            />
+          ) : (
+            <></>
+          )}
         </>
       ) : (
         <WaitingScreen />

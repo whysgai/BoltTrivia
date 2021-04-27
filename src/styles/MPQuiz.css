@@ -9,6 +9,21 @@
     width: 75%;
 }
 
+.quiz-answer-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.mp-quiz-answer {
+    width: 45%;
+    display: flex;
+    justify-content: center;
+    
+}
+
 .scoreboard {
     width: 22%;
 }

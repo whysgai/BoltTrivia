@@ -21,7 +21,12 @@
     width: 45%;
     display: flex;
     justify-content: center;
+    margin-bottom: 2vh;
     
+}
+
+.mp-quiz-answer label {
+    width: 100%;
 }
 
 .scoreboard {

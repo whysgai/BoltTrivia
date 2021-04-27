@@ -71,7 +71,7 @@ const GameConfigs = (props) => {
             </select>
           </label>
         </div>
-        <button className="btn btn-success config-confirm" type="submit">
+        <button className="btn btn-success config-confirm mb-4" type="submit">
           <span className="little-button-text">START</span>
         </button>
       </form>

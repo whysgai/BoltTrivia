@@ -11,7 +11,7 @@ import MPTimer from "../components/MPTimer";
 import Onboarding from "../components/Onboarding";
 import MPScoreboardTimed from "../components/MPScoreboardTimed";
 import MPScoreboardScored from "../components/MPScoreboardScored";
-import MPQuiz from "../components/MPQuiz"
+import MPQuiz from "../components/MPQuiz";
 import MPResults from "../components/MPResults";
 import WaitingScreen from "../components/WaitingScreen";
 
@@ -28,15 +28,15 @@ function App() {
       ) : (
         <>
           <NavbarComponent />
-          <h2 className="mt-3">Bolt Trivia!</h2>
-          {gameState.restart && (
-            <div className="alert alert-danger">
-              You or your opponent has quit, please choose Single Player or
-              Multi Player to play again.
-            </div>
-          )}
-          {
-            gameState.phase === GAME_PHASE.SELECT_MULTI ? (
+          <div className="container">
+            <h2 className="mt-3">Bolt Trivia!</h2>
+            {gameState.restart && (
+              <div className="alert alert-danger">
+                You or your opponent has quit, please choose Single Player or
+                Multi Player to play again.
+              </div>
+            )}
+            {gameState.phase === GAME_PHASE.SELECT_MULTI ? (
               <MultiSelect />
             ) : gameState.multiSelect === PLAYER_MODE.MULTI_PLAYER ? (
               // Multiplayer
@@ -48,37 +48,38 @@ function App() {
                 <WaitingScreen />
               ) : gameState.phase === GAME_PHASE.PLAY_GAME ? (
                 <>
-                  <div>
-                    <p>MP running the game</p>
+                  <div className="quiz-container">
                     <MPQuiz />
-                    {/* <MPTimer /> */}
-                    <button onClick={() => updatePlayerScore(0, 10)}>
-                      Update Player 1 Score by 10
-                    </button>
-                    <button onClick={() => finishMPGame()}>Game Over</button>
+                    {gameState.type === GAME_TYPE.TIME_MODE ? (
+                      <MPScoreboardTimed />
+                    ) : gameState.type === GAME_TYPE.SCORE_MODE ? (
+                      <MPScoreboardScored />
+                    ) : (
+                      <></>
+                    )}
                   </div>
-                  {gameState.type === GAME_TYPE.TIME_MODE ? (
-                    <MPScoreboardTimed />
-                  ) : gameState.type === GAME_TYPE.SCORE_MODE ? (
-                    <MPScoreboardScored />
-                  ) : (
-                    <></>
-                  )}
                 </>
               ) : gameState.phase === GAME_PHASE.AWAITING_RESULTS ? (
-                < WaitingScreen/>  
+                <WaitingScreen />
               ) : gameState.phase === GAME_PHASE.VIEW_SCORES ? (
-                <MPResults/>
-              ) : gameState.phase === GAME_PHASE.ERROR_OCCURRED && (
-                <p>An error occurred connecting to the server. Please select the Home button and try again.</p>
+                <MPResults />
+              ) : (
+                gameState.phase === GAME_PHASE.ERROR_OCCURRED && (
+                  <p>
+                    An error occurred connecting to the server. Please select
+                    the Home button and try again.
+                  </p>
+                )
               )
+            ) : gameState.phase === GAME_PHASE.ERROR_OCCURRED ? (
+              <p>
+                An error occurred connecting to the server. Please select the
+                Home button and try again.
+              </p>
             ) : (
-              gameState.phase === GAME_PHASE.ERROR_OCCURRED ? 
-                <p>An error occurred connecting to the server. Please select the Home button and try again.</p>
-                :
-                <SinglePlayer />
-            )
-          }
+              <SinglePlayer />
+            )}
+          </div>
         </>
       )}
     </div>

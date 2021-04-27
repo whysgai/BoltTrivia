@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/index.css';
+import './styles/MPQuiz.css';
 import App from './views/App';
 import reportWebVitals from './reportWebVitals';
 import store from './redux/store'

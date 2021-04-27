@@ -19,7 +19,8 @@ const MPQuiz = () => {
 
 
     return (
-        <div className="card">
+        <div className="card mp-questions">
+            <div className="card-body">
             {
                 !start && questions.length > 0?
                 <button onClick={setStart(true)}>Start Quiz</button>
@@ -33,6 +34,7 @@ const MPQuiz = () => {
                     }
                 </div>
             }
+            </div>
         </div>
     )
 }

@@ -1,13 +1,10 @@
 import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectPlayerMulti } from "../client";
-import { viewResults } from "../redux/actions/gameStateActions";
+
 
 const ChoosePlayer = () => {
-  const playerAvailability = useSelector(
-    (state) => state.gameStateReducer.playerAvailability
-  );
-  const dispatch = useDispatch();
+  const playerAvailability = useSelector(state => state.gameStateReducer.playerAvailability);
 
   const selectP1 = () => {
     selectPlayerMulti(0);
@@ -20,10 +17,6 @@ const ChoosePlayer = () => {
   useEffect(() => {
     console.log("Player availability updated in chose player component");
   }, [playerAvailability]);
-
-  const results = () => {
-    dispatch(viewResults());
-  };
 
   return (
     <>

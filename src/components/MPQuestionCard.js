@@ -41,7 +41,8 @@ const MPQuestionCard = (props) => {
     return (
         <div>
             <p className="text-center card-subtite">Category: {question.category}</p>
-            <h4 className="card-title">Question: {characterCheck(question.question)}</h4>
+            <h3 className="card-title">Question: {characterCheck(question.question)}</h3>
+            <div className="seperator"/>
             <div className="quiz-answer-list">
                 { question.allAnswers.map((selection, index) => (
                     <div key={index} className="mp-quiz-answer">
@@ -71,9 +72,8 @@ const MPQuestionCard = (props) => {
                         </label>
                     </div>
                 ))}
-            </div>
-            <div>
-                <button onClick={() => submitAnswer()}>Submit</button>
+                <div className="seperator"/>
+                <button className="btn btn-primary mp-quiz-submit" onClick={() => submitAnswer()}><h3>Submit</h3></button>
             </div>
         </div>
     )

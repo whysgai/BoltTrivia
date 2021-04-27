@@ -12,13 +12,21 @@
 .quiz-answer-list {
     width: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+    /* flex-direction: column; */
+    flex-wrap: wrap;
+    justify-content: space-between;
     align-items: center;
 }
 
+.seperator {
+    width: 100%;
+    height: 0px;
+    border-bottom: solid black thin;
+    margin-bottom: 2vh;
+}
+
 .mp-quiz-answer {
-    width: 45%;
+    width: 48%;
     display: flex;
     justify-content: center;
     margin-bottom: 2vh;
@@ -27,6 +35,15 @@
 
 .mp-quiz-answer label {
     width: 100%;
+}
+
+.mp-quiz-submit {
+    width: 100%;
+}
+
+.mp-quiz-submit h3 {
+    margin-top: .5rem;
+    text-transform: uppercase;
 }
 
 .scoreboard {

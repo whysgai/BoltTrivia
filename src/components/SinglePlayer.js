@@ -73,7 +73,10 @@ const SinglePlayer = () => {
         <>
           <p>
             You have chosen Single Player mode. Please select your game choices
-            from the options below.
+            from the options below. Once you select and submit an answer for the 
+            multiple choice questions you will be shown whether your answer was correct or incorrect.
+            If you chose an incorrect answer the correct answer will be displayed for you. Be careful clicking submit,
+            you cannot go back and change your answer!
           </p>
 
           <form

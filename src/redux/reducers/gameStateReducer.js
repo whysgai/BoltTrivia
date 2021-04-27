@@ -10,6 +10,7 @@ import {
   CLOSE_ONBOARDING,
   SET_FINAL_RESULTS,
   AWAIT_FINAL_RESULTS,
+  ERROR_OCCURRED
 } from "../actionConstants";
 import {
   SET_MP_QUESTIONS,
@@ -124,6 +125,11 @@ export const gameStateReducer = (state = INITIAL_STATE, action) => {
         ...state,
         phase: GAME_PHASE.VIEW_SCORES,
       };
+    case ERROR_OCCURRED:
+      return {
+        ...state,
+        phase: GAME_PHASE.ERROR_OCCURRED
+      }
     default:
       return state;
   }

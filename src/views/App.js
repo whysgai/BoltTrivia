@@ -69,21 +69,15 @@ function App() {
                 < WaitingScreen/>  
               ) : gameState.phase === GAME_PHASE.VIEW_SCORES ? (
                 <MPResults/>
-              ) : (
-                <p>MP Error catching</p>
+              ) : gameState.phase === GAME_PHASE.ERROR_OCCURRED && (
+                <p>An error occurred connecting to the server. Please select the Home button and try again.</p>
               )
             ) : (
-              //Single player
-              //gameState.phase === GAME_PHASE.SET_CONFIGS ? (
-              <SinglePlayer />
+              gameState.phase === GAME_PHASE.ERROR_OCCURRED ? 
+                <p>An error occurred connecting to the server. Please select the Home button and try again.</p>
+                :
+                <SinglePlayer />
             )
-            // ) : gameState.phase === GAME_PHASE.PLAY_GAME ? (
-            //   <p>SP running the game</p>
-            // ) : gameState.phase === GAME_PHASE.VIEW_SCORES ? (
-            //   <p>SP view the scores</p>
-            // ) : (
-            //   <p>SP Error catching</p>
-            // )
           }
         </>
       )}

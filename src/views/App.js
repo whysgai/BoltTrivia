@@ -5,9 +5,7 @@ import MultiSelect from "../components/MultiSelect";
 import ChoosePlayer from "../components/ChoosePlayer";
 import GameTypeSelect from "../components/GameTypeSelect";
 import SinglePlayer from "../components/SinglePlayer";
-import { updatePlayerScore, finishMPGame } from "../client.js";
 import NavbarComponent from "../components/Navbar";
-import MPTimer from "../components/MPTimer";
 import Onboarding from "../components/Onboarding";
 import MPScoreboardTimed from "../components/MPScoreboardTimed";
 import MPScoreboardScored from "../components/MPScoreboardScored";
@@ -17,8 +15,6 @@ import WaitingScreen from "../components/WaitingScreen";
 
 function App() {
   const gameState = useSelector((state) => state.gameStateReducer);
-  const spState = useSelector((state) => state.SPQuestionReducer);
-  const mpState = useSelector((state) => state.MPQuestionReducer);
 
   return (
     <div className="App">
@@ -77,7 +73,10 @@ function App() {
                 gameState.phase === GAME_PHASE.ERROR_OCCURRED ? 
                   <p>An error occurred connecting to the server. Please select the Home button and try again.</p>
                   :
-                  <SinglePlayer />
+                  (
+                    gameState.multiSelect === PLAYER_MODE.SINGLE_PLAYER &&
+                    <SinglePlayer />
+                  )
               )
             }
           </div>

@@ -64,7 +64,6 @@ export const MPQuestionReducer = (state = INITIAL_STATE, action) => {
         finalTimes: action.payload.finalResults.finalTimes,
         scores: action.payload.finalResults.playerScores,
         winner: action.payload.finalResults.winner,
-        // quizInProgress: false,
       };
     default:
       return state;

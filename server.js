@@ -52,7 +52,6 @@ const readQuestions = async (url) => {
 
 const assembleURL = (gameConfigs) => {
   let url = OPEN_TDB_URL + "?amount=50";
-  // url = url + "&category=any";
   if (gameConfigs.difficulty !== "any") {
     url = url + "&difficulty=" + gameConfigs.difficulty;
   }
@@ -64,8 +63,6 @@ const contactAPI = (gameConfigs) => {
   let url = assembleURL(gameConfigs);
   readQuestions(url)
     .then((data) => {
-      //console.log("data:", data);
-      // setStatus(STATUS.SUCCESS);
       questionList = data.results;
       io.sockets.emit("start game", [...questionList]);
     })
@@ -226,7 +223,6 @@ io.on("connection", (client) => {
         //    set waitingForOther to false
         waitingForOther = false;
       } else {
-        //    io.sockets.broadcast.emit("other player reached goal")
         io.sockets.emit("other player has reached goal", playerIndex);
       }
     } else {

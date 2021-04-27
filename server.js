@@ -96,7 +96,7 @@ const contactAPI = (gameConfigs) => {
       io.sockets.emit("start game", [...questionList]);
     })
     .catch((error) => {
-      //setStatus(STATUS.FAIL);
+      io.sockets.emit("connect failed");
       console.log(error);
     });
 };
@@ -276,21 +276,6 @@ io.on("connection", (client) => {
       };
     }
   });
-
-  // I commented the below out because I think we can just
-  // call the reset functionality when players exit the
-  // results page
-
-  // client.on("finish MP game", () => {
-  //   console.log("finishing MP game");
-
-  //   io.sockets.emit("MP game finished", [...playerScores]);
-  //   playerAvailability = [true, true];
-  //   gameType = null;
-  //   gameConfigs = {};
-  //   questionList = [];
-  //   playerScores = [0, 0];
-  // });
 
   client.on("disconnect", () => {
     io.sockets.emit("disconnected");

@@ -1,5 +1,5 @@
 import {RESTART_SELECTIONS, SELECT_SINGLE_PLAYER_TYPE, SELECT_MULTI_PLAYER_TYPE, SELECT_PLAYER_NUMBER, UPDATE_PLAYER_AVAILABILITY,
-    SET_GAME_CONFIGS, OPEN_ONBOARDING, CLOSE_ONBOARDING, END_MP_QUIZ} from "../actionConstants";
+    SET_GAME_CONFIGS, OPEN_ONBOARDING, CLOSE_ONBOARDING, END_MP_QUIZ, ERROR_OCCURRED} from "../actionConstants";
 
 export const restartGame = (restart) => ({
     type: RESTART_SELECTIONS,
@@ -11,6 +11,10 @@ export const restartGame = (restart) => ({
 export const connectSinglePlayerMode = () => ({
     type: SELECT_SINGLE_PLAYER_TYPE
 });
+
+export const errorOccurred = () => ({
+    type: ERROR_OCCURRED
+})
 
 // export const connectMultiPlayerMode = () => {
 //     return dispatch => {

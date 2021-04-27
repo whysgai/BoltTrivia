@@ -68,29 +68,12 @@ socket.on("update player availability", (availability) => {
   store.dispatch(updatePlayerAvailability(availability));
 });
 
-// // Game type button selected (timed/score)
-// export const selectGameType = (type) => {
-//   socket.emit("game type selected", type);
-
-//   // No redux store dispatch needed here because the server
-//   // will respond to this event with another event(the next one)
-// };
-
-// socket.on("confirm game type selection", (gameType) => {
-//   console.log("server confirmed game selection: " + gameType);
-
-//   // Redux dispatch needed here to update store state
-//   // to waiting for game type approval,
-//   // along with the gameType that needs approval
-//   store.dispatch(gameTypeSelection(gameType));
-
-//   socket.off("confirm game type selection");
-// });
-
 // Game config selected
 export const selectGameConfig = (configs) => {
-  console.log("Sending configs to server", configs);
-  socket.emit("game configs selected", configs);
+  if (store.getState().gameStateReducer.multiSelect === PLAYER_MODE.MULTI_PLAYER) {
+    console.log("Sending configs to server", configs);
+    socket.emit("game configs selected", configs);
+  }
 
   // No redux store dispatch needed here because the server
   // will respond to this event with another event(the next one)
@@ -99,13 +82,18 @@ export const selectGameConfig = (configs) => {
 socket.on("confirm game configs", (configs) => {
   console.log("server approved game config: ", configs);
   store.dispatch(setGameConfigs(configs));
-  // socket.off("confirm game configs");
 });
 
 socket.on("start game", (questions) => {
-  questions.map((question, index) => processQuestion(question));
-  store.dispatch(setMPQuestions(questions));
-  console.log("Questions from server", questions);
+  console.log(store.getState().gameStateReducer.multiSelect)
+  if (store.getState().gameStateReducer.multiSelect === PLAYER_MODE.MULTI_PLAYER) {
+    questions.map((question, index) => processQuestion(question));
+    store.dispatch(setMPQuestions(questions));
+    console.log("Questions from server", questions);
+  } else if (store.getState().gameStateReducer.multiSelect === null) {
+    console.log('restart game')
+    store.dispatch(restartGame(false))
+  }
 });
 
 // Restart selected

@@ -40,27 +40,29 @@ const MPQuestionCard = (props) => {
 
     return (
         <div>
-            <h4 className="pb-3 text-center">Category: {question.category}</h4>
-            <h5>Question: {characterCheck(question.question)}</h5>
-            { question.allAnswers.map((selection, index) => (
-                <div key={index} className="form-check pb-2">
-                    <input
-                        required
-                        className="form-check-input"
-                        checked={answer === characterCheck(selection)}
-                        type="radio"
-                        name="gridRadios"
-                        id={"gridRadios" + index}
-                        value="type-text"
-                        onChange={() => {
-                        setAnswer(characterCheck(selection));
-                        }}
-                    />
-                    <label className="form-check-label pb-2" htmlFor={"gridRadios" + index}>
-                        {characterCheck(selection)}
-                    </label>
-                </div>
-            ))}
+            <p className="text-center card-subtite">Category: {question.category}</p>
+            <h4 className="card-title">Question: {characterCheck(question.question)}</h4>
+            <div className="quiz-answer-list">
+                { question.allAnswers.map((selection, index) => (
+                    <div key={index} className="form-check pb-2 mp-quiz-answer">
+                        <input
+                            required
+                            className="form-check-input"
+                            checked={answer === characterCheck(selection)}
+                            type="radio"
+                            name="gridRadios"
+                            id={"gridRadios" + index}
+                            value="type-text"
+                            onChange={() => {
+                            setAnswer(characterCheck(selection));
+                            }}
+                        />
+                        <label className="form-check-label pb-2" htmlFor={"gridRadios" + index}>
+                            {characterCheck(selection)}
+                        </label>
+                    </div>
+                ))}
+            </div>
             <div>
                 <button onClick={() => submitAnswer()}>Submit</button>
             </div>

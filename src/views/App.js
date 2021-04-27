@@ -48,11 +48,6 @@ function App() {
                     <div>
                       <p>MP running the game</p>
                       <MPQuiz />
-                      {/* <MPTimer /> */}
-                      <button onClick={() => updatePlayerScore(0, 10)}>
-                        Update Player 1 Score by 10
-                      </button>
-                      <button onClick={() => finishMPGame()}>Game Over</button>
                     </div>
                     {gameState.type === GAME_TYPE.TIME_MODE ? (
                       <MPScoreboardTimed />

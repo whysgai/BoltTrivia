@@ -1,10 +1,8 @@
-import { useDispatch } from "react-redux";
 import store from "./redux/store";
 import {
   selectMultiPlayer,
   selectPlayerNumber,
   updatePlayerAvailability,
-  gameTypeSelection,
   setGameConfigs,
   restartGame,
   errorOccurred,

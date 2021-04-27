@@ -1,4 +1,4 @@
-import { PLAYER_MODE, GAME_TYPE, GAME_PHASE } from "../storeConstants";
+import { PLAYER_MODE, GAME_PHASE } from "../storeConstants";
 import {
   SELECT_SINGLE_PLAYER_TYPE,
   SELECT_MULTI_PLAYER_TYPE,
@@ -14,8 +14,6 @@ import {
 } from "../actionConstants";
 import {
   SET_MP_QUESTIONS,
-  ADD_MP_ANSWER,
-  START_MP_QUIZ,
   END_MP_QUIZ,
 } from "../actionConstants";
 

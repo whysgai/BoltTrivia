@@ -1,20 +1,16 @@
 import { useState } from "react";
 import { GAME_TYPE } from "../redux/storeConstants";
-// import { selectGameType } from "../client";
-//import { gameTypeSelection } from "../redux/actions/gameStateActions";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import WaitingScreen from "./WaitingScreen";
 import GameConfigs from "./GameConfigs";
 import { selectGameConfig } from "../client";
 
 const GameTypeSelect = () => {
-  //const selectedType = useSelector((state) => state.gameStateReducer.type);
   const playerNumber = useSelector((state) => state.gameStateReducer.player);
   const playerAvailability = useSelector(
     (state) => state.gameStateReducer.playerAvailability
   );
 
-  const [selectedType, setType] = useState();
   const [configs, setConfigs] = useState({
     gameType: null,
     timeLimit: null,

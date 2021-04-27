@@ -14,10 +14,18 @@ const NavbarComponent = () => {
   const restart = () => {
     if (multiSelect === PLAYER_MODE.SINGLE_PLAYER) {
       dispatch(restartGame(true));
-    } else if (phase === GAME_PHASE.SELECT_MULTI) {
+    } else if (
+      multiSelect === PLAYER_MODE.MULTI_PLAYER &&
+      phase === GAME_PHASE.SELECT_MULTI
+    ) {
       dispatch(restartGame(false));
-    } else {
+    } else if (
+      multiSelect === PLAYER_MODE.MULTI_PLAYER &&
+      phase !== GAME_PHASE.SELECT_MULTI
+    ) {
       selectRestart();
+    } else {
+      console.log("Invalid Restart");
     }
   };
 

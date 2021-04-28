@@ -26,13 +26,13 @@ const MultiSelect = () => {
         View the Tutorial from the Menu to Learn More.
       </h6>
       <button
-        className="btn-sm btn-primary mx-3"
+        className="btn btn-primary mx-3"
         onClick={() => selectMultiPlayerClick()}
       >
         Multiplayer
       </button>
       <button
-        className="btn-sm btn-primary"
+        className="btn btn-primary"
         onClick={() => selectSinglePlayerClick()}
       >
         Single Player

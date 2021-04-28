@@ -29,14 +29,14 @@ const ChoosePlayer = () => {
         for the Game to Start.
       </h6>
       <button
-        className="btn-sm btn-secondary mx-3"
+        className="btn btn-primary mx-3"
         onClick={() => selectP1()}
         disabled={!playerAvailability[0]}
       >
         Host
       </button>
       <button
-        className="btn-sm btn-secondary"
+        className="btn btn-primary"
         onClick={() => selectP2()}
         disabled={!playerAvailability[1]}
       >

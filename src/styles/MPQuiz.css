@@ -1,0 +1,18 @@
+.quiz-container {
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-between;
+
+}
+
+.mp-questions {
+    width: 75%;
+}
+
+.scoreboard {
+    width: 22%;
+}
+
+.scored-board, .timed-board {
+    background-color: aliceblue;
+}

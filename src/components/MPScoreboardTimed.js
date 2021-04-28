@@ -24,18 +24,20 @@ const MPScoreboardTimed = () => {
     }
 
     return (
-        <div>
-            <p>Scoreboard (timed)</p>
-            <p><MPTimer />&nbsp;seconds</p>            
-            <p>{player === 0 ? "P1" : "P2"}'s score: {player === 0 ? p1Score : p2Score}</p>
-            <div>
-                {
-                    wins.map((question, index) => 
-                        <div key={index}>Question {index}: {question ? "Correct" : "Wrong"}</div>
-                    )
-                }
+        <div className="scoreboard timed-board">
+            <div className="card-body">
+                <p>Scoreboard (timed)</p>
+                <p><MPTimer />&nbsp;seconds</p>            
+                <p>{player === 0 ? "P1" : "P2"}'s score: {player === 0 ? p1Score : p2Score}</p>
+                <div>
+                    {
+                        wins.map((question, index) => 
+                            <div key={index}>Question {index}: {question ? "Correct" : "Wrong"}</div>
+                        )
+                    }
+                </div>
+                <p>{player === 0 ? "P2" : "P1"}'s score: {player === 0 ? p2Score : p1Score}</p>
             </div>
-            <p>{player === 0 ? "P2" : "P1"}'s score: {player === 0 ? p2Score : p1Score}</p>
         </div>
     );
 };

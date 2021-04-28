@@ -41,8 +41,11 @@ const GameTypeSelect = () => {
       {console.log("Mode selected:", configs.gameType)}
       {playerNumber === 0 && !playerAvailability[1] ? (
         <>
-          <h6 className="my-4">Player 1: Select a Game Mode:</h6>
-          <h6>In Timed Mode, you Compete to Score More in the Same Time.</h6>
+          <h6 className="my-4">Host: Select a Game Mode:</h6>
+          <h6>
+            In Timed Mode, you Compete to Answer More Questions in the Same
+            Time.
+          </h6>
           <h6>
             In Score Mode, the First Person to Reach the Selected Score Wins.
           </h6>
@@ -63,11 +66,11 @@ const GameTypeSelect = () => {
           {configs.gameType !== null ? (
             configs.gameType === GAME_TYPE.TIME_MODE ? (
               <p className="text-center mt-4 text-success">
-                Great Choice ! TIME is Money.
+                Great Choice! TIME is Money.
               </p>
             ) : (
               <p className="text-center mt-4 text-success">
-                Nice Choice ! GOALS MATTER.
+                Nice Choice! GOALS MATTER.
               </p>
             )
           ) : (

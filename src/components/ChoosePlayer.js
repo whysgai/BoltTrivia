@@ -22,27 +22,26 @@ const ChoosePlayer = () => {
   return (
     <>
       <h6 className="mt-4 text-center mb-2">
-        Choose an Available Player from Player 1 or Player 2.
+        Choose an Available Player from Host or Guest.
       </h6>
       <h6 className="text-center mb-4">
-        Player 1 gets to Select the Game Configurations while Player 2 waits for
-        the Game to Start.
+        The Host gets to Select the Game Configurations while the Guest waits
+        for the Game to Start.
       </h6>
       <button
         className="btn-sm btn-secondary mx-3"
         onClick={() => selectP1()}
         disabled={!playerAvailability[0]}
       >
-        Player 1
+        Host
       </button>
       <button
         className="btn-sm btn-secondary"
         onClick={() => selectP2()}
         disabled={!playerAvailability[1]}
       >
-        Player 2
+        Guest
       </button>
-      <img src="trivia_animation.gif" className="logo mt-5 d-block mb-4" />
     </>
   );
 };

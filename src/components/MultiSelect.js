@@ -18,6 +18,7 @@ const MultiSelect = () => {
 
   return (
     <>
+      <img src="trivia_animation.gif" className="logo mt-5 d-block mb-4" />
       <h6 className="mt-4 text-center mb-2">
         Select Whether You Want to Play in Single Player or Multiplayer Mode.
       </h6>
@@ -36,7 +37,6 @@ const MultiSelect = () => {
       >
         Single Player
       </button>
-      <img src="trivia_animation.gif" className="logo mt-5 d-block mb-4" />
     </>
   );
 };

@@ -35,7 +35,7 @@ const MPScoreboardTimed = () => {
       }
 
     return (
-        <div className="scoreboard ">
+        <div className="scoreboard card">
             <div className="card-body timed-board">
                 <span className="timed-timer">
                     <h4>
@@ -64,7 +64,7 @@ const MPScoreboardTimed = () => {
                         </div>
                     ))}
                 </div>
-                <span>
+                <span className="timed-opponent-score">
                     <h4>
                         {player === 0 ? "P2" : "P1"}: {player === 0 ? p2Score : p1Score}
                     </h4>

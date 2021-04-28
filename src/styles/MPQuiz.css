@@ -1,4 +1,4 @@
-.quiz-container {
+.quiz-container, .mp-quiz-category {
     width: 100%;
     display: inline-flex;
     justify-content: space-between;
@@ -8,7 +8,7 @@
     width: 75%;
 }
 
-.mp-quiz-category {
+.mp-quiz-category, .mp-quiz-type {
     font-size: 1.25em;
     margin-bottom: 2vh;
 }
@@ -69,6 +69,6 @@
     justify-content: space-evenly;
 }
 
-.scored-timer {
+.scored-timer, .timed-opponent-score {
     margin-top: auto;
 }

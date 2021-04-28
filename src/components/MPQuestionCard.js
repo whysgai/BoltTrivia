@@ -40,7 +40,10 @@ const MPQuestionCard = (props) => {
 
     return (
         <div>
-            <span className="text-center card-subtite mp-quiz-category">Category: {question.category}</span>
+            <div className="card-subtite mp-quiz-category">
+                <span>Category: {question.category}</span>
+                <span>Question # {props.count+1}</span>
+            </div>
             <h3 className="card-title mp-quiz-question">Question: {characterCheck(question.question)}</h3>
             <div className="seperator"/>
             <div className="quiz-answer-list">

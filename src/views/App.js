@@ -9,7 +9,7 @@ import NavbarComponent from "../components/Navbar";
 import Onboarding from "../components/Onboarding";
 import MPScoreboardTimed from "../components/MPScoreboardTimed";
 import MPScoreboardScored from "../components/MPScoreboardScored";
-import MPQuiz from "../components/MPQuiz"
+import MPQuiz from "../components/MPQuiz";
 import MPResults from "../components/MPResults";
 import WaitingScreen from "../components/WaitingScreen";
 
@@ -24,7 +24,7 @@ function App() {
       ) : (
         <>
           <NavbarComponent />
-          <div className="container">
+          <div className="container main">
             <h2 className="mt-3">Bolt Trivia!</h2>
             {gameState.restart && (
               <div className="alert alert-danger">
@@ -32,48 +32,52 @@ function App() {
                 Multi Player to play again.
               </div>
             )}
-            {
-              gameState.phase === GAME_PHASE.SELECT_MULTI ? (
-                <MultiSelect />
-              ) : gameState.multiSelect === PLAYER_MODE.MULTI_PLAYER ? (
-                // Multiplayer
-                gameState.phase === GAME_PHASE.SELECT_PLAYER ? (
-                  <ChoosePlayer />
-                ) : gameState.phase === GAME_PHASE.SELECT_GAME_TYPE ? (
-                  <GameTypeSelect />
-                ) : gameState.phase === GAME_PHASE.LOADING_GAME ? (
-                  <WaitingScreen />
-                ) : gameState.phase === GAME_PHASE.PLAY_GAME ? (
-                  <>
-                    <div>
-                      <p>MP running the game</p>
-                      <MPQuiz />
-                    </div>
-                    {gameState.type === GAME_TYPE.TIME_MODE ? (
-                      <MPScoreboardTimed />
-                    ) : gameState.type === GAME_TYPE.SCORE_MODE ? (
-                      <MPScoreboardScored />
-                    ) : (
-                      <></>
-                    )}
-                  </>
-                ) : gameState.phase === GAME_PHASE.AWAITING_RESULTS ? (
-                  < WaitingScreen/>  
-                ) : gameState.phase === GAME_PHASE.VIEW_SCORES ? (
-                  <MPResults/>
-                ) : gameState.phase === GAME_PHASE.ERROR_OCCURRED && (
-                  <p>An error occurred connecting to the server. Please select the Home button and try again.</p>
-                )
+            {gameState.phase === GAME_PHASE.SELECT_MULTI ? (
+              <MultiSelect />
+            ) : gameState.multiSelect === PLAYER_MODE.MULTI_PLAYER ? (
+              // Multiplayer
+              gameState.phase === GAME_PHASE.SELECT_PLAYER ? (
+                <ChoosePlayer />
+              ) : gameState.phase === GAME_PHASE.SELECT_GAME_TYPE ? (
+                <GameTypeSelect />
+              ) : gameState.phase === GAME_PHASE.LOADING_GAME ? (
+                <WaitingScreen />
+              ) : gameState.phase === GAME_PHASE.PLAY_GAME ? (
+                <>
+                  <div>
+                    <p>MP running the game</p>
+                    <MPQuiz />
+                  </div>
+                  {gameState.type === GAME_TYPE.TIME_MODE ? (
+                    <MPScoreboardTimed />
+                  ) : gameState.type === GAME_TYPE.SCORE_MODE ? (
+                    <MPScoreboardScored />
+                  ) : (
+                    <></>
+                  )}
+                </>
+              ) : gameState.phase === GAME_PHASE.AWAITING_RESULTS ? (
+                <WaitingScreen />
+              ) : gameState.phase === GAME_PHASE.VIEW_SCORES ? (
+                <MPResults />
               ) : (
-                gameState.phase === GAME_PHASE.ERROR_OCCURRED ? 
-                  <p>An error occurred connecting to the server. Please select the Home button and try again.</p>
-                  :
-                  (
-                    gameState.multiSelect === PLAYER_MODE.SINGLE_PLAYER &&
-                    <SinglePlayer />
-                  )
+                gameState.phase === GAME_PHASE.ERROR_OCCURRED && (
+                  <p>
+                    An error occurred connecting to the server. Please select
+                    the Home button and try again.
+                  </p>
+                )
               )
-            }
+            ) : gameState.phase === GAME_PHASE.ERROR_OCCURRED ? (
+              <p>
+                An error occurred connecting to the server. Please select the
+                Home button and try again.
+              </p>
+            ) : (
+              gameState.multiSelect === PLAYER_MODE.SINGLE_PLAYER && (
+                <SinglePlayer />
+              )
+            )}
           </div>
         </>
       )}

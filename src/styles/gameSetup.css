@@ -1,5 +1,33 @@
+.multi-page {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.logo-holder {
+  display: flex;
+  justify-content: center;
+}
+
 .logo {
-  width: 25vw;
+  max-width: 25vw;
   height: 10vw;
-  margin-left: 35%;
+}
+
+.multi-copy {
+  max-width: 25vw;
+}
+
+.multi-buttons {
+  max-width: 25vw;
+  min-width: 25vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.multi-buttons button {
+  width: 100%;
+  margin-bottom: 2vh;
 }

@@ -31,7 +31,7 @@
   justify-content: space-between;
 }
 
-.player-buttons {
+.player-buttons, .type-buttons {
   max-width: 25vw;
   min-width: 25vw;
   display: flex;
@@ -48,6 +48,16 @@
   height: 8vh;
 }
 
+.type-buttons button {
+  width: 45%;
+  height: 6vh;
+}
+
 .config-button-text {
   margin-top: .5rem;
+}
+
+.start-game-button {
+  width: 100%;
+  height: 10vh;
 }

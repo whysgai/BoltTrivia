@@ -1,5 +1,78 @@
+.config-page {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.logo-holder {
+  display: flex;
+  justify-content: center;
+}
+
 .logo {
-  width: 25vw;
+  max-width: 25vw;
   height: 10vw;
-  margin-left: 35%;
+}
+
+.config-copy {
+  max-width: 25vw;
+}
+
+.config-copy h3 {
+  text-align: justify;
+}
+
+.config-buttons {
+  max-width: 25vw;
+  min-width: 25vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.player-buttons, .type-buttons {
+  max-width: 25vw;
+  min-width: 25vw;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.config-buttons button {
+  width: 100%;
+  margin-bottom: 2vh;
+}
+
+.player-buttons button {
+  width: 45%;
+  height: 8vh;
+}
+
+.type-buttons button {
+  width: 45%;
+  height: 6vh;
+}
+
+.conditional-config {
+  max-width: 25vw;
+  min-width: 25vw;
+}
+
+.config-button-text {
+  margin-top: .5rem;
+}
+
+.config-inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+.config-setting, .config-difficulty-input {
+  width: 100%;
+}
+
+.start-game-button {
+  width: 100%;
+  height: 10vh;
+  margin-top: 2vh;
 }

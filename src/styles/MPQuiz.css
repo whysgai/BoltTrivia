@@ -1,0 +1,74 @@
+.quiz-container, .mp-quiz-category {
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-between;
+}
+
+.mp-questions {
+    width: 75%;
+}
+
+.mp-quiz-category, .mp-quiz-type {
+    font-size: 1.25em;
+    margin-bottom: 2vh;
+}
+
+.mp-quiz-question {
+    margin-bottom: 2vh;
+}
+
+.quiz-answer-list {
+    width: 100%;
+    display: flex;
+    /* flex-direction: column; */
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.seperator {
+    width: 100%;
+    height: 0px;
+    border-bottom: solid black thin;
+    margin-bottom: 2vh;
+}
+
+.mp-quiz-answer {
+    width: 48%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2vh;
+    
+}
+
+.mp-quiz-answer label {
+    width: 100%;
+}
+
+.mp-quiz-submit {
+    width: 100%;
+}
+
+.mp-quiz-submit h3 {
+    margin-top: .5rem;
+    text-transform: uppercase;
+}
+
+.scoreboard {
+    width: 22%;
+    min-height: 60vh;
+}
+
+.scored-board, .timed-board {
+    display: flex;
+    flex-direction: column;
+}
+
+.scored-scores {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.scored-timer, .timed-opponent-score {
+    margin-top: auto;
+}

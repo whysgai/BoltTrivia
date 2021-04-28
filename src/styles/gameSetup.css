@@ -53,11 +53,26 @@
   height: 6vh;
 }
 
+.conditional-config {
+  max-width: 25vw;
+  min-width: 25vw;
+}
+
 .config-button-text {
   margin-top: .5rem;
+}
+
+.config-inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+.config-setting, .config-difficulty-input {
+  width: 100%;
 }
 
 .start-game-button {
   width: 100%;
   height: 10vh;
+  margin-top: 2vh;
 }

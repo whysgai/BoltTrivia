@@ -59,5 +59,19 @@
 }
 
 .scored-board, .timed-board {
-    background-color: aliceblue;
+    display: flex;
+    flex-direction: column;
+}
+
+.scored-scores {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.scoreboard-answered {
+    overflow-y: scroll;
+}
+
+.scored-timer {
+    margin-top: auto;
 }

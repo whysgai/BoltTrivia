@@ -25,7 +25,6 @@ function App() {
         <>
           <NavbarComponent />
           <div className="container">
-            <h2 className="mt-3">Bolt Trivia!</h2>
             {gameState.restart && (
               <div className="alert alert-danger">
                 You or your opponent has quit, please choose Single Player or

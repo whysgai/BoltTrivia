@@ -22,12 +22,12 @@ const ChoosePlayer = () => {
   return (
     <div className="card card-body config-page">
       <div className="config-copy">
-        <h3 className="mt-4 text-center mb-2">
+        <h6 className="mt-4 text-center mb-2">
           Choose an available player:
-        </h3>
-        <h3 className="mb-4">
+        </h6>
+        <h6 className="mb-4">
           Host selects the game type and determines the difficulty and settings for the multiplayer game.
-        </h3>
+        </h6>
       </div>
       <div className="player-buttons">
         <button
@@ -35,14 +35,14 @@ const ChoosePlayer = () => {
           onClick={() => selectP1()}
           disabled={!playerAvailability[0]}
         >
-          <h3 className="config-button-text">Host (P1)</h3>
+          <h6 className="config-button-text">Host (P1)</h6>
         </button>
         <button
           className="btn btn-primary"
           onClick={() => selectP2()}
           disabled={!playerAvailability[1]}
         >
-          <h3 className="config-button-text">Guest (P2)</h3>
+          <h6 className="config-button-text">Guest (P2)</h6>
         </button>
       </div>
     </div>

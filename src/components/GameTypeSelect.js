@@ -42,7 +42,7 @@ const GameTypeSelect = () => {
       {playerNumber === 0 && !playerAvailability[1] ? (
         <div className="card card-body config-page">
           <div className="config-copy">
-            <h3 className="text-center">Host: Select a game mode</h3>
+            <h5 className="text-center">Host: Select a game mode</h5>
             <p>
               In timed mode, compete to answer as many questions correctly as you can before time runs out
             </p>
@@ -62,12 +62,12 @@ const GameTypeSelect = () => {
               className={`btn ${configs.gameType === GAME_TYPE.TIME_MODE ? "btn-primary" : "btn-outline-primary"} `}
               onClick={() => selectTimed()}
             >
-              <h3 className="config-button-text">Timed</h3>
+              <h6 className="config-button-text">Timed</h6>
             </button>
             <button 
               className={`btn ${configs.gameType === GAME_TYPE.SCORE_MODE ? "btn-primary" : "btn-outline-primary"} `}
               onClick={() => selectScore()}>
-              <h3 className="config-button-text">Score</h3>
+              <h6 className="config-button-text">Score</h6>
             </button>
           </div>
           {configs.gameType !== null ? (

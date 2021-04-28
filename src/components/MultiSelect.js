@@ -1,8 +1,7 @@
 import { useDispatch } from "react-redux";
 import { selectMultiplayerMode } from "../client";
 import {
-  connectSinglePlayerMode,
-  connectMultiPlayerMode,
+  connectSinglePlayerMode
 } from "../redux/actions/gameStateActions";
 
 const MultiSelect = () => {
@@ -22,25 +21,25 @@ const MultiSelect = () => {
         <img src="trivia_animation.gif" className="logo" />
       </div>
       <div className="config-copy">
-        <h3 className="mt-4 text-center mb-2">
+        <h6 className="mt-4 text-center mb-2">
           Select whether you Want to play in single player or multiplayer mode.
-        </h3>
-        <h3 className="text-center mb-4">
+        </h6>
+        <h6 className="text-center mb-4">
           Or, view the tutorial from the menu to learn more.
-        </h3>
+        </h6>
       </div>
       <div className="config-buttons">
         <button
           className="btn btn-primary"
           onClick={() => selectMultiPlayerClick()}
         >
-          <h3 className="config-button-text">Multiplayer</h3>
+          <h6 className="config-button-text">Multiplayer</h6>
         </button>
         <button
           className="btn btn-primary"
           onClick={() => selectSinglePlayerClick()}
         >
-          <h3 className="config-button-text">Single Player</h3>
+          <h6 className="config-button-text">Single Player</h6>
         </button>
       </div>      
     </div>

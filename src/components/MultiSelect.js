@@ -18,15 +18,21 @@ const MultiSelect = () => {
 
   return (
     <>
-      <p>Choose single player or multiplayer.</p>
+      <img src="trivia_animation.gif" className="logo mt-5 d-block mb-4" />
+      <h6 className="mt-4 text-center mb-2">
+        Select Whether You Want to Play in Single Player or Multiplayer Mode.
+      </h6>
+      <h6 className="text-center mb-4">
+        View the Tutorial from the Menu to Learn More.
+      </h6>
       <button
-        className="btn-sm btn-primary"
+        className="btn btn-primary mx-3"
         onClick={() => selectMultiPlayerClick()}
       >
         Multiplayer
       </button>
       <button
-        className="btn-sm btn-primary"
+        className="btn btn-primary"
         onClick={() => selectSinglePlayerClick()}
       >
         Single Player

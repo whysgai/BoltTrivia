@@ -2,11 +2,19 @@
     width: 100%;
     display: inline-flex;
     justify-content: space-between;
-
 }
 
 .mp-questions {
     width: 75%;
+}
+
+.mp-quiz-category {
+    font-size: 1.25em;
+    margin-bottom: 2vh;
+}
+
+.mp-quiz-question {
+    margin-bottom: 2vh;
 }
 
 .quiz-answer-list {
@@ -48,8 +56,19 @@
 
 .scoreboard {
     width: 22%;
+    min-height: 60vh;
 }
 
 .scored-board, .timed-board {
-    background-color: aliceblue;
+    display: flex;
+    flex-direction: column;
+}
+
+.scored-scores {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.scored-timer {
+    margin-top: auto;
 }

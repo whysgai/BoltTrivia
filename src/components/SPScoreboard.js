@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { unsetSPBeginQuiz } from "../redux/actions/SPQuestionActions";
 import { restartGame } from "../redux/actions/gameStateActions";
@@ -20,14 +19,15 @@ const SPScoreboard = () => {
           answers.length +
           " questions right"}
       </p>
+      <p>
+        Try and beat your score, or change it up and play with a friend!
+      </p>
       <button
         className="btn btn-primary mx-2"
         onClick={() => dispatch(unsetSPBeginQuiz())}
       >
         New Single Player Game
       </button>
-
-      {/* quit game logic */}
       <button className="btn btn-primary" onClick={() => dispatch(restartGame(false))}>Home</button>
     </>
   );

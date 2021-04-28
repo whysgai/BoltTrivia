@@ -1,32 +1,6 @@
 const fetch = require("node-fetch");
 // Server config stuff goes here
 
-// Server attributes go here:
-// quiz questions (array)
-// player1 (object)
-// player2 (object)
-
-// server behaviors
-//io.on("connection" ...)
-
-//  emit "joined server" to client on connection
-//  assign client to p1/p2
-//  emit "other player joined" to other client (if present) on connection
-
-//  select game mode (from p1) and emit to p2
-
-//  recieve p2 approval for game mode
-
-//  select configuration (from p1)
-//  recieve p2 approval for configuration
-
-//  emit start game (to all)
-//      send all questions
-
-//  recieve answer for each question (emit to other player)
-
-//  end game (to all) and emit scoreboard
-
 /** SERVER CONFIGURATION */
 const express = require("express");
 const app = express();
@@ -78,7 +52,6 @@ const readQuestions = async (url) => {
 
 const assembleURL = (gameConfigs) => {
   let url = OPEN_TDB_URL + "?amount=50";
-  // url = url + "&category=any";
   if (gameConfigs.difficulty !== "any") {
     url = url + "&difficulty=" + gameConfigs.difficulty;
   }
@@ -90,8 +63,6 @@ const contactAPI = (gameConfigs) => {
   let url = assembleURL(gameConfigs);
   readQuestions(url)
     .then((data) => {
-      //console.log("data:", data);
-      // setStatus(STATUS.SUCCESS);
       questionList = data.results;
       io.sockets.emit("start game", [...questionList]);
     })
@@ -252,7 +223,6 @@ io.on("connection", (client) => {
         //    set waitingForOther to false
         waitingForOther = false;
       } else {
-        //    io.sockets.broadcast.emit("other player reached goal")
         io.sockets.emit("other player has reached goal", playerIndex);
       }
     } else {

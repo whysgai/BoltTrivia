@@ -4,6 +4,7 @@ import {
   ADD_SP_ANSWER,
   SET_SP_BEGIN_QUIZ,
   UNSET_SP_BEGIN_QUIZ,
+  RESTART_SELECTIONS,
 } from "../actionConstants";
 
 const INITIAL_STATE = {
@@ -43,6 +44,8 @@ export const SPQuestionReducer = (state = INITIAL_STATE, action) => {
         answers: [],
         questions: [],
       };
+    case RESTART_SELECTIONS:
+      return INITIAL_STATE;
     default:
       return state;
   }

@@ -1,10 +1,7 @@
-import store from "../store";
 import {
   SET_MP_QUESTIONS,
   ADD_MP_ANSWER,
   UPDATE_SCOREBOARDS,
-  START_MP_QUIZ,
-  END_MP_QUIZ,
   UPDATE_MP_TIME,
   UPDATE_MP_SCORES,
   SET_FINAL_RESULTS,

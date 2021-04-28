@@ -50,7 +50,7 @@ const SinglePlayer = () => {
         setCategory(data.trivia_categories);
       })
       .catch((error) => {
-        dispatch(errorOccurred())
+        dispatch(errorOccurred());
         console.log(error);
       });
   }, []);
@@ -61,7 +61,7 @@ const SinglePlayer = () => {
         dispatch(setSPQuestions(data.results));
       })
       .catch((error) => {
-        dispatch(errorOccurred())
+        dispatch(errorOccurred());
         console.log(error);
       });
     dispatch(setSPBeginQuiz());
@@ -73,69 +73,83 @@ const SinglePlayer = () => {
         <>
           <p>
             You have chosen Single Player mode. Please select your game choices
-            from the options below.
+            from the options below. Once you select and submit an answer for the 
+            multiple choice questions you will be shown whether your answer was correct or incorrect.
+            If you chose an incorrect answer the correct answer will be displayed for you. Be careful clicking submit,
+            you cannot go back and change your answer!
           </p>
 
-          <div className="form-row">
-            <div className="col-md-4 mb-3">
-              <label className="form-label mt-3" htmlFor="number-of-questions">
-                Number of Questions:
-              </label>
-              <input
-                className="form-control"
-                value={numberOfQuestions}
-                onChange={(e) => setNumberOfQuestions(e.target.value)}
-              />
-            </div>
-          </div>
-
-          <div className="form-group">
-            <label
-              className="form-label mt-3 mr-3"
-              htmlFor="trivia-category-selection"
-            >
-              Trivia Category Selection:
-            </label>
-            <select
-              className="form-select"
-              value={selectedCategory}
-              id={0}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-            >
-              <option value={"any category"}>any category</option>
-              {categories.map((category, index) => (
-                <option value={category.id} key={index}>
-                  {category.name}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="form-group">
-            <label
-              className="form-label mt-3 pt-3 mr-3"
-              htmlFor="trivia-difficulty"
-            >
-              Difficulty:
-            </label>
-            <select
-              className="form-select"
-              value={selectedDifficulty}
-              onChange={(e) => setSelectedDifficulty(e.target.value)}
-            >
-              {difficulty.map((diff, index) => (
-                <option value={diff} key={index}>
-                  {diff}
-                </option>
-              ))}
-            </select>
-          </div>
-          <button
-            className="btn btn-success mt-4"
-            onClick={() => beginQuizClick()}
+          <form
+            onSubmit={(e) => {
+              console.log("hiii");
+              e.preventDefault();
+              beginQuizClick();
+            }}
           >
-            Begin Quiz!
-          </button>
+            <div className="form-row">
+              <div className="col-md-4 mb-3">
+                <label
+                  className="form-label mt-3"
+                  htmlFor="number-of-questions"
+                >
+                  Number of Questions (max 50):
+                </label>
+                <input
+                  type="number"
+                  className="form-control"
+                  value={numberOfQuestions}
+                  min={1}
+                  max={50}
+                  onChange={(e) => setNumberOfQuestions(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label
+                className="form-label mt-3 mr-3"
+                htmlFor="trivia-category-selection"
+              >
+                Trivia Category Selection:
+              </label>
+              <select
+                className="form-select"
+                value={selectedCategory}
+                id={0}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+              >
+                <option value={"any category"}>any category</option>
+                {categories.map((category, index) => (
+                  <option value={category.id} key={index}>
+                    {category.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label
+                className="form-label mt-3 pt-3 mr-3"
+                htmlFor="trivia-difficulty"
+              >
+                Difficulty:
+              </label>
+              <select
+                className="form-select"
+                value={selectedDifficulty}
+                onChange={(e) => setSelectedDifficulty(e.target.value)}
+              >
+                {difficulty.map((diff, index) => (
+                  <option value={diff} key={index}>
+                    {diff}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <button className="btn btn-success mt-4" type="submit">
+              Begin Quiz!
+            </button>
+          </form>
         </>
       ) : (
         <>

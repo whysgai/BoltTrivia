@@ -2,49 +2,85 @@ import { useSelector } from "react-redux";
 import MPTimer from "./MPTimer";
 
 const MPScoreboardScored = () => {
-    const player = useSelector(state => state.gameStateReducer.player);
-    const answers = useSelector(state => state.MPQuestionReducer.playerAnswers);
-    const goal = useSelector(state => state.gameStateReducer.configs.scoreGoal);
-    //dummy score history
-    // const wins = [true, false, true, true, false, true];
-    let p1Answers = [];
-    let p1Score = 0;
-    let p2Answers = [];
-    let p2Score = 0;
-    let wins = [];
+  const player = useSelector((state) => state.gameStateReducer.player);
+  const answers = useSelector((state) => state.MPQuestionReducer.playerAnswers);
+  const goal = useSelector((state) => state.gameStateReducer.configs.scoreGoal);
+  //dummy score history
+  // const wins = [true, false, true, true, false, true];
+  let p1Answers = [];
+  let p1Score = 0;
+  let p2Answers = [];
+  let p2Score = 0;
+  let wins = [];
+  let total = 0;
 
-    if (answers) {
-        p1Answers = answers[0];
-        p1Score = (answers[0].filter(answer => answer)).length;
-        p2Answers = answers[1];
-        p2Score = (answers[1].filter(answer => answer)).length;
-    
-        if (player === 0) {
-            wins = p1Answers;
-        } else {
-            wins = p2Answers;
-        }
+  if (answers) {
+    p1Answers = answers[0];
+    p1Score = answers[0].filter((answer) => answer).length;
+    p2Answers = answers[1];
+    p2Score = answers[1].filter((answer) => answer).length;
+
+    if (player === 0) {
+      total = p1Answers.length;
+      if (p1Answers.length > 5) {        
+        wins = p1Answers.slice(p1Answers.length-5);
+      } else {
+        wins = p1Answers;
+      } 
+    } else {
+      total = p2Answers.length;
+      if (p2Answers.length > 5) {        
+        wins = p2Answers.slice(p2Answers.length-5);
+      } else {
+        wins = p2Answers;
+      } 
     }
+  }
 
-    return (
-        <div className="scoreboard scored-board card">
-            <div className="card-body">
-                <p>Scoreboard (scored)</p>
-                        
-                <p>{player === 0 ? "P1" : "P2"}'s score: {player === 0 ? p1Score : p2Score}</p>
-                <p>{player === 0 ? "P2" : "P1"}'s score: {player === 0 ? p2Score : p1Score}</p>
-                <p>Out of&nbsp;{goal}</p>
-                <div>
-                    {
-                        wins.map((question, index) => 
-                            <div index={index}>Question {index}: {question ? "Correct" : "Wrong"}</div>
-                        )
-                    }
-                </div>
-                <p><MPTimer />&nbsp;seconds</p>
-            </div>
+  return (
+    <div className="scoreboard card">
+      <div className="card-body scored-board ">
+        {/* <p>Scoreboard (scored)</p> */}
+        <div className="scored-scores">
+          <span>
+            <h4>
+              {player === 0 ? "P1" : "P2"}: {player === 0 ? p1Score : p2Score}
+            </h4>
+          </span>
+          <span>
+            <h4>
+              {player === 0 ? "P2" : "P1"}: {player === 0 ? p2Score : p1Score}
+            </h4>
+          </span>
         </div>
-    );
+        <div className="scored-goal">
+          <h4>Goal:&nbsp;{goal}</h4>
+        </div>
+        <div className="scoreboard-answered list-group-flush">
+          {
+            total > 5 ?
+              <div className="list-group-item">...</div>
+              :
+              <></>
+          }
+          {wins.map((question, index) => (
+            <div key={index} className="list-group-item">
+              Question {total > 5 ? total-5+index+1 : index+1}:&nbsp;
+              <span className={`${question ? "text-success" : "text-danger"}`}>
+                {question ? "Right" : "Wrong"}
+              </span>
+            </div>
+          ))}
+        </div>
+        <span className="scored-timer">
+          <h4>
+            <MPTimer />
+            &nbsp;seconds
+          </h4>
+        </span>
+      </div>
+    </div>
+  );
 };
 
 export default MPScoreboardScored;

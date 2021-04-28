@@ -1,8 +1,6 @@
 import {
   SET_MP_QUESTIONS,
   ADD_MP_ANSWER,
-  START_MP_QUIZ,
-  END_MP_QUIZ,
   UPDATE_SCOREBOARDS,
   UPDATE_MP_TIME,
   RESTART_SELECTIONS,
@@ -64,7 +62,6 @@ export const MPQuestionReducer = (state = INITIAL_STATE, action) => {
         finalTimes: action.payload.finalResults.finalTimes,
         scores: action.payload.finalResults.playerScores,
         winner: action.payload.finalResults.winner,
-        // quizInProgress: false,
       };
     default:
       return state;

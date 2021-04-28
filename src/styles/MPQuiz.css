@@ -2,11 +2,19 @@
     width: 100%;
     display: inline-flex;
     justify-content: space-between;
-
 }
 
 .mp-questions {
     width: 75%;
+}
+
+.mp-quiz-category {
+    font-size: 1.25em;
+    margin-bottom: 2vh;
+}
+
+.mp-quiz-question {
+    margin-bottom: 2vh;
 }
 
 .quiz-answer-list {

@@ -40,8 +40,8 @@ const MPQuestionCard = (props) => {
 
     return (
         <div>
-            <p className="text-center card-subtite">Category: {question.category}</p>
-            <h3 className="card-title">Question: {characterCheck(question.question)}</h3>
+            <span className="text-center card-subtite mp-quiz-category">Category: {question.category}</span>
+            <h3 className="card-title mp-quiz-question">Question: {characterCheck(question.question)}</h3>
             <div className="seperator"/>
             <div className="quiz-answer-list">
                 { question.allAnswers.map((selection, index) => (

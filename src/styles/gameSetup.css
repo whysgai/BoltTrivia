@@ -1,4 +1,4 @@
-.multi-page {
+.config-page {
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
@@ -15,8 +15,12 @@
   height: 10vw;
 }
 
-.multi-copy {
+.config-copy {
   max-width: 25vw;
+}
+
+.config-copy h3 {
+  text-align: justify;
 }
 
 .multi-buttons {
@@ -27,7 +31,23 @@
   justify-content: space-between;
 }
 
-.multi-buttons button {
+.player-buttons {
+  max-width: 25vw;
+  min-width: 25vw;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.config-buttons button {
   width: 100%;
   margin-bottom: 2vh;
+}
+
+.player-buttons button {
+  width: 45%;
+  height: 8vh;
+}
+
+.config-button-text {
+  margin-top: .5rem;
 }

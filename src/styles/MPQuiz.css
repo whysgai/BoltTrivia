@@ -56,6 +56,7 @@
 
 .scoreboard {
     width: 22%;
+    min-height: 60vh;
 }
 
 .scored-board, .timed-board {
@@ -66,10 +67,6 @@
 .scored-scores {
     display: flex;
     justify-content: space-evenly;
-}
-
-.scoreboard-answered {
-    overflow-y: scroll;
 }
 
 .scored-timer {

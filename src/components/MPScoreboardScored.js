@@ -12,6 +12,7 @@ const MPScoreboardScored = () => {
   let p2Answers = [];
   let p2Score = 0;
   let wins = [];
+  let total = 0;
 
   if (answers) {
     p1Answers = answers[0];
@@ -20,9 +21,19 @@ const MPScoreboardScored = () => {
     p2Score = answers[1].filter((answer) => answer).length;
 
     if (player === 0) {
-      wins = p1Answers;
+      total = p1Answers.length;
+      if (p1Answers.length > 5) {        
+        wins = p1Answers.slice(p1Answers.length-5);
+      } else {
+        wins = p1Answers;
+      } 
     } else {
-      wins = p2Answers;
+      total = p2Answers.length;
+      if (p2Answers.length > 5) {        
+        wins = p2Answers.slice(p2Answers.length-5);
+      } else {
+        wins = p2Answers;
+      } 
     }
   }
 
@@ -30,7 +41,7 @@ const MPScoreboardScored = () => {
     <div className="scoreboard card">
       <div className="card-body scored-board ">
         {/* <p>Scoreboard (scored)</p> */}
-        <div class="scored-scores">
+        <div className="scored-scores">
           <span>
             <h4>
               {player === 0 ? "P1" : "P2"}: {player === 0 ? p1Score : p2Score}
@@ -46,9 +57,15 @@ const MPScoreboardScored = () => {
           <h4>Goal:&nbsp;{goal}</h4>
         </div>
         <div className="scoreboard-answered list-group-flush">
+          {
+            total > 5 ?
+              <div className="list-group-item">...</div>
+              :
+              <></>
+          }
           {wins.map((question, index) => (
-            <div index={index} className="list-group-item">
-              Question {index+1}:&nbsp;
+            <div key={index} className="list-group-item">
+              Question {total > 5 ? total-5+index+1 : index+1}:&nbsp;
               <span className={`${question ? "text-success" : "text-danger"}`}>
                 {question ? "Right" : "Wrong"}
               </span>

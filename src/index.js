@@ -5,6 +5,7 @@ import bootstrap from "bootstrap";
 import "./styles/index.css";
 import "./styles/gameSetup.css";
 import './styles/MPQuiz.css';
+import './styles/SPQuiz.css';
 import App from "./views/App";
 import reportWebVitals from "./reportWebVitals";
 import store from "./redux/store";

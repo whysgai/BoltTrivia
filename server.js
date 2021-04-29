@@ -87,23 +87,32 @@ const processResults = () => {
   playerScores[1] = numberRight(playerAnswers[1]);
   if (gameType === "time mode") {
     if (playerScores[0] > playerScores[1]) {
-      console.log("P1 answered more correctly")
+      console.log("P1 answered more correctly");
       finalResults.winner = "P1";
     } else if (playerScores[0] < playerScores[1]) {
-      console.log("P2 answered more correctly")
+      console.log("P2 answered more correctly");
       finalResults.winner = "P2";
     } else {
-      console.log("Timed tie")
+      console.log("Timed tie");
       finalResults.winner = "Draw";
     }
   } else if (gameType === "score mode") {
-    if (playerScores[0] < gameConfigs.scoreGoal && playerScores[1] < gameConfigs.scoreGoal) {
+    if (
+      playerScores[0] < gameConfigs.scoreGoal &&
+      playerScores[1] < gameConfigs.scoreGoal
+    ) {
       console.log("Neither met goal");
       finalResults.winner = "Draw";
-    } else if (playerScores[0] === gameConfigs.scoreGoal && playerScores[1] < gameConfigs.scoreGoal) {
+    } else if (
+      playerScores[0] === gameConfigs.scoreGoal &&
+      playerScores[1] < gameConfigs.scoreGoal
+    ) {
       console.log("P1 met goal, P2 did not");
       finalResults.winner = "P1";
-    } else if (playerScores[0] < gameConfigs.scoreGoal && playerScores[1] === gameConfigs.scoreGoal) {
+    } else if (
+      playerScores[0] < gameConfigs.scoreGoal &&
+      playerScores[1] === gameConfigs.scoreGoal
+    ) {
       console.log("P2 met goal, P1 did not");
       finalResults.winner = "P2";
     } else {
@@ -116,8 +125,8 @@ const processResults = () => {
       } else {
         console.log("Both met goal, times tied");
         finalResults.winner = "Draw";
-      };      
-    };
+      }
+    }
   }
   finalResults.playerAnswers = playerAnswers;
   finalResults.playerScores = playerScores;
@@ -136,11 +145,16 @@ let finalResults = {
   winner: "",
   finalTimes: [0, 0],
   playerAnswers: [[], []],
-  playerScores: [0, 0]
+  playerScores: [0, 0],
 };
 
 io.on("connection", (client) => {
   io.sockets.emit("notify all", `Client ${client.id} has connected`);
+
+  client.on("home page loaded", () => {
+    console.log(`Multiplayer mode has been selected`);
+    client.emit("update player availability", [...playerAvailability]);
+  });
 
   client.on("multiplayer selected", () => {
     console.log(`Multiplayer mode has been selected`);
@@ -212,7 +226,10 @@ io.on("connection", (client) => {
         waitingForOther = false;
       }
       // else do nothing to waitForOther and keep waiting
-    } else if (condition === "SCORE_REACHED" || condition === "OTHER_SCORE_REACHED") {
+    } else if (
+      condition === "SCORE_REACHED" ||
+      condition === "OTHER_SCORE_REACHED"
+    ) {
       console.log("Player ", playerIndex, " has reached the goal");
       finalResults.finalTimes[playerIndex] = time;
       // if both entires in recievedEndGame are true,
@@ -242,7 +259,7 @@ io.on("connection", (client) => {
         winner: "",
         finalTimes: [0, 0],
         playerAnswers: [[], []],
-        playerScores: [0, 0]
+        playerScores: [0, 0],
       };
     }
   });

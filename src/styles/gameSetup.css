@@ -1,3 +1,6 @@
+.main {
+  margin-top: 100px;
+}
 .config-page {
   display: flex;
   flex-direction: column;
@@ -31,7 +34,8 @@
   justify-content: space-between;
 }
 
-.player-buttons, .type-buttons {
+.player-buttons,
+.type-buttons {
   max-width: 25vw;
   min-width: 25vw;
   display: flex;
@@ -59,7 +63,7 @@
 }
 
 .config-button-text {
-  margin-top: .5rem;
+  margin-top: 0.5rem;
 }
 
 .config-inputs {
@@ -67,7 +71,8 @@
   flex-direction: column;
 }
 
-.config-setting, .config-difficulty-input {
+.config-setting,
+.config-difficulty-input {
   width: 100%;
 }
 

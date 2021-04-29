@@ -1,0 +1,39 @@
+.quiz-container, .sp-quiz-category {
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-between;
+}
+
+.sp-questions {
+    width: 100%;
+}
+
+.sp-quiz-category, .sp-quiz-type {
+    font-size: 1.25em;
+    margin-bottom: 2vh;
+}
+
+.sp-quiz-question {
+    margin-bottom: 2vh;
+}
+
+.sp-quiz-answer {
+    width: 48%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2vh;
+    
+}
+
+.sp-quiz-answer label {
+    width: 100%;
+}
+
+.sp-quiz-submit {
+    width: 100%;
+}
+
+.sp-quiz-submit h3 {
+    margin-top: .5rem;
+    text-transform: uppercase;
+}

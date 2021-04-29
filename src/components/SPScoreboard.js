@@ -10,26 +10,26 @@ const SPScoreboard = () => {
     return answers.filter((answer) => answer === true).length;
   };
   return (
-    <>
-      <h5>Scoreboard:</h5>
-      <p>
-        {"You got " +
+    <div className="mx-3 my-3">
+      <h3>
+        {"Your score: " +
           checkRightAnswers(answers) +
-          " out of " +
-          answers.length +
-          " questions right"}
-      </p>
+          "/" +
+          answers.length}
+      </h3>
       <p>
         Try and beat your score, or change it up and play with a friend!
       </p>
       <button
-        className="btn btn-primary mx-2"
+        className="btn btn-primary sp-quiz-submit mb-3"
         onClick={() => dispatch(unsetSPBeginQuiz())}
       >
-        New Single Player Game
+        <h5>New Single Player Game</h5>
       </button>
-      <button className="btn btn-primary" onClick={() => dispatch(restartGame(false))}>Home</button>
-    </>
+      <button className="btn btn-dark sp-quiz-submit" onClick={() => dispatch(restartGame(false))}>
+        <h5>HOME</h5>
+      </button>
+    </div>
   );
 };
 

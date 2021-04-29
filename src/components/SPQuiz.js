@@ -27,11 +27,12 @@ const SPQuiz = () => {
   };
 
   return (
-    <div>
+    <div className="card sp-questions mt-3">
       {questions.length > 0 && answeredCount < count ? (
         <SPQuestionCard
           question={questions[answeredCount]}
           multipleChoice={randomizeMultiple()}
+          answeredCount={answeredCount}
         />
       ) : answeredCount === count ? (
         <SPScoreboard />

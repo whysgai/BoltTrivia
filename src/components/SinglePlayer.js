@@ -71,25 +71,28 @@ const SinglePlayer = () => {
     <>
       {!beginQuiz ? (
         <>
-          <p>
-            You have chosen Single Player mode. Please select your game choices
-            from the options below. Once you select and submit an answer for the 
+          <h3 className="mt-4">Single Player</h3>
+          <h6 className="mt-4 text-center mb-2">
+            Once you select and submit an answer for the 
             multiple choice questions you will be shown whether your answer was correct or incorrect.
             If you chose an incorrect answer the correct answer will be displayed for you. Be careful clicking submit,
             you cannot go back and change your answer!
-          </p>
+          </h6>
+
+          <h6 className="mt-4 text-center mb-2">
+            Please select your game choices from the options below. 
+          </h6>
 
           <form
             onSubmit={(e) => {
-              console.log("hiii");
               e.preventDefault();
               beginQuizClick();
             }}
           >
-            <div className="form-row">
-              <div className="col-md-4 mb-3">
+            <div className="config-inputs text-center">
+              <div className="col-md-4 mb-3 text-center">
                 <label
-                  className="form-label mt-3"
+                  className="form-label config-setting"
                   htmlFor="number-of-questions"
                 >
                   Number of Questions (max 50):
@@ -105,15 +108,15 @@ const SinglePlayer = () => {
               </div>
             </div>
 
-            <div className="form-group">
+            <div className="config-inputs">
               <label
-                className="form-label mt-3 mr-3"
+                className="form-label config-difficulty-input"
                 htmlFor="trivia-category-selection"
               >
                 Trivia Category Selection:
               </label>
               <select
-                className="form-select"
+                className="form-control"
                 value={selectedCategory}
                 id={0}
                 onChange={(e) => setSelectedCategory(e.target.value)}
@@ -127,15 +130,15 @@ const SinglePlayer = () => {
               </select>
             </div>
 
-            <div className="form-group">
+            <div className="config-inputs">
               <label
-                className="form-label mt-3 pt-3 mr-3"
+                className="form-label config-difficulty-input"
                 htmlFor="trivia-difficulty"
               >
                 Difficulty:
               </label>
               <select
-                className="form-select"
+                className="form-control"
                 value={selectedDifficulty}
                 onChange={(e) => setSelectedDifficulty(e.target.value)}
               >
@@ -146,8 +149,8 @@ const SinglePlayer = () => {
                 ))}
               </select>
             </div>
-            <button className="btn btn-success mt-4" type="submit">
-              Begin Quiz!
+            <button className="btn btn-success config-confirm mb-4 start-game-button" type="submit">
+              <h6 className="config-button-text">START</h6>
             </button>
           </form>
         </>

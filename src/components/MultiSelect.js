@@ -1,8 +1,7 @@
 import { useDispatch } from "react-redux";
 import { selectMultiplayerMode } from "../client";
 import {
-  connectSinglePlayerMode,
-  connectMultiPlayerMode,
+  connectSinglePlayerMode
 } from "../redux/actions/gameStateActions";
 
 const MultiSelect = () => {
@@ -17,27 +16,33 @@ const MultiSelect = () => {
   };
 
   return (
-    <>
-      <img src="trivia_animation.gif" className="logo mt-5 d-block mb-4" />
-      <h6 className="mt-4 text-center mb-2">
-        Select Whether You Want to Play in Single Player or Multiplayer Mode.
-      </h6>
-      <h6 className="text-center mb-4">
-        View the Tutorial from the Menu to Learn More.
-      </h6>
-      <button
-        className="btn btn-primary mx-3"
-        onClick={() => selectMultiPlayerClick()}
-      >
-        Multiplayer
-      </button>
-      <button
-        className="btn btn-primary"
-        onClick={() => selectSinglePlayerClick()}
-      >
-        Single Player
-      </button>
-    </>
+    <div className="card card-body config-page">
+      <div className="logo-holder">
+        <img src="trivia_animation.gif" className="logo" />
+      </div>
+      <div className="config-copy">
+        <h6 className="mt-4 text-center mb-2">
+          Select whether you Want to play in single player or multiplayer mode.
+        </h6>
+        <h6 className="text-center mb-4">
+          Or, view the tutorial from the menu to learn more.
+        </h6>
+      </div>
+      <div className="config-buttons">
+        <button
+          className="btn btn-primary"
+          onClick={() => selectMultiPlayerClick()}
+        >
+          <h6 className="config-button-text">Multiplayer</h6>
+        </button>
+        <button
+          className="btn btn-primary"
+          onClick={() => selectSinglePlayerClick()}
+        >
+          <h6 className="config-button-text">Single Player</h6>
+        </button>
+      </div>      
+    </div>
   );
 };
 

@@ -44,17 +44,16 @@ function App() {
                 <WaitingScreen />
               ) : gameState.phase === GAME_PHASE.PLAY_GAME ? (
                 <>
-                  <div>
-                    <p>MP running the game</p>
+                  <div className="quiz-container">
                     <MPQuiz />
+                    {gameState.type === GAME_TYPE.TIME_MODE ? (
+                      <MPScoreboardTimed />
+                    ) : gameState.type === GAME_TYPE.SCORE_MODE ? (
+                      <MPScoreboardScored />
+                    ) : (
+                      <></>
+                    )}
                   </div>
-                  {gameState.type === GAME_TYPE.TIME_MODE ? (
-                    <MPScoreboardTimed />
-                  ) : gameState.type === GAME_TYPE.SCORE_MODE ? (
-                    <MPScoreboardScored />
-                  ) : (
-                    <></>
-                  )}
                 </>
               ) : gameState.phase === GAME_PHASE.AWAITING_RESULTS ? (
                 <WaitingScreen />
@@ -74,9 +73,7 @@ function App() {
                 Home button and try again.
               </p>
             ) : (
-              gameState.multiSelect === PLAYER_MODE.SINGLE_PLAYER && (
-                <SinglePlayer />
-              )
+              <SinglePlayer />
             )}
           </div>
         </>

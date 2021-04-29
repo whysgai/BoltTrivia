@@ -31,6 +31,10 @@ let socket = socketIOClient.connect(host, { secure: true });
 // Checks which host we're connected to for troubleshooting.
 console.log("Connected to " + host);
 
+export const homePageLoaded = () => {
+  socket.emit("home page loaded");
+};
+
 // Multiplayer Button Clicked
 // returns new availability array
 export const selectMultiplayerMode = () => {
@@ -68,7 +72,9 @@ socket.on("update player availability", (availability) => {
 
 // Game config selected
 export const selectGameConfig = (configs) => {
-  if (store.getState().gameStateReducer.multiSelect === PLAYER_MODE.MULTI_PLAYER) {
+  if (
+    store.getState().gameStateReducer.multiSelect === PLAYER_MODE.MULTI_PLAYER
+  ) {
     console.log("Sending configs to server", configs);
     socket.emit("game configs selected", configs);
   }
@@ -83,14 +89,16 @@ socket.on("confirm game configs", (configs) => {
 });
 
 socket.on("start game", (questions) => {
-  console.log(store.getState().gameStateReducer.multiSelect)
-  if (store.getState().gameStateReducer.multiSelect === PLAYER_MODE.MULTI_PLAYER) {
+  console.log(store.getState().gameStateReducer.multiSelect);
+  if (
+    store.getState().gameStateReducer.multiSelect === PLAYER_MODE.MULTI_PLAYER
+  ) {
     questions.map((question, index) => processQuestion(question));
     store.dispatch(setMPQuestions(questions));
     console.log("Questions from server", questions);
   } else if (store.getState().gameStateReducer.multiSelect === null) {
-    console.log('restart game')
-    store.dispatch(restartGame(false))
+    console.log("restart game");
+    store.dispatch(restartGame(false));
   }
 });
 
@@ -214,7 +222,7 @@ socket.on("connect failed", () => {
 });
 
 socket.on("connect_error", (error) => {
-  console.log("Couldn't connect to server.")
-  socket.disconnect()
+  console.log("Couldn't connect to server.");
+  socket.disconnect();
   store.dispatch(errorOccurred());
-})
+});

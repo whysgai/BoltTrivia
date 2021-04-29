@@ -1,10 +1,13 @@
-import { useDispatch } from "react-redux";
-import { selectMultiplayerMode } from "../client";
-import {
-  connectSinglePlayerMode
-} from "../redux/actions/gameStateActions";
+import { useDispatch, useSelector } from "react-redux";
+import { selectMultiplayerMode, homePageLoaded } from "../client";
+import { connectSinglePlayerMode } from "../redux/actions/gameStateActions";
+import { useEffect } from "react";
 
 const MultiSelect = () => {
+  const playerAvailability = useSelector(
+    (state) => state.gameStateReducer.playerAvailability
+  );
+
   const dispatch = useDispatch();
 
   const selectSinglePlayerClick = () => {
@@ -14,6 +17,10 @@ const MultiSelect = () => {
   const selectMultiPlayerClick = () => {
     selectMultiplayerMode();
   };
+
+  useEffect(() => {
+    homePageLoaded();
+  });
 
   return (
     <div className="card card-body config-page">
@@ -32,6 +39,7 @@ const MultiSelect = () => {
         <button
           className="btn btn-primary"
           onClick={() => selectMultiPlayerClick()}
+          disabled={!playerAvailability[0] && !playerAvailability[1]}
         >
           <h6 className="config-button-text">Multiplayer</h6>
         </button>
@@ -41,7 +49,7 @@ const MultiSelect = () => {
         >
           <h6 className="config-button-text">Single Player</h6>
         </button>
-      </div>      
+      </div>
     </div>
   );
 };

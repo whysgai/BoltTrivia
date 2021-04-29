@@ -40,7 +40,7 @@ const MPQuestionCard = (props) => {
 
     return (
         <div>
-            <div className="card-subtite mp-quiz-category">
+            <div className="card-subtitle mp-quiz-category">
                 <span>Category: {question.category}</span>
                 <span>Question # {props.count+1}</span>
             </div>
